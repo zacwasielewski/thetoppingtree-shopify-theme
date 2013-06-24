@@ -94,15 +94,26 @@
         {% if template contains 'customers' %}
             {{ 'customer.css' | asset_url | stylesheet_tag }}
         {% endif %}
-        
+
+        {% if template == 'page.bow-builder' %}
+            {{ 'bow-builder.css' | asset_url | stylesheet_tag }}
+        {% endif %}
+
+        {{ 'ss-standard.css' | asset_url | stylesheet_tag }}
         
     <!-- Theme javascript dependencies -->
   	<!-- ——————————————————————————————————————— -->
     <!-- ——————————————————————————————————————— -->
     
+        <!--
         {{ 'jquery.min.1.7.1.js' | asset_url | script_tag }}
         {{ 'modernizr-2.5.3.min.js' | asset_url | script_tag }}
-        
+        -->
+
+        {{ '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' | script_tag }}
+        {{ '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js' | script_tag }}
+        {{ '//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js' | script_tag }}
+        {{ '//code.jquery.com/jquery-migrate-1.2.1.js' | script_tag }}
     
     <!-- Shopify Assets -->
   	<!-- ——————————————————————————————————————— -->

@@ -1,0 +1,304 @@
+/*
+nav.bow-builder-progress {
+	
+}
+nav.bow-builder-progress ol {
+	list-style-type: decimal;
+	margin: 20px 0;
+}
+nav.bow-builder-progress ol li {
+	
+}
+nav.bow-builder-progress ol li.current {
+	font-weight: bold;
+}
+
+
+#bow-builder .step-title {
+    display: inline-block;
+    white-space: nowrap;
+    width: auto;
+    background-color: #ccc;
+}
+#bow-builder .step-title .step-order {
+    float: left;
+}
+#bow-builder .step-title .step-name {
+}
+#bow-builder .step-title.step-visited.step-active {
+	background-color: #677e87;
+}
+#bow-builder .step-title.step-visited {
+	background-color: #999;
+}
+#bow-builder .back-button {
+    float: left;
+    margin: 3px;
+}
+#bow-builder .next-button, .submit-button {
+    float: right;
+    margin: 3px;
+}
+#bow-builder .colored-box {
+    display:inline-block;
+    cursor:pointer;
+    width:50px;
+    height:50px;
+    opacity: .5;
+}
+#bow-builder .step-title .step-name {
+    margin-left: 12%;
+}
+
+
+ul.bow-builder-filter{
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    text-align: center;
+}
+
+ul.bow-builder-filter li{
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+ul.bow-builder-filter li a{
+    color: #fff;
+    display: inline-block;
+    background-color: rgb(102,126,136);
+    margin: 0 20px 20px 0;
+    padding: 11px 14px;
+    text-align: center;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    width: 100px;
+    font-weight: bold;
+}
+ul.bow-builder-filter li a:hover{
+    color: #fff;
+}
+
+ul.bow-builder-filter li.selected a{
+    background-color: rgb(51,51,51);
+}
+
+ul.bow-builder-list{
+    list-style-type: none;
+    margin: 20px 0;
+    padding: 0;
+    clear: both;
+    width: 100%;
+}
+
+ul.bow-builder-list li{
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
+ul.bow-builder-list li a{
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-color: #cee;
+    margin: 0 20px 20px 0;
+    padding: 5px;
+}
+
+ul.bow-builder-list li.selected a{
+    background-color: #acc;
+    color: #222;
+}
+*/
+
+
+
+select.bowbuilder-select {
+  display: none;
+}
+
+
+ul.bowbuilder-product-list li img {
+    width: 200px !important;
+    height: 150px !important;
+}
+
+ul.bowbuilder-product-list li.selected {
+}
+
+ul.bowbuilder-product-list li .wrapper {
+    width: 220px;
+    height: 240px;
+}
+
+
+
+
+
+/* Flat button
+------------------------------------------------*/
+
+.flat-btn {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  background-color: {{ settings.secondary-accent-colour }};
+  color: #ffffff;
+  font-weight: 700;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 0;
+  outline: 0;
+  padding: 0.750em 0.875em;
+  font-size: 0.813em;
+  -webkit-font-smoothing: antialiased; }
+
+.flat-btn.disabled, .flat-btn.disabled:hover {
+  cursor: default !important;
+  background-color: #ec565a !important; }
+
+.flat-btn:hover {
+  background-color: #333333; }
+
+.flat-btn.small {
+  padding: 0.750em 0.813em 0.500em 0.875em;
+  font-size: 0.625em; }
+
+.flat-btn.selected {
+  background-color: #333333; }
+
+
+/* Filter by tag
+------------------------------------------------*/
+.filter-by-tag {
+  margin-top: 2.750em; }
+
+.filter-by-tag p {
+  display: inline-block;
+  zoom: 1;
+  /* ie7 fix */
+  *display: inline;
+  /* ie7 fix */ }
+
+.filter-by-tag p {
+  font-style: italic;
+  font-size: 0.750em;
+  margin: 0 12px 0 0;
+  color: {{ settings.secondary-accent-colour }};
+  -webkit-font-smoothing: antialiased; }
+
+/* fsa */
+.neuton .filter-by-tag p {
+  font-size: 0.875em;
+  font-weight: 300; }
+
+
+/* Wizard steps
+------------------------------------------------*/
+
+.step-progress {
+    padding: 20px 0 10px 0;
+    line-height: 40px;
+    margin: 0 0 40px 0;
+    background-color: rgb(241,241,241);
+    border-radius: 5px;
+}
+
+.step-progress p {
+  display: inline-block;
+  zoom: 1;
+  /* ie7 fix */
+  *display: inline;
+  /* ie7 fix */
+}
+
+.step-progress p {
+  font-style: italic;
+  font-size: 0.750em;
+  margin: 0 12px 0 0;
+  color: {{ settings.secondary-accent-colour }};
+  -webkit-font-smoothing: antialiased; }
+
+.step-title {
+    text-align: center;
+    display: inline-block;
+    padding: 0 1em;
+    font-size: 0.813em;
+    color: rgb(210,210,210);
+}
+
+.step-order{
+    margin: 0 auto;
+    display: block;
+    height: 40px;
+    width: 40px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.step-title.step-visited.step-active {
+    color: #333;
+    color: {{ settings.accent-colour }};
+}
+.step-title.step-visited.step-active .step-order{
+    color: {{ settings.accent-colour }};
+}
+
+.step-title.step-visited {
+    color: #666;
+}
+
+
+/**** Isotope filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope animations ****/
+
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+

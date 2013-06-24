@@ -1,0 +1,157 @@
+<div id="content" class="collection  {% if paginate.previous or paginate.next %}has-pagination{% endif %} {{ settings.products-pagination-method }}">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div class="page-title">
+    <h1>{{ page.title }}</h1>
+  </div>
+
+  <!-- Standard page content -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <section id="collection-content">
+
+    <div id="bowbuilder">
+    
+        <div id="bowbuilder-progress" class="step-progress">
+            <p>Progress:</p>
+            <div class="step-title accent-text"><span class="step-order">1</span> <span class="step-name">Base Bow</span></div>
+            <div class="step-title accent-text"><span class="step-order">2</span> <span class="step-name">Small Bow</span></div>
+            <div class="step-title accent-text"><span class="step-order">3</span> <span class="step-name">Topping</span></div>
+            <div class="step-title accent-text"><span class="step-order">4</span> <span class="step-name">Finish!</span></div>
+        </div>
+    
+        <form action="/cart/add" method="post" enctype="multipart/form-data">
+
+            {% assign linklist = linklists['bowbuilder'] %}
+            {% assign current_time = 'now' | date: "%Y%m%d%H%M%S" %}
+
+            <input type="hidden" id="bow-group" name="properties[bow-group]" value="{{ current_time }}" />
+
+            <section id="bowbuilder-large-bows" class="step-content bowbuilder-step">
+            
+                {% assign collection = collections.large-bows %}
+
+                <h2>Step 1: Pick your base bow</h2>
+                
+                <div class="filter-by-tag bowbuilder-filter">
+                    <p>Choose a style:</p>
+                    <button class="flat-btn accent-text" data-filter=".standard">Standard</button>
+                    <button class="flat-btn accent-text" data-filter=".funky">Funky</button>
+                    <button class="flat-btn accent-text" data-filter=".fancy">Fancy</button>
+                    <button class="flat-btn accent-text" data-filter="*">All</button>
+                </div>
+
+                <ul class="product-list clearfix bowbuilder-product-list">
+                    {% for product in collection.products %}{% include 'bowbuilder-product-item' %}{% endfor %}
+                </ul>
+
+                <select name="id[]" id="bowbuilder-select-{{ collection.handle }}" class="bowbuilder-select">
+                    <option value=""></option>
+                    {% for product in collection.products %}
+                        {% for variant in product.variants %}
+                            <option value="{{ variant.id }}">
+                                {{ product.title }}
+                                ({{ variant.price | money }})
+                            </option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+
+            </section>
+
+            <section id="bowbuilder-small-bows" class="step-content bowbuilder-step hide">
+        
+                {% assign collection = collections.small-bows %}
+
+                <h2>Step 2: Pick your small bow</h2>
+
+                <div class="filter-by-tag bowbuilder-filter">
+                    <p>Choose a style:</p>
+                    <button class="action-btn accent-text" data-filter=".ugly">Ugly</button>
+                    <button class="action-btn accent-text" data-filter=".stupid">Stupid</button>
+                    <button class="action-btn accent-text" data-filter=".dirty">Dirty</button>
+                    <button class="action-btn accent-text" data-filter="*">All</button>
+                </div>
+            
+                <ul class="product-list clearfix bowbuilder-product-list">
+                    {% for product in collection.products %}{% include 'bowbuilder-product-item' %}{% endfor %}
+                </ul>
+
+                <select name="id[]" id="bowbuilder-select-{{ collection.handle }}" class="bowbuilder-select">
+                    <option value=""></option>
+                    {% for product in collection.products %}
+                        {% for variant in product.variants %}
+                            <option value="{{ variant.id }}">
+                                {{ product.title }}
+                                ({{ variant.price | money }})
+                            </option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+        
+            </section>
+
+            <section id="bowbuilder-toppings" class="step-content bowbuilder-step hide">
+        
+                {% assign collection = collections.toppings %}
+
+                <h2>Step 3: The final touch!</h2>
+            
+                <div class="filter-by-tag bowbuilder-filter">
+                    <p>Choose a style:</p>
+                    <button class="action-btn accent-text" data-filter=".shiny">Shiny</button>
+                    <button class="action-btn accent-text" data-filter=".fluffy">Fluffy</button>
+                    <button class="action-btn accent-text" data-filter=".orangey">Orangey</button>
+                    <button class="action-btn accent-text" data-filter="*">All</button>
+                </div>
+            
+                <ul class="product-list clearfix bowbuilder-product-list">
+                    {% for product in collection.products %}{% include 'bowbuilder-product-item' %}{% endfor %}
+                </ul>
+
+                <select name="id[]" id="bowbuilder-select-{{ collection.handle }}" class="bowbuilder-select">
+                    <option value=""></option>
+                    {% for product in collection.products %}
+                        {% for variant in product.variants %}
+                            <option value="{{ variant.id }}">
+                                {{ product.title }}
+                                ({{ variant.price | money }})
+                            </option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+        
+            </section>
+
+            <section id="small-bows" class="step-content hide">
+        
+                <h2>Step 4: Finalize</h2>
+            
+                <p>Preview and add to cart</p>
+                
+            </section>
+            
+        </form>
+
+        <!--
+        <button class="action-btn accent-text back-button btn">&larr; Back</button>
+        <button class="action-btn accent-text next-button btn hide">Next &rarr;</button>
+        <button class="action-btn accent-text submit-button btn">Done</button>
+        -->
+
+    </div>
+
+  </section>
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>
+
+{{ 'jquery.isotope.min.js' | asset_url | script_tag }}
+{{ 'jquery.psteps.min.js' | asset_url | script_tag }}
+{{ 'bow-builder.js' | asset_url | script_tag }}

@@ -1,0 +1,57 @@
+{% unless template contains 'search' %}<li class="{{ product.tags | join(' ') }}" data-product_id="{{ itemType.id }}">{% endunless %}
+    
+    <div class="wrapper">
+    
+        <!-- 
+        We have to re-assign this variable depending on the 
+        page has access to either the product shopify object or
+        the item shopify object (used on search pages) 
+        -->
+    
+        {% assign itemType = product %}
+        {% if template contains 'search' %}
+            {% assign itemType = item %}
+        {% elsif template contains 'product' %}
+            {% assign itemType = prod %}
+        {% endif %}
+    
+    
+        <div class="product-image-wrap is-loading">
+        
+            <!-- Product image -->
+                
+                    {% unless settings.display-produt-overlay %}<a href="{{ product.url }}">{% endunless %}
+                    <a title="Product details" href="{{ product.url }}"><img src="{{ itemType.featured_image | product_img_url: 'large' }}" alt="{{ itemType.featured_image.alt }}"></a>
+                    {% unless settings.display-produt-overlay %}</a>{% endunless %}
+        
+            <!-- Include sale banner if item is on sale -->
+            {% if itemType.compare_at_price_min > itemType.price_min and settings.display-sale-banner %}
+                <h2 class="accent-text">
+                    {% unless settings.display-produt-overlay %}<a href="{{ product.url }}">{% endunless %}
+                    {{ settings.sale-banner-text }}
+                    {% unless settings.display-produt-overlay %}</a>{% endunless %}
+                </h2>
+            {% endif %}
+                
+        </div>
+        
+        <div class="product-info" id="product-info-{{ itemType.id }}">
+        
+            <!-- Product title -->
+            <h1><a href="{{ itemType.url }}">{{ itemType.title }}</a></h1>
+        
+            <!-- Product price (switches depending on the sale condition) -->
+            {% if itemType.compare_at_price_min > itemType.price_min %}
+                <p class="price sale accent-text" data-price="{{ itemType.price_min }}" data-price-was="{{ itemType.compare_at_price_min }}">now {{ itemType.price_min | money }}</p>
+                <p class="price was accent-text">was {{ itemType.compare_at_price_min | money }}</p>
+            {% else %}
+                <p class="price accent-text">{{ itemType.price_min | money }}</p>
+            {% endif %}
+        
+        </div><!-- .product-info -->
+    
+        <!-- <input id="quick-add-json-{{ itemType.id }}"></span> -->
+
+</div>
+
+{% unless template contains 'search' %}</li>{% endunless %}
