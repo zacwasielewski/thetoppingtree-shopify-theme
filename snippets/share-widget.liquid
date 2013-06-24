@@ -1,0 +1,13 @@
+<ul class="share-widget">
+    <li class="share-close-button">x</li>
+    <li class="twitter share-button">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{{ shop.name }}:" data-url="{{ shop.url }}{{ article.url }}">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </li>
+    <li class="facebook share-button">
+        <div class="fb-like" data-href="{{ shop.url }}{{ article.url }}" data-send="false" data-layout="button_count" data-show-faces="false"></div>
+    </li>
+    <li class="google share-button">
+        <div class="g-plusone" data-size="medium" data-annotation="bubble" data-href="{{ shop.url }}{{ article.url }}"></div>
+    </li>
+</ul>

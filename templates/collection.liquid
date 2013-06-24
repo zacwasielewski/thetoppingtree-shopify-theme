@@ -1,0 +1,110 @@
+{% paginate collection.products by settings.products-per-page %}  
+<div id="content" class="collection  {% if paginate.previous or paginate.next %}has-pagination{% endif %} {{ settings.products-pagination-method }}">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div class="page-title {% if collection.description.size > 0 %}has-description{% endif %}">
+    <h1>{{ collection.title }}{% if current_tags.size > 0 %} / {{ current_tags.first }}{% endif %}</h1>
+    
+    <!-- Collection description -->
+    {% if collection.description.size > 0 %}
+      <div id="collection-description" class="rte">
+      {{ collection.description }}
+      </div>
+    {% endif %}
+  </div>
+
+  <section id="collection-content" class="">
+
+    <!-- Browse by tag -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+    {% if collection.all_tags.size > 0 %}
+      <div id="browse-by-tag">
+        <p>Browse by tag</p>
+        <select class="styled-select">
+          <option value="" id="">All</option>
+          {% for tag in collection.all_tags %}
+            {% if current_tags contains tag %}
+              <option value="{{ tag | handleize }}" id="{{ tag | handleize }}" selected>{{ tag }}</option>
+            {%else%}
+              <option value="{{ tag | handleize }}" id="{{ tag | handleize }}">{{ tag }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+
+    <!-- Products loop -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  
+      <!-- Always renders... UNLESS the store has products but the collection does NOT have any products  -->
+      {% unless shop.products_count > 0 and collection.products.size == 0 %}
+        <ul class="product-list clearfix">
+        {% for product in collection.products %}{% include 'small-product-item' %}{% endfor %}
+
+        {% if shop.products_count == 0 %}
+          {% for i in (1..4) %}{% include 'small-product-item-default' %}{% endfor %}
+        {% endif %}
+        </ul>
+      {% endunless %}
+    
+      <!-- ONLY renders when the store has products but the collection does NOT have any products -->
+      {% if shop.products_count > 0 and collection.products.size == 0 %}
+        <p id="empty-collection">No products in this collection</p>
+      {% endif %}
+
+    <!-- Product pagination -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+    {% if paginate.previous or paginate.next %}
+      <button id="click-to-load-button" class="nav-btn accent-text">Show more</button>
+      {% include 'pagination' %}
+    {% endif %}
+
+  </section>
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>
+{% endpaginate %}
+
+<!-- Collection specific JS to handle browse-by filter -->
+<!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <script type="text/javascript" charset="utf-8">
+
+    // Product count for infinite scroll
+    {% paginate collection.products by settings.products-per-page %}
+      var totalProductsCount = '{{ paginate.items }}';
+    {% endpaginate %}
+    
+    /* Browse by tag — Brought to you by Caroline Schnapp */
+    var collFilters = jQuery('.styled-select', '#browse-by-tag');
+    collFilters.change(function() {
+      var newTags = [];
+      collFilters.each(function() { 
+        if (jQuery(this).val()) {
+          newTags.push(jQuery(this).val());
+        }
+      });
+      if (newTags.length) {
+        var query = newTags.join('+');
+        window.location.href = jQuery('{{ '0my-tag0' | link_to_tag: '0my-tag0' }}').attr('href').replace('0my-tag0', query);
+      } 
+      else {
+        {% if collection.handle %}
+        window.location.href = '/collections/{{ collection.handle }}';
+        {% elsif collection.products.first.type == collection.title %}
+        window.location.href = '{{ collection.title | url_for_type }}';
+        {% elsif collection.products.first.vendor == collection.title %}
+        window.location.href = '{{ collection.title | url_for_vendor }}';
+        {% endif %}
+      }
+    });
+    
+  </script>

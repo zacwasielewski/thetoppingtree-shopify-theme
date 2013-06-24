@@ -1,0 +1,613 @@
+<!doctype html>
+<!--[if lt IE 7]> <html xmlns:fb="http://www.facebook.com/2008/fbml" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7  ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html xmlns:fb="http://www.facebook.com/2008/fbml" class="no-js lt-ie10 lt-ie9 lt-ie8  ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html xmlns:fb="http://www.facebook.com/2008/fbml" class="no-js lt-ie10 lt-ie9  ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html xmlns:fb="http://www.facebook.com/2008/fbml" class="no-js lt-ie10 ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    
+<!--
+==========================================================================
+ _____                    ___       __  __
+/\  _  \ __              /\_ \     /\ \/\ \          __
+\ \ \_\ \\_\  __  _    __\//\ \    \ \ \ \ \    ___ /\_\    ___    ___
+ \ \  __//\ \/\ \/ \ / __ \\ \ \    \ \ \ \ \  / _  \/\ \  / __ \ / _  \
+  \ \ \/ \ \ \/>  <//\  __/ \_\ \_   \ \ \_\ \/\ \/\ \ \ \/\ \_\ \\ \/\ \
+   \ \_\  \ \_\\_/\_\ \____\/\____\   \ \_____\ \_\ \_\ \_\ \____/ \_\ \_\
+    \/_/   \/_///\/_/\/____/\/____/    \/_____/\/_/\/_/\/_/\/___/ \/_/\/_/
+==========================================================================
+   Editions v1.0.6
+   Updated: 6 May, 2013
+   Website: http://pixelunion.net
+   Themes: http:tumblr.com/themes/by/pixelunion
+==========================================================================
+-->
+
+
+  <!-- Meta -->
+  <!-- ——————————————————————————————————————— -->
+	<!-- ——————————————————————————————————————— -->
+    
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  
+  <link rel="canonical" href="{{ canonical_url }}" />
+
+    {% if template contains "product" %}
+  <meta name="description" content="{{ product.description | strip_html | escape | truncate: 50 }}, Price: {% if product.price_varies %} starting at {% endif %} {{ product.price_min | money }}">
+  {% elsif template == "index" and shop.description != empty %}
+  <meta name="description" content="{{ shop.description | strip_html | escape }}">  
+  {% endif %}
+
+  <title>
+    {% if template == "index" %} {{ shop.name | escape }} {% elsif template == "404" %} {{ settings.404-title }} &ndash; {{ shop.name | escape }} {% else %} {{ page_title | escape }} &ndash; {{ shop.name | escape }} {% endif %}
+  </title>
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  
+  <link href="{{ 'favicon.ico' | asset_url }}" rel="shortcut icon" />
+
+    <!-- Facebook Open Graph -->
+  	<!-- ——————————————————————————————————————— -->
+    <!-- ——————————————————————————————————————— -->
+    
+    <meta property="fb:admins" content=""/>
+    <meta property="fb:app_id" content=""/>
+    
+    {% if template == "product" %}
+        <meta property="og:title" content="{{ shop.name }} — {{ product.title }}"/> 
+        <meta property="og:type" content="product"/> 
+        <meta property="og:image" content="{{ product.featured_image | product_img_url: 'medium' }}"/>
+        <meta property="og:url" content="{{ shop.url }}{{ product.url }}"/> 
+    {% elsif template == "article" %}
+        <meta property="og:title" content="{{ shop.name }} — {{ article.title }}"/> 
+        <meta property="og:type" content="article"/> 
+        <meta property="og:image" content="{{ 'logo.png' | asset_url }}"/>
+        <meta property="og:url" content="{{ shop.url }}{{ article.title }}"/>
+    {% else %}
+        <meta property="og:title" content="{{ shop.name }}"/> 
+        <meta property="og:type" content="article"/> 
+        <meta property="og:image" content="{{ 'logo.png' | asset_url }}"/>
+        <meta property="og:url" content="{{ shop.url }}"/>
+    {% endif %}
+    
+    <meta property="og:site_name" content="{{ shop.name }}"/> 
+    
+    <!-- Imported Fonts -->
+  	<!-- ——————————————————————————————————————— -->
+    <!-- ——————————————————————————————————————— -->
+    
+        {% if settings.accent-font == "'News Cycle', sans-serif" %} <link href='//fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'> {% endif %}
+        {% if settings.text-font == "'Neuton', sans-serif" %} 
+          <!-- 400 / 700 -->                    <link href='//fonts.googleapis.com/css?family=Neuton:400,700' rel='stylesheet' type='text/css'> 
+          <!-- 300 / 400italic / 700italic -->  {{ 'neuton.css' | asset_url | stylesheet_tag }}
+        {% endif %}
+        {% if settings.accent-font == "'PT Sans', sans-serif" %} <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'> {% endif %}
+        {% if settings.text-font == "'PT Serif', serif" %} <link href='//fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'> {% endif %}
+    
+    
+    <!-- Theme CSS -->
+  	<!-- ——————————————————————————————————————— -->
+    <!-- ——————————————————————————————————————— -->
+    
+        {{ 'style.css' | asset_url | stylesheet_tag }}
+        {% if template contains 'customers' %}
+            {{ 'customer.css' | asset_url | stylesheet_tag }}
+        {% endif %}
+        
+        
+    <!-- Theme javascript dependencies -->
+  	<!-- ——————————————————————————————————————— -->
+    <!-- ——————————————————————————————————————— -->
+    
+        {{ 'jquery.min.1.7.1.js' | asset_url | script_tag }}
+        {{ 'modernizr-2.5.3.min.js' | asset_url | script_tag }}
+        
+    
+    <!-- Shopify Assets -->
+  	<!-- ——————————————————————————————————————— -->
+    <!-- ——————————————————————————————————————— -->
+    
+        {{ 'pixelOptionSelect.js' | asset_url | script_tag }}
+        {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+        {{ "/services/javascripts/currencies.js" | script_tag }}
+    
+        {% if template contains 'customers' %}
+        {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+        {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+      {% endif %}
+    
+    <!-- Content for Header -->
+  	<!-- ——————————————————————————————————————— -->
+    <!-- ——————————————————————————————————————— -->
+    
+        {{ content_for_header }}
+    
+</head>
+
+<body class="
+	{{ settings.theme-style }} 
+	{{ settings.element-style }} 
+	template-{{ template }} 
+	{% if settings.text-font == "'Neuton', sans-serif" %}neuton{% endif %} 
+	{% if settings.accent-font == "'News Cycle', sans-serif" %}news-cycle{% endif %} 
+	{% if settings.text-font == "'PT Serif', serif" %}pt-serif{% endif %} 
+	{% if settings.accent-font == "'PT Sans', sans-serif" %}pt-sans{% endif %} 
+	{% if settings.twitter-username.size > 0 %}twitter-enabled{% endif %} 
+">
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+    
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=187795038002910";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    {% if settings.theme-style == 'bold' %}
+    <span id="header-accent"></span>
+    {% endif %}
+    
+    <div id="page-wrap" class="clearfix {% if settings.show-payment-visa or settings.show-payment-amex or settings.show-payment-mastercard or settings.show-payment-cirrus or settings.show-payment-discover or settings.show-payment-paypal %}has-payment-options{% endif %}">
+        
+      <!-- HEADER -->
+      <!-- ——————————————————————————————————————— -->
+      <!-- ——————————————————————————————————————— -->
+        <header>
+            
+            <!-- Top most toolbar -->
+            <!-- +++++++++++++++++++++++++++++++++++++++ -->
+            <ul id="header-tools" class="clearfix">
+                
+				<!-- Search & browse -->
+				<li class="search accent-text">
+	                <span id="search-toggle-button">
+	                    
+						<span id="search-toggle-title"><span class="browse-icon">M</span>{% if settings.display-shop-by-category or settings.display-shop-by-vendor %}Browse / search {% else %}Search{% endif %}</span>
+	                    
+						<span id="search-browse-parent-outline">
+							<div id="search-browse-container">
+	                        <ul>
+	                            <li id="search-bar" class="clearfix {% if settings.display-shop-by-category == false and settings.display-shop-by-vendor == false %}only-search{% endif %}">
+	                                <form action="/search" method="get">
+	                            <input name="q" type="text" value="Enter search terms" class="styled-text-field" id="search-field">
+	                            <input type="submit" value="Search" class="action-btn accent-text" name="submit" id="search-submit">
+	                        </form>
+	                            </li>
+	                            {% if settings.display-shop-by-category %}
+	                            <li id="shop-by-category">
+	                                    <label for="shop-by-category-select" class="accent-text">Shop by category</label>
+	                                    <select class="styled-select" name="shop-by-category-select" id="shop-by-category-select" size="1">
+	                                <option>Choose a category</option>
+	                                {% for collection in collections %}
+	                                <option value="{{ collection.url }}">{{ collection.title }}</option>
+	                                {% endfor %}
+	                              </select>
+	                            </li>
+	                            {% endif %}
+	                            
+	                            {% if settings.display-shop-by-vendor %}
+	                            <li id="shop-by-vendor">
+	                                <label for="shop-by-vendor-select" class="accent-text">Shop by vendor</label>
+	                                <select class="styled-select" name="shop-by-vendor-select" id="shop-by-vendor-select" size="1">
+	                            <option>Choose a vendor</option>
+	                            {% for product_vendor in shop.vendors %}
+	                            <option value="{{ product_vendor | url_for_vendor }}">{{ product_vendor }}</option>
+	                            {% endfor %}
+	                          </select>
+	                            </li>
+	                            {% endif %}
+	                        </ul>
+
+	                    </div><!-- #search-browser-container -->
+						</span>
+						
+	                </span>
+                </li>
+				
+				<!-- Account details -->
+                <li class="account-details">
+                    {% if shop.customer_accounts_enabled %}
+                        {% if customer %}
+                            <p>Logged in as <a href="/account">{{ customer.first_name }}</a>. {{ "Logout" | customer_logout_link }}.</p>
+                        {% else %}
+                            <p>
+                                {{ "Login" | customer_login_link }}
+                                {% if shop.customer_accounts_optional %}
+                                    {{ 'Sign up' | customer_register_link }}
+                                {% endif %}
+                            </p>
+                        {% endif %}
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                </li>
+
+				<!-- Cart Details -->
+                <li class="cart-details accent-text">
+                    <a href="/cart"><span class="cart-icon">c</span><span id="cart-item-count-wrap">{{ cart.item_count}}</span> {{ cart.item_count | pluralize: 'item', 'items' }} - <span id="cart-amount-wrap">{{ cart.total_price | money }}</span></a>
+                </li>
+
+            </ul>
+            
+            <!-- Logo wrap -->
+            <!-- +++++++++++++++++++++++++++++++++++++++ -->
+            <div {% if settings.use-logo == false %}class="text"{% endif %} id="logo-wrap" onclick = "void(0)"> <!-- void click event necessary for mobile meganav hover off event -->
+                {% if settings.use-logo %}
+                    <a href="/" id="logo">
+                      <img class="standard" src="{{ 'logo.png' | asset_url }}">
+                      {% if settings.include-retina-logo %}
+                        <img class="retina" src="{{ 'retina-logo.png' | asset_url }}">
+                      {% endif %}
+                    </a><!-- #logo -->
+                {% else %}
+                  <h1 id="store-title" class="accent-text"><a href="/">{{ shop.name }}</a></h1>
+                {% endif %}
+            </div><!-- #logo-wrap -->
+            
+            <!-- Main navigation -->
+            <!-- +++++++++++++++++++++++++++++++++++++++ -->
+            <ul id="header-nav" class="{% if settings.theme-style == 'minimalist' %}double-borders{% endif %} {% if settings.invert-dropdown-arrows %}invert-arrows{% endif %} {% if settings.smaller-list-items %}smaller{% endif %} accent-text">
+                
+                <li class="mobile-nav-item browse"><a><span>M</span>Browse</a></li>
+                <li class="mobile-nav-item cart"><a href="/cart"><span>c</span>Cart</a></li>
+                <li class="mobile-nav-item navigate"><a><span>n</span>Navigate</a></li>
+                
+                {% for link in linklists.main-menu.links %}
+                    
+                    {% capture child_linklist_handle %}{{ link.title | handle }}{% endcapture %}
+                    
+                    {% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 or (child_linklist_handle == 'catalog' and settings.enable-mega-navigation) %}
+                      {% capture has_dropdown %}true{% endcapture %}
+                    {% else %}
+                      {% capture has_dropdown %}false{% endcapture %}
+                    {% endif %}
+                    
+                    <li class="nav-item {% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %} {% if link.active %}active{% endif %} {% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 or child_linklist_handle == 'catalog' %}dropdown{% endif %} {% if child_linklist_handle == 'catalog' %}mega{% endif %}">
+                        <a href="{{ link.url }}">{{ link.title }} {% if has_dropdown == 'true' %}<span class="arrow down"></span>{% endif %}</a>
+                        
+                        <!-- Simple dropdown -->
+                        {% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 and child_linklist_handle != 'catalog' %}
+                        <div class="dropdown-parent-outline"></div><!-- .dropdown-parent-outline -->
+                        <div class="dropdown-nav">
+                            
+                            <ul>
+                                {% for simple_nav_link in linklists[child_linklist_handle].links %}
+                                    <li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+                                        <a href="{{ simple_nav_link.url }}">{{ simple_nav_link.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            
+                        </div><!-- .nav-dropdown -->
+                        {% endif %}
+                        
+						
+                        <!-- Mega dropdown -->
+                        {% if child_linklist_handle == 'catalog' and settings.enable-mega-navigation %}
+                        <div class="dropdown-parent-outline"></div><!-- .dropdown-parent-outline -->
+                        <div class="dropdown-nav">
+                            
+                            <header>
+                                
+                                <ul id="dropdown-titles">
+                                    <li class="categories"><span>{{ settings.categories-label }}</span></li>
+                                    <li class="brands"><span>{{ settings.brands-label }}</span></li>
+                                </ul>
+                                
+                                <ul id="dropdown-breadcrumbs">
+                                    <li class="primary"><span href="">Categories</span></li>
+                                    <li class="secondary"><span class="separator">></span><span class="label"></span></li>
+                                    <li class="tertiary"><span class="separator">></span><span class="label"></span></li>
+                                </ul>
+                                
+                            </header>
+                            
+                            <div id="brands-nav-level">
+                                
+                                <ul>
+                                {% if settings.custom-brands-collection.size > 0 %}
+                                    {% for p in collections.[settings.custom-brands-collection].products %}
+                                    <li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+                                        <a href="{{ p.url }}">{{ p.title }}</a>
+                                    </li>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for vendor in shop.vendors %}
+                                    <li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+                                        {{ vendor | link_to_vendor  }}
+                                    </li>
+                                    {% endfor %}
+                                {% endif %}
+                                
+                                </ul>
+                                
+                            </div><!-- #brands-nav-level -->
+                            
+                            <div id="primary-nav-level">
+                                
+                                <ul>
+                                
+                                {% if linklists['catalog'].links.size > 0 %}
+                                
+                                  {% for primary_link in linklists['catalog'].links %}
+                                    
+                                      {% capture primary_child_linklist_handle %}{{ primary_link.title | handle }}{% endcapture %}
+                                    
+                                      <li data-expandable="{% if linklists[primary_child_linklist_handle] and linklists[primary_child_linklist_handle].links.size > 0 %}true{% else %}false{% endif %}" data-list-level="2" data-parent="{{ primary_link.title | handle }}" class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+                                          <a href="{{ primary_link.url }}"><span class="overflow-mask"></span>
+                                              {{ primary_link.title }} 
+                                              {% unless linklists[primary_child_linklist_handle] and linklists[primary_child_linklist_handle].links.size > 0 %}
+                                                  <span class="count">
+                                                      {% if collections[primary_child_linklist_handle].all_products_count.size > 0 %} ({{ collections[primary_child_linklist_handle].all_products_count }}) {% endif %}
+                                                  </span>
+                                              {% endunless %}
+                                          </a>
+                                        
+                                          <!-- If this collection item has a corresponding link list then... -->
+                                          {% if linklists[primary_child_linklist_handle] and linklists[primary_child_linklist_handle].links.size > 0 %}
+                                              <span class="arrow"></span>
+                                              <ul class="secondary-list" data-child="{{ primary_child_linklist_handle }}">
+                                                
+                                              <!-- Loop through link list associated with the current collection handle -->
+                                              {% for secondary_link in linklists[primary_child_linklist_handle].links %}
+                                            
+                                                  {% capture secondary_child_linklist_handle %}{{ secondary_link.title | handle }}{% endcapture %}
+                                                
+                                                  <li data-expandable="{% if linklists[secondary_child_linklist_handle] and linklists[secondary_child_linklist_handle].links.size > 0 %}true{% else %}false{% endif %}" data-list-level="3" data-parent="{{ secondary_link.title | handle }}" class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+                                                      <a href="{{ secondary_link.url }}"><span class="overflow-mask"></span>
+                                                          {{ secondary_link.title }} 
+                                                          {% unless linklists[secondary_child_linklist_handle] and linklists[secondary_child_linklist_handle].links.size > 0 %}
+                                                              <span class="count">
+                                                                  {% if collections[secondary_child_linklist_handle].all_products_count.size > 0 %}({{ collections[secondary_child_linklist_handle].all_products_count }}){% endif %}
+                                                              </span>
+                                                          {% endunless %}
+                                                      </a>
+                                                    
+                                                      <!-- If this link-list item has a corresponding link list then... -->
+                                                      {% if linklists[secondary_child_linklist_handle] and linklists[secondary_child_linklist_handle].links.size > 0 %}
+                                                          <span class="arrow"></span>
+                                                          <ul class="tertiary-list" data-child="{{ secondary_child_linklist_handle }}">
+                                                            
+                                                          <!-- Loop through link list associated with the current link list item handle -->
+                                                          {% for tertiary_link in linklists[secondary_child_linklist_handle].links %}
+                                                            
+                                                              {% capture tertiary_child_linklist_handle %}{{ tertiary_link.title | handle }}{% endcapture %}
+                                                            
+                                                              <li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+                                                                  <a href="{{ tertiary_link.url }}"><span class="overflow-mask"></span>
+                                                                      {{ tertiary_link.title }}
+                                                                      {% unless linklists[tertiary_child_linklist_handle] and linklists[tertiary_child_linklist_handle].links.size > 0 %}
+                                                                          <span class="count">
+                                                                              {% if collections[tertiary_child_linklist_handle].all_products_count.size > 0 %}({{ collections[tertiary_child_linklist_handle].all_products_count }}){% endif %}
+                                                                          </span>
+                                                                      {% endunless %}
+                                                                  </a>
+                                                              </li>
+                                                          {% endfor %}
+                                                          </ul>
+                                                        
+                                                      {% endif %}
+                                                    
+                                                  </li>
+                                              {% endfor %}
+                                              </ul>
+                                          {% endif %}
+                                        
+                                      </li>
+                                  {% endfor %}
+                                
+                                {% else %}
+                                  
+                                  <li class="empty-list">
+                                    It looks like your 'catalog' link-list is empty! Header over to the <a target="_blank" href="/admin/links" title="Add New Links">admin screen</a> to create and populate your 'catalog' link-list. Every link you add will appear here.
+                                  </li>
+                                  
+                                {% endif %}
+                                </ul>
+                                
+                            </div>
+                            
+                            <div id="secondary-nav-level">
+                                
+                            
+                                
+                            </div>
+                            
+                            <div id="tertiary-nav-level">
+                            
+                            </div>
+                            
+                        </div><!-- .nav-dropdown -->
+                        {% endif %}
+                        
+                    </li>
+                    
+                {% endfor %}
+
+            </ul>
+			<div id="mobile-browse-container"></div><!-- #mobile-browse-container -->
+			<div id="mobile-nav-dropdown-container" class="accent-text"></div><!-- #mobile-nav-dropdown-container -->
+      </header>
+    
+        <!-- BODY -->
+      	<!-- ——————————————————————————————————————— -->
+        <!-- ——————————————————————————————————————— -->
+
+        {% if template == 'list-collections' %}
+            {% include 'collections' %}
+        {% else %}
+            {{ content_for_layout }}
+        {% endif %}
+        
+        
+        <!-- FOOTER -->
+      	<!-- ——————————————————————————————————————— -->
+        <!-- ——————————————————————————————————————— -->
+        
+            <!-- Twitter -->
+            <!-- +++++++++++++++++++++++++++++++++++++++ -->
+            {% unless template =='index' and settings.home-layout == 'double-column' %}
+                {% include 'twitter-feed' %}
+            {% endunless %}
+        
+        {% if settings.theme-style == 'bold' %}</div><!-- #page-wrap -->{% endif %}
+        
+        <footer>
+            
+            <!-- Footer toolbar -->
+            <!-- +++++++++++++++++++++++++++++++++++++++ -->
+            <section id="footer-tools" class="section">
+                
+                <ul class="clearfix">
+                    <li id="attribution" class="module {% if settings.theme-style == 'minimalist' %}double-borders{% endif %}">
+                            {% if settings.copyright-text.size > 0 %}
+                              <h2 class="module-title accent-text">{{ settings.copyright-text }}</h2>
+                            {% endif %}
+                            <p {% if settings.copyright-text.size == 0 %}class="no-title"{% endif %}>{{ powered_by_link }}. {% if settings.enable-theme-branding %}Editions Theme by <a href="/">Pixel Union</a>.{% endif %}</p>
+                    </li>
+                    
+                    
+                    {% if settings.show-social-links %}
+                    <li id="social-links" class="module {% if settings.theme-style == 'minimalist' %}double-borders{% endif %}">
+                        <h2 class="module-title accent-text">{{ settings.social-links-title }}</h2>
+                        <ul>
+                            {% if settings.show-twitter-link.size > 0 %}
+                            <li class="twitter"><a href="{{ settings.show-twitter-link }}">t</a></li>
+                            {% endif %}
+                            {% if settings.show-facebook-link.size > 0 %}
+                            <li class="facebook"><a href="{{ settings.show-facebook-link }}">f</a></li>
+                            {% endif %}
+                            {% if settings.show-tumblr-link.size > 0 %}
+                            <li class="tumblr"><a href="{{ settings.show-tumblr-link }}">T</a></li>
+                            {% endif %}
+                            {% if settings.show-pinterest-link.size > 0 %}
+                            <li class="pinterest"><a href="{{ settings.show-pinterest-link }}">p</a></li>
+                            {% endif %}
+                            {% if settings.show-google-link.size > 0 %}
+                            <li class="google"><a href="{{ settings.show-google-link }}">g</a></li>
+                            {% endif %}
+                            {% if settings.show-instagram-link.size > 0 %}
+                            <li class="instagram"><a href="{{ settings.show-instagram-link }}">i</a></li>
+                            {% endif %}
+                            {% if settings.show-svpply-link.size > 0 %}
+                            <li class="svpply"><a href="{{ settings.show-svpply-link }}">s</a></li>
+                            {% endif %}
+                            {% if settings.show-flickr-link.size > 0 %}
+                            <li class="flickr"><a href="{{ settings.show-flickr-link }}">F</a></li>
+                            {% endif %}
+                            {% if settings.show-vimeo-link.size > 0 %}
+                            <li class="vimeo"><a href="{{ settings.show-vimeo-link }}">v</a></li>
+                            {% endif %}
+                            {% if settings.show-youtube-link.size > 0 %}
+                            <li class="youtube"><a href="{{ settings.show-youtube-link }}">y</a></li>
+                            {% endif %}
+                            
+                        </ul>
+                    </li>
+                    {% endif %}
+                    
+                    {% if settings.show-mailing-list %}
+                    <li id="mailing-list" class="module {% if settings.theme-style == 'minimalist' %}double-borders{% endif %}">
+                        <h2 class="module-title accent-text">Join our mailing list</h2>
+                        
+                        {% if settings.mailing-list-type == 'mailchimp' %}
+                            <form action="{{ settings.mailchimp-action-url }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                  <input type="email" value="your@email.com" name="EMAIL" id="email-input" class="accent-text">
+                  <input type="submit" class="accent-text small action-btn" value="Sign Up" name="subscribe" id="email-submit">
+                </form>
+                        {% endif %}
+                        
+                        {% if settings.mailing-list-type == 'shopify' %}
+                            {% form 'customer' %}
+                              
+                              {% if form.posted_successfully? %}
+                                <script type="text/javascript" charset="utf-8">
+                                  window.location = '#mailing-list';
+                                </script>
+                                <p id="mailing-list-success">Thanks for signing up!</p>
+                              {% else %}
+                                <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter"/>
+                                <input type="email" value="your@email.com" name="contact[email]" id="email-input" class="accent-text">
+                                <input type="submit" class="accent-text small action-btn" value="Sign Up" name="subscribe" id="email-submit">
+                              {% endif %}
+                            
+                            {% endform %}
+                        {% endif %}
+
+                    </li>
+                    {% endif %}
+                </ul>
+                
+            </section>
+        
+      {% unless settings.theme-style == 'bold' %}</footer>{% endunless %}
+        
+        {% if settings.show-payment-visa or settings.show-payment-amex or settings.show-payment-mastercard or settings.show-payment-cirrus or settings.show-payment-discover or settings.show-payment-paypal %}
+        <div id="payment-options" {% if settings.payment-style == 'light' %}class="light"{% endif %}>
+            
+            <ul>
+             {% if settings.show-payment-visa %} <li class="ir visa">visa</li>{% endif %}
+             {% if settings.show-payment-amex %} <li class="ir amex">amex</li>{% endif %}
+             {% if settings.show-payment-mastercard %} <li class="ir mastercard">mastercard</li>{% endif %}
+             {% if settings.show-payment-cirrus %} <li class="ir cirrus">cirrus</li>{% endif %}
+             {% if settings.show-payment-maestro %} <li class="ir maestro">maestro</li>{% endif %}
+             {% if settings.show-payment-discover %} <li class="ir discover">discover</li>{% endif %}
+             {% if settings.show-payment-paypal %} <li class="ir paypal">paypal</li>{% endif %}
+             {% if settings.show-payment-interac %} <li class="ir interac">interac</li>{% endif %}
+             {% if settings.show-payment-dankort %} <li class="ir dankort">dankort</li>{% endif %}
+             {% if settings.show-payment-google %} <li class="ir google">google wallet</li>{% endif %}
+            </ul>
+            
+        </div><!-- #payment-options -->
+        {% endif %}
+    
+    {% if settings.theme-style == 'bold' %}</footer>{% endif %}
+        
+    {% if settings.theme-style == 'minimalist' %}</div><!-- #page-wrap -->{% endif %}
+    
+    
+    <!-- QUICK SHOP -->
+    <!-- ——————————————————————————————————————— -->
+    <!-- ——————————————————————————————————————— -->
+    
+    {% include 'quickShop' %}
+    <script type="text/javascript" charset="utf-8">
+      {% include 'quickShopScript' %}
+    </script>
+    
+    
+    <script type="text/javascript" charset="utf-8">
+        
+        var shopCurrency = '{{ shop.currency }}';
+        
+    </script>
+    
+    {{ 'plugins.js' | asset_url | script_tag }}
+    {{ 'customSelect.js' | asset_url | script_tag }}
+    {{ 'script.js' | asset_url | script_tag }}
+    
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+    <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+    
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+
+</body>
+</html>
+        
+        
+        

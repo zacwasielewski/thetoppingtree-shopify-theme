@@ -1,0 +1,590 @@
+/* Customer login
+------------------------------------------------*/
+
+	#recover-password {
+		display:none;
+	}
+	
+	#customer_login, #recover-password form, #activate-account form, .reset-password form {
+		display:inline-block;
+		text-align:left;
+		width:45%;
+		margin:2.250em 0 4.438em;
+	}
+	
+		#customer-email {
+			margin-bottom:1.688em;
+		}
+	
+			#customer-login label, #recover-password label, #activate-account label, .reset-password label {
+				display:inline-block;
+				font-size:0.814em;
+				margin-bottom:1.188em;
+				margin-left:1px;
+			}
+			
+		.form-action {
+			margin-top:2.250em;
+		}
+		
+		.form-action p, #decline-invitation {
+			font-size:0.625em;
+			color:{{ settings.secondary-link-colour }};
+			display:inline-block;
+			margin-left:5px;
+		}
+		
+		.neuton .form-action p, .neuton #decline-invitation { font-size:0.875em; font-weight:300; }
+		
+			#forgot-password {
+				margin-top:0.625em;
+				font-size:0.625em;
+				float:right;
+			}
+			
+			.neuton #forgot-password { font-size:0.875em; font-weight:300; }
+			
+		.btn.guest {
+			padding: 0;
+			margin: 0;
+			border: none;
+			background: none;
+			font-size: 1.000em;
+			color: {{ settings.link-colour }};
+			font-family:inherit;
+		}
+			
+			
+/* Customer account
+------------------------------------------------*/
+		
+		
+	/*  Account details
+  ===================================== */
+  
+	.customer.account .page-title h1, .customer.order .page-title h1 {
+		border-bottom:none;
+	}
+
+	#account-details-list, .address-list {
+		padding:1.375em 0;
+		font-size:0.875em;
+	}
+	
+	.neuton #account-details-list, .neuton .address-list { font-size:1.000em;  font-weight:300; }
+    
+    .neuton #account-details-list .customer-name {
+      font-weight:700;
+      -webkit-font-smoothing:antialiased;
+    }
+    
+		#account-details-list .customer-email,  .address-list .customer-email {
+			margin-bottom:1.375em;
+		}
+	
+		#account-details-list .customer-address, .address-list .customer-address {
+			margin-bottom:1.375em;
+		}
+	
+			#account-details-list .customer-address > p, .address-list .customer-address > p {
+				margin:0 0;
+			}
+	
+		#order-history, .order-details {
+			
+		}
+			
+		#order-history .no-orders, .order-details .no-orders {
+			font-size:0.875em;
+			padding:1.375em 0 3.313em;
+			font-style:italic;
+		}
+		
+		.neuton #order-history .no-orders, .neuton .order-details .no-orders { font-size:1.000em; font-weight:300; }
+		
+		.order-number, .payment-status, .fulfillment-status { font-size:0.875em; }
+		.order-number {
+			width:25%;
+		}
+		.neuton .order-number, .neuton .payment-status, .neuton .fulfillment-status { font-size:1.000em; font-weight:300; }
+		
+		
+	/*  Order history
+  ===================================== */
+	
+	#order-history table {
+		width:100%;
+		text-align:left;
+		margin-bottom:3.875em;
+		-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+		        box-sizing: border-box;
+	}
+		
+		#order-history th {
+			font-size:0.814em;
+			border-bottom:1px solid {{ settings.secondary-border-colour }};
+			padding:2.250em 0;
+			color:{{ settings.title-label-colour }};
+			font-weight:300;
+			text-align:left;
+		}
+		
+		#order-history td { 
+			width:23.4%;
+			padding:1.125em 1.125em 1.125em 0px;
+			border-bottom:1px solid {{ settings.secondary-border-colour }};
+			vertical-align:middle;
+		}
+		
+		  /* Cells in last row */   #order-history .last td { border-bottom:none; }
+		  /* First cells for row */ #order-history th.first, #order-history td.first { padding-left:0.750em; }
+		
+		#order-history td.total {
+			font-size:0.722em;
+			padding-right:0px;
+			text-align:baseline;
+		}
+		
+		#order-history td.unfulfilled {
+			font-style:italic;
+			color:{{ settings.secondary-accent-colour }};
+			-webkit-font-smoothing:antialiased;
+		}
+		
+		
+/* Customer orders
+------------------------------------------------*/
+	
+	.address-list {
+		width:30%;
+		display:inline-block;
+	}
+	
+		.address-type {
+			margin-bottom:2.000em;
+			font-size:0.814em;
+		}
+	
+	
+	/*  Order details
+  ===================================== */
+	
+	.order-details table {
+		width:100%;
+		text-align:left;
+		border-top:1px solid {{ settings.primary-border-colour }};
+		border-bottom:1px solid {{ settings.primary-border-colour }};
+		margin-bottom:1.936em;
+		-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+		        box-sizing: border-box;
+	}
+		
+		/* Table header */
+		.order-details th {
+			border-bottom:1px solid {{ settings.secondary-border-colour }};
+			color:{{ settings.title-label-colour }};
+			font-weight:400;
+			padding:1.563em 0;
+			font-size:0.750em;
+			text-align:left;
+		}
+		
+		/* Table cells */
+		.order-details td { 
+			border-bottom:1px solid {{ settings.secondary-border-colour }};
+			vertical-align:middle;
+			font-size:0.750em;
+			padding:1.667em 0;
+		}
+		
+		.order-details th, .order-details td {
+			padding-left:30px;
+		}
+		
+		  /* Table cells in the last row */ .order-details .last td { border-bottom:none; }
+		  /* First cell in each row */      .order-details th.first, .order-details td.first { 
+		    padding-left:10px;
+		  }
+				
+		.order-details td.unfulfilled {
+			font-style:italic;
+			color:{{ settings.secondary-accent-colour }};
+			-webkit-font-smoothing:antialiased;
+		}
+		
+		.order-details .image 			{ width: 11.7%; }
+		.order-details .item 				{ width: 38.3%; }
+		.order-details .price 			{ width: 17.0%; }
+		.order-details .quantity 		{ width: 18.1%; }
+		.order-details .total 			{ width: 16.0%; }
+		
+	                    .order-details td.item a  { font-size:1.143em; font-weight:400; }
+		/* fsa */ .neuton .order-details td.item a  { font-size:1.286em; font-weight:300; }
+		
+		  .order-details .image img { width: 100%; }
+		
+	
+	/*  Order totals
+  ===================================== */
+	
+	#order-subtotals {
+		border-bottom:1px solid {{ settings.secondary-border-colour }};
+		padding-bottom:1.000em;
+		margin-bottom:1.250em;
+		text-align:left;
+	}
+	
+	#order-totals {
+		text-align:left;
+		margin-bottom:2.250em;
+	}
+		
+		.order-totals {
+			float:right;
+			width:32.97%;
+			padding-left:30px;
+			margin:0;
+			-webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+				      box-sizing: border-box;
+		}
+			
+			.order-totals li {
+				font-size:0.750em;
+				vertical-align:top;
+				margin-bottom:1.714em;
+			}
+			
+			.order-tax.last {
+				margin-bottom:0.714em;
+			}
+			
+				.order-totals h2 {
+					font-size:1.000em;
+					display:inline-block;
+					width:150px;
+					margin:0 1.429em 0 0;
+				}
+				
+				#order-totals .order-totals, #order-totals .order-totals h2 {
+				  font-weight:700;
+				  -webkit-font-smoothing:antialiased;
+				}
+				
+	.order .nav-btn {
+		margin-bottom:5.750em;
+	}
+
+		
+/* Customer addresses
+------------------------------------------------*/
+	
+	#add-new-address-wrap, #address-list, #add_address {
+		width:72.3%;
+		margin:0 auto;
+	}
+	
+	#add-new-address-wrap {
+		border-bottom: 1px solid{{ settings.secondary-border-colour }};
+		padding: 1.688em 0 1.625em;
+		font-size: 1.000em;
+	}
+	
+	.neuton #add-new-address-wrap { font-size:1.125em; font-weight:300; }
+	
+		#address-list {
+			margin:1.688em auto 2.750em;
+		}
+	
+			#address-list > li {
+				border-bottom: 1px solid {{ settings.secondary-border-colour }};
+				padding-bottom:1.688em;
+				margin-bottom:1.688em;
+			}
+		
+			#address-list > li.last {
+				border-bottom:none;
+				padding-bottom:0;
+				margin-bottom:0;
+			}
+		
+				#address-list > li p {
+					margin:0;
+					padding:0;
+					font-size:0.875em;
+				}
+				
+				.neuton #address-list > li p { font-size:1.000em; font-weight:300; }
+		
+				#address-list .street {
+					font-size:1.125em;
+					margin:0 0 0.688em;
+					font-weight:300;
+					color:{{ settings.title-label-colour }};
+				}
+				
+				.neuton #address-list .street { font-size:1.250em; font-weight:300; }
+	
+				#address-list .address-action {
+					margin-top:1.125em;
+				}
+		
+					.address-action a {
+						margin:0 0.313em;
+					}
+					
+					.form-action p {
+					  color:{{ settings.secondary-accent-colour }};
+					}
+					
+	.addresses .nav-btn {
+		margin-bottom:5.750em;
+	}
+	
+	/*  Add & edit addresses
+  ===================================== */
+	
+	.add-address, .edit-address {
+		padding:0.813em 0 0.250em;
+	}
+	
+	.add-address {
+		border-bottom:1px solid {{ settings.secondary-border-colour }};
+	}
+	
+	.add-address form, .edit-address form {
+		width:62.4%;
+		margin:0 auto;
+		text-align:left;
+	}
+	
+		.add-address li, .edit-address li {
+			margin-bottom:1.563em;
+			position:relative;
+		}
+		
+			.add-address select, .edit-address select {
+				display:block;
+				width:360px;
+				bottom:4px;
+				left:11px;
+			}
+			
+			  /* firefox specific */ @-moz-document url-prefix() {
+			    .add-address select, .edit-address select { left:1px; }
+			  }
+			
+			.add-address    label[for="address-country"], 
+			.add-address    label[for="address-province"], 
+			.edit-address   label[for="address-country"],
+			.edit-address   label[for="address-province"] {
+				display:block;
+			}
+			
+			.add-address .set-default, .edit-address .set-default {
+				color:{{ settings.secondary-accent-colour }};
+				margin-top:1.875em;
+				font-size:0.875em;
+			}
+			
+			.neuton .add-address .set-default, .neuton .edit-address .set-default { font-size:1.000em; font-weight:300; }
+			
+				.add-address .set-default input, .edit-address .set-default input {
+					margin-right:6px;
+				}
+			
+			.add-address .form-action, .edit-address .form-action {
+				margin-top:0px;
+			}
+	
+
+/* Smartphone
+------------------------------------------------*/
+
+@media all and (max-width: 767px) {
+	
+
+  /*  Universal
+  ===================================== */
+
+	#customer_login, 
+	#recover-password form, 
+	#activate-account form, 
+	.reset-password form {
+		width:95%;
+	}
+	
+	
+  /*  Customer login
+  ===================================== */	
+	
+	#forgot-password {
+		  margin-top:5px;
+			font-size:0.875em;
+	}
+			
+		.neuton #forgot-password { 
+		  font-size:1.000em;
+		}
+	
+	
+  /*  Customer account
+  ===================================== */
+		
+	#order-history table, .order-details table {
+		margin-top:15px;
+		margin-bottom:1.875em;
+	}
+	
+		#order-history th, .order-details th {
+			display:none;
+		}
+
+			#order-history td, .order-details td {
+				border-bottom:0px !important;
+				display: block !important;
+        -webkit-box-sizing: border-box !important;
+           -moz-box-sizing: border-box !important;
+				        box-sizing: border-box !important;
+				width: 100% !important;
+				padding:0 0 0 100px !important;
+				margin:14px 0 !important;
+				position:relative !important;
+			}
+		
+			#order-history td.last, .order-details td.last {
+				border-bottom:1px solid {{ settings.secondary-border-colour }};
+				margin-bottom:0px !important;
+				padding-bottom:20px !important;
+			}
+			
+			#order-history tr.last td.last, .order-details tr.last td.last {
+				border-bottom:0px !important;
+			}
+			
+			#order-history td:before, .order-details td:before {
+				position:absolute;
+				left:5px;
+				font-family: {{ settings.accent-font }} ;
+    		text-transform: uppercase;
+				font-size:11px;
+				color: {{ settings.title-label-colour }};
+				font-style:normal;
+			}
+			
+			#order-history td.total { font-size:0.750em; }
+			
+			#order-history td.order-number:before 			{ top:2px; content:'item' }
+			#order-history td.payment-status:before 		{ top:2px; content:'payment' }
+			#order-history td.fulfillment-status:before { top:2px; content:'fulfillment' }
+			#order-history td.total:before 							{ top:0px; content:'total' }
+
+
+    /*  Customer addresses
+    ===================================== */
+		
+		#add-new-address-wrap, #address-list, #add_address {
+			width:100%;
+		}
+		
+		#add-new-address-wrap {
+			padding:1.500em 0 1.500em;
+		}
+		
+			.add-address form, .edit-address form {
+				width:95%;
+			}
+			
+				.add-address select, .edit-address select {
+					width:283px;
+				}
+	
+  /*  Customer order
+  ===================================== */
+		
+	.address-list {
+		width:100%;
+		padding-top:0.750em;
+		margin-bottom:0px;
+	}
+	
+	#billing-address-list {
+		border-bottom:1px solid {{ settings.secondary-border-colour }};
+		padding-bottom:0.500em;
+	}
+	
+	#shipping-address-list {
+		border-bottom:1px solid {{ settings.primary-border-colour }};
+		padding-bottom:1.500em;
+	}
+	
+		/* Order table */
+		.order-details table {
+			margin-top:40px;
+		}
+		
+			.order-details td.image { 
+				width: 200px !important;
+				margin: 0 auto 2.000em !important; 
+				padding-left:0px !important;
+			}
+			
+				.order-details td.image img {
+					width:100%;
+					outline:1px solid pink;
+				}
+				
+				.order-details td.item:before 		{ top:2px; content:'item' }
+				.order-details td.price:before 		{ top:0px; content:'price' }
+				.order-details td.quantity:before { top:0px; content:'quantity' }
+				.order-details td.total:before 		{ top:0px; content:'total' }
+				
+				.order-details td.last {
+					border-bottom:1px solid {{ settings.secondary-border-colour }} !important;
+					margin-bottom:25px !important;
+				}
+		
+		/* Order totals */
+		.order-totals {
+		-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+		        box-sizing: border-box;
+			padding:0 2.5%;
+			width:100%;
+		}
+	
+}	
+
+/* Account registration page
+------------------------------------------------*/
+
+.note a {
+        font-weight:300;
+        font-size:16px;
+}
+
+#first_name label, #last_name label, #email label, #password label {
+        font-size:0.814em;
+        margin-bottom:1.188em;
+        margin-left:1px;
+}
+
+#first_name, #last_name, #email, #password {
+        margin-bottom: 1.375em;
+}
+
+#create_customer {
+        display: inline-block;
+        text-align: left;
+        width: 45%;
+        margin: 2.250em 0 4.438em;
+}
+
+
+
+
+
+
+

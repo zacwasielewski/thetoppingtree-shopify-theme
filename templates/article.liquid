@@ -1,0 +1,136 @@
+{% paginate article.comments by settings.article-comments-per-page %}
+
+  {% form article %}
+  
+    <div id="content" class="article-page">
+
+      <!-- Page title -->
+      <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+      <div class="page-title">
+        <h1><a href="{{ blog.url }}">{{ blog.title }}</a></h1>
+      </div>
+
+      <!-- Article -->
+      <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+      <section id="blog-content" class="{% if article.comments_enabled? %}has-comments{% endif %}">
+
+        <!-- Article output -->
+        <ul class="blog">
+          <li class="article {% include 'for-looper' %}">
+
+            <a href="{{ article.url }}" class="article-date accent-text">{{ article.published_at | date: "%B %d, %Y" }}</a>
+            <h1 class="article-title"><a href="{{ article.url }}">{{ article.title }}</a></h1>
+
+            <div class="article-content rte">
+              {{ article.content }}
+            </div>
+
+            <div class="article-meta-wrap">
+            
+              <ul class="article-meta accent-text">
+                <li class="share-widget-toggle">
+                  <a href="#">share this</a>
+                </li>
+              </ul><!-- .article-meta -->
+
+              {% include 'share-widget' %}
+            
+            </div><!-- .article-meta-wrap -->
+
+          </li>
+        </ul>
+
+        <!-- Tags (if there are any) -->
+        {% if article.tags.size > 0 %}
+          <ul id="article-tags" class="accent-text {% if article.comments_enabled? == false %}comments-disabled{% endif %}">
+            {% for tag in article.tags %}
+              <li><a href="{{ blog.url }}/tagged/{{ tag | handle }}">#{{ tag }}</a></li>  
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <!-- Comments section (if enabled) -->
+        {% if article.comments_enabled? %}
+          <ul id="comments" {% if article.tags.size == 0 %}class="no-tags"{% endif %} {% if article.comments_count == 0 %}no-comments{% endif %}>
+            <li id="read-comments" {% if paginate.previous or paginate.next %}class="has-pagination"{% endif %}>
+              
+              <h2 class="comments-title">Comments on this post  <span>({{ article.comments_count }} {{ article.comments_count | pluralize:'comment', 'comments' }})</span></h2>
+
+              <!-- Display comments -->
+              <ul class="comments">
+
+                {% if comment and comment.created_at %}
+                  <li class="comment {% if article.comments_count == 0 %}last{% endif %}">
+                    <p class="comment-author">{% if comment.email %}<a href="mailto:{{ comment.email }}">{{ comment.author }}</a>{% else %}{{ comment.author }}{% endif %} says…</p>
+                    <div class="comment-text">{{ comment.content }}</div>
+                    <p class="comment-published-date accent-text">on {{ comment.created_at | date: "%B %d, %Y" }}</p>
+                  </li>
+                {% endif %}
+
+                {% for comment in article.comments %}
+                  <li class="comment {% include 'for-looper' %}">
+                    <p class="comment-author">{% if comment.email %}<a href="mailto:{{ comment.email }}">{{ comment.author }}</a>{% else %}{{ comment.author }}{% endif %} says…</p>
+                    <div class="comment-text">{{ comment.content }}</div>
+                    <p class="comment-published-date accent-text">on {{ comment.created_at | date: "%B %d, %Y" }}</p>
+                  </li>
+                {% endfor %}
+                
+              </ul>   
+            </li>
+
+            <!-- Comments pagination -->
+            {% if paginate.previous or paginate.next %}
+              <li id="paginate-comments">
+                {% include 'pagination' %}
+              </li>
+            {% endif %}
+
+            <!-- Leave comments -->
+            <li id="leave-comments">
+              <div id="leave-comments-wrap">
+                
+                <h2 class="comments-title">Leave a comment</h2>
+
+                {% if form.errors %}
+                  <div id="comment-error-alert" class="errors">
+                    Whoops! Better give one more try!
+                  </div>
+                {% endif %}
+
+                <div id="author-name">
+                  <label class="styled-label accent-text">Name</label>
+                  <input type="text" value="Your name" name="comment[author]" class="styled-text-field {% if form.errors contains "author" %}field-error{% endif %}">
+                </div> 
+
+                <div id="author-email">
+                  <label class="styled-label accent-text">Email</label>
+                  <input type="text" value="your@email.com" name="comment[email]" class="styled-text-field {% if form.errors contains "email" %}field-error{% endif %}">
+                </div>
+
+                <div id="author-body">
+                  <label class="styled-label accent-text">Message</label>
+                  <textarea id="author-comment" name="comment[body]" class="styled-text-field {% if form.errors contains "body" %}field-error{% endif %}"></textarea>
+                </div>
+
+                <input class="action-btn accent-text" type="submit" value="POST COMMENT">
+                
+              </div>
+            </li>
+
+          </ul>
+        {% endif %}
+
+      </section>
+
+      <!-- Breadcrumbs -->
+      <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+      {% include 'breadcrumbs' %}
+
+    </div>
+    
+  {% endform %}
+
+{% endpaginate %}

@@ -1,0 +1,44 @@
+<div id="content" class="customer activate-account">
+
+  <section id="activate-account">
+
+    <!-- Page title -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+    <div class="page-title has-description">
+      <h1>Activate your Account</h1>
+      <h2>To activate your account, choose a password and enter it below.</h2>
+    </div>
+
+    <!-- Activate account form -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+    {% form 'activate_customer_password' %}
+
+      {{ form.errors | default_errors }}
+
+      <div id="customer-email">
+        <label class="accent-text">Password</label>
+        <input type="password" value="" name="customer[password]" class="styled-text-field">
+      </div>
+
+      <div id="customer-password">
+        <label for="customer-password" class="accent-text">Repeat password</label>
+        <input type="password" value="" name="customer[password_confirmation]" class="styled-text-field">
+      </div>
+
+      <div id="customer-login-tools" class="form-action">
+        <input class="action-btn accent-text" type="submit" value="Submit">
+        <p id="decline-invitation">or <a href="/">decline invitation</a></p>
+      </div>
+
+    {% endform %}
+
+  </section>
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>

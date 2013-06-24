@@ -1,0 +1,27 @@
+  <div id="content" class="collections">
+        
+        <div class="page-title">
+            <h1>Collections</h1>
+        </div>
+        
+        <section id="collections-content" class="">
+            
+            <ul id="collections-list" class="clearfix">
+                {% for collection in collections %}<li>
+                    <a id="collection-list-image-wrap" href="{{ collection.url }}">
+                        {% if collection.image %}
+                            {{ collection.image.src | collection_img_url: 'large' | img_tag: collection.image.alt }}
+                        {% else %}
+                            {{ collection.products.first.images[0] | product_img_url: 'large' | img_tag: collection.title }}
+                        {% endif %}
+                    </a>
+                    <h1><a href="{{ collection.url }}">{{ collection.title }}</a></h1>
+                    <div class="rte"><p>{{ collection.description | strip_html | truncatewords: 20 | replace: '....', '...' }}</p></div>
+                </li>{% endfor %}
+            </ul>
+        
+        </section>
+        
+        {% include 'breadcrumbs' %}
+        
+  </div>

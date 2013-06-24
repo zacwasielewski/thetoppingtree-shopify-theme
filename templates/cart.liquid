@@ -1,0 +1,99 @@
+<div id="content" class="cart">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% if cart.item_count > 0 %}
+    <div class="page-title">
+      <h1>Cart</h1>
+    </div>
+  {% else %}
+    <div class="page-title has-description">
+      <h1>Cart</h1>
+      <h2>It appears that your cart is currently empty!</h2>
+    </div>
+  {% endif %}
+
+  {% if cart.item_count > 0 %}
+
+    <!-- Display the cart -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+    <form action="/cart" method="post" id="cart-form">
+
+      <!-- Cart table header -->
+      <table>
+        
+        <!-- Cart table headers -->
+        <tr class="cart-table-header accent-text">
+          <th class="first">Item</th>
+          <th>&nbsp;</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Remove</th>
+          <th class="last">Total</th>
+        </tr>
+
+        <!-- Cart table line-items -->
+        {% for item in cart.items %}
+          <tr class="cart-row {% include 'for-looper' %}">
+            <td class="cart-item first">
+              <a href="{{ item.product.url | within: collections.all }}"><img src="{{ item.product.images[0] | product_img_url: "large" }}" alt="{{ item.title | escape }}" /></a>
+            </td>
+            <td class="cart-detail">
+              <a href="{{ item.product.url }}">{{ item.title | escape }}</a>
+            </td>
+            <td class="cart-price accent-text">{{ item.price | money }}</td>
+            <td class="cart-quantity"><input type="number" class="styled-text-field" name="updates[]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" /></td>
+            <td class="cart-remove"><a href="/cart/change/{{ item.variant.id }}?quantity=0" title="remove">Remove</a></td>
+            <td class="cart-total accent-text last">{{ item.line_price | money }}</td>
+          </tr>
+        {% endfor %}
+
+      </table>
+
+      <!-- Secondary cart tools -->
+      <div id="cart-tools" class="clearfix">
+
+        <!-- Totals & checkout -->
+        <div id="cart-checkout">
+
+          <h2 id="cart-subtotal" class="accent-text">Subtotal <em>{{ cart.total_price | money }}</em></h2>
+
+          <div id="cart-update-or-submit">
+            <input type="submit" id="update-cart" name="update" value="Update cart" /> <span>or</span> <input id="checkout-button" class="action-btn accent-text" type="submit" name="checkout" value="Check out" />
+          </div>
+
+          {% if additional_checkout_buttons %}
+            <div class="additional-checkout-buttons">
+              {{ content_for_additional_checkout_buttons }}
+            </div>
+          {% endif %}
+
+        </div>
+
+        <!-- Optional special notes -->
+        {% if settings.show-cart-notes == true %}
+          <div id="cart-notes">
+            <p class="accent-text">{{ settings.cart-notes-title }}</p>
+            <textarea class="styled-text-field" id="cart-notes-area" name="note">{{ cart.note}}</textarea>
+          </div>
+        {% endif %}
+
+      </div>
+
+    </form>
+
+  {% endif %}
+
+  <!-- Display if cart is empty -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <a href="{{ settings.cart-continue-url }}" class="nav-btn accent-text">Continue shopping →</a>
+
+  <!-- Display the cart -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>

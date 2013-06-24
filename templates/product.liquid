@@ -1,0 +1,142 @@
+<div id="content" class="product-page {% if product.images.size > 0 %}product-showcase{% endif %}">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div class="page-title has-description">
+    <h1>{{ product.title }}</h1>
+    <h2>{{ product.vendor | link_to_vendor }}</h2>
+  </div>
+
+  <!-- Product image viewer -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <section id="product-image-viewer" class="no-top-border {% if product.images.size == 1 %}no-thumbs{% endif %}">
+
+    <div id="product-image-showcase">
+      <img src="{{ product.featured_image | product_img_url: 'original' }}" alt="{{ product.featured_image.alt }}">
+    </div>
+
+    {% if product.images.size > 1 %}
+      <ul id="product-image-thumbnails">
+        {% for image in product.images %}
+          <li><img src="{{ image.src | product_img_url: 'small' }}" alt="{{ image.alt }}" data-high-res-url="{{ image.src | product_img_url: 'original' }}" class="{% if forloop.first %}first active{% endif %} {% if forloop.last %}last{% endif %}"></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+  </section>
+
+  <!-- Product details -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <form action="/cart/add" method="post">
+    <section id="product-details">
+      
+      <!-- Product Variants -->
+      {% if product.available %} <!-- If the product is available then... -->
+
+        {% if product.variants.size > 1 %} <!-- Create a variants dropdown IF the product has more than one variant -->
+        
+        <ul id="product-variants">
+          <li>
+            <select name="id" id="product-select" class="js-styled">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+              {% endfor %}
+            </select>
+          </li>
+        </ul>
+
+        {% else %} <!-- If the product only has one variant, create a hidden input with the variant id. NOTE: Necessary for "add to cart" to work -->
+
+          {% for variant in product.variants %}
+            <input type="hidden" name="id" value="{{ variant.id }}" />
+          {% endfor %}
+
+        {% endif %}
+
+      {% endif %}
+      
+      <!-- Product Price / Add to Cart -->
+      <ul id="product-add-to-cart" class="{% if product.variants.size == 1 or product.available == false %}no-variants{% endif %} {% if product.description.size == 0 %}no-description{% endif %}">
+        <li id="product-price">
+          {% if product.variants.size == 1 %}
+            {% if product.compare_at_price_min > product.price_min %}
+              <p class="price sale accent-text" data-price="{{ product.price_min }}">{{ product.price_min | money }}</p>
+              <p class="price was accent-text">{{ product.compare_at_price_min | money }}</p>
+            {% else %}
+              <p class="price accent-text">{{ product.price_min | money }}</p>
+            {% endif %}
+          {% endif %}
+        </li>
+        <li id="product-add">
+          <button class="action-btn accent-text" id="add-to-cart">Add</button>
+          <input id="product-submit" type="submit">
+        </li>   
+      </ul>
+      
+       <!-- Product description -->
+      {% if product.description.size > 0 %}
+        <div id="product-description" class="rte">
+          {{ product.description }}
+        </div>
+      {% endif %}
+
+    </section>
+  </form>
+
+  <!-- Product share options -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <ul id="share-this">
+
+    <!-- Twitter share button -->
+    <li class="twitter share-button">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-text="{{ shop.name }}:" data-url="{{ shop.url }}{{ product.url }}">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </li>
+
+    <!-- Facebook share button -->
+    <li class="facebook share-button">
+      <div class="fb-like" data-href="{{ shop.url }}{{ product.url }}" data-send="false" data-layout="button_count" data-show-faces="false"></div>
+    </li>
+
+    <!-- Google share button -->
+    <li class="google share-button">
+      <div class="g-plusone" data-size="medium" data-annotation="bubble" data-href="{{ shop.url }}{{ product.url }}"></div>
+    </li>
+
+    <!-- Pinterest share button -->
+    <li class="pinterest share-button">
+      <a data-pin-config="none" href="//pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url | }}&media={{ product.featured_image | product_img_url: 'large' }}" data-pin-do="buttonPin" ><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a>
+    </li>
+
+    <!-- Svpply share button -->
+    <li class="svpply share-button">
+      <script src="//svpply.com/api/all.js#xsvml=1" type="text/javascript"></script>
+      <sv:product-button type="boxed"></sv:product-button>
+    </li>
+
+  </ul>
+
+  <!-- Related products -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'related-products' %}
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->    
+
+  {% include 'breadcrumbs' %}
+
+</div>
+
+<!-- Product page specific JS -->
+<!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+<script type="text/javascript" charset="utf-8">
+
+  {% include 'selectOptions' %}
+
+</script>

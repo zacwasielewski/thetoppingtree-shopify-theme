@@ -1,0 +1,51 @@
+<div id="content" class="page">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div class="page-title"><h1>{{ page.title }}</h1></div>
+
+  <!-- Standard page content -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% if page.content.size > 0 %}
+    <section id="page-content" class="rte">
+      {{ page.content }}
+    </section>
+  {% endif %}
+
+  <!-- Template [Contact] specific markup -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% form 'contact' %}
+    <section id="contact-form">
+      <div id="contact-form-wrap">
+        <h2 class="contact-title">Ask a Question</h2>
+
+        {% if form.posted_successfully? %}
+          <div class="success">Thanks for contacting us! We'll get back to you as soon as possible.</div>
+        {% endif %}
+
+        {{ form.errors | default_errors }}
+
+        <div id="contact-email">
+          <label class="styled-label accent-text">Email</label>
+          <input type="text" value="your@email.com" name="contact[email]" class="styled-text-field {% if form.errors contains "email" %}field-error{% endif %}">
+        </div>
+
+        <div id="contact-question">
+          <label class="styled-label accent-text">Message</label>
+          <textarea id="author-comment" name="contact[question]" class="styled-text-field {% if form.errors contains "question" %}field-error{% endif %}"></textarea>
+        </div>
+
+        <input class="action-btn accent-text" type="submit" value="Submit">
+      </div>
+    </section>
+  {% endform %}
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>

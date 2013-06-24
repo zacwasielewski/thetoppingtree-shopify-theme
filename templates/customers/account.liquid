@@ -1,0 +1,74 @@
+<div id="content" class="customer account">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div class="page-title"><h1>Account</h1></div>
+
+  <!-- Account details -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <section id="account-details">
+    <div class="section-title single-borders">
+      <h1 class="accent-text">Account details</h1>
+    </div>
+    <ul id="account-details-list">
+      <li class="customer-name">{{ customer.name }}</li>
+      <li class="customer-email"><a href="mailto:{{ customer.email }}">{{ customer.email }}</a></li>
+      {% if customer.default_address != nil %}
+        <li class="customer-address">
+          <p>{{ customer.default_address.address1 }}</p>
+          {% if customer.default_address.address2 != "" %}
+            <p>{{ customer.default_address.address2 }}</p>
+          {% endif %}
+          <p>{{ customer.default_address.city}}, {% if address.province_code %}{{customer.default_address.province_code}}, {% endif %}{{customer.default_address.country}}</p>
+          <p>{{ customer.default_address.zip}}</p>
+          <p>{{ customer.default_address.phone }}</p>
+        </li>
+      {% endif %}
+      <li><a class="view-customer-address" href="/account/addresses">View addresses ({{ customer.addresses_count }})</a></li>
+    </ul>
+  </section>
+
+  <!-- Order history -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <section id="order-history">
+
+    <div class="section-title single-borders">
+      <h1 class="accent-text">Order history</h1>
+    </div>
+
+    {% if customer.orders.size != 0 %}
+    <table>
+      <thead>
+        <tr>
+          <th class="accent-text order-number first">Order</th>
+          <th class="accent-text payment-status">Payment</th>
+          <th class="accent-text fulfillment-status">Fulfillment</th>
+          <th class="accent-text total last">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in customer.orders %}
+          <tr class="{% include 'for-looper' %} {% if order.cancelled %}cancelled_order{% endif %}">
+            <td class="order-number first">{{ order.name | link_to: order.customer_url }} - {{ order.created_at | date: "%b %d, %Y" }}</td>
+            <td class="payment-status {{ order.financial_status }}">{{ order.financial_status | capitalize }}</td>
+            <td class="fulfillment-status {{ order.fulfillment_status }}">{{ order.fulfillment_status | capitalize }}</td>
+            <td class="total accent-text last">{{ order.total_price | money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p class="no-orders">You haven't placed any orders yet.</p>
+    {% endif %}
+    
+  </section>
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>

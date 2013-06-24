@@ -1,0 +1,108 @@
+<div id="content" class="customer order">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div class="page-title"><h1>Order {{ order.name }}</h1></div>
+
+  <!-- Account details -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <section id="account-details">
+    
+    <div class="section-title single-borders">
+      <h1 class="accent-text">Order details</h1>
+    </div>
+    
+    <ul id="billing-address-list" class="address-list">
+      <li class="address-type accent-text">Billing address</li>
+      <li class="customer-name">{{ order.billing_address.name }}</li>
+      <li class="customer-email"><a href="mailto:{{ order.billing_address.email }}">{{ order.email }}</a></li>
+      <li class="customer-address">
+        <p>{{ order.billing_address.address1 }}</p>
+        {% if order.billing_address.address2 != "" %}
+          <p>{{ order.billing_address.address2 }}</p>
+        {% endif %}
+        <p>{{ order.billing_address.city}}{% if order.billing_address.province_code %} {{order.billing_address.province_code}}, {% endif %}{{order.billing_address.country}}</p>
+        <p>{{ order.billing_address.zip}}</p>
+        <p>{{ order.billing_address.phone }}</p>
+      </li>
+    </ul>
+
+    <ul id="shipping-address-list" class="address-list">
+      <li class="address-type accent-text">Shipping address</li>
+      <li class="customer-name">{{ order.shipping_address.name }}</li>
+      <li class="customer-email"><a href="mailto:{{ order.billing_address.email }}">{{ order.email }}</a></li>
+      <li class="customer-address">
+        <p>{{ order.shipping_address.address1 }}</p>
+        {% if order.shipping_address.address2 != "" %}
+          <p>{{ order.shipping_address.address2 }}</p>
+        {% endif %}
+        <p>{{ order.shipping_address.city}}{% if order.shipping_address.province_code %} {{order.shipping_address.province_code}}, {% endif %}{{order.shipping_address.country}}</p>
+        <p>{{ order.shipping_address.zip}}</p>
+        <p>{{ order.shipping_address.phone }}</p>
+      </li>
+    </ul>
+
+  </section>
+
+  <!-- Order details -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <section class="order-details">
+    
+    <table>
+      <thead>
+        <tr>
+          <th class="accent-text first">Item</th>
+          <th class="accent-text item">&nbsp;</th>
+          <th class="accent-text price">Price</th>
+          <th class="accent-text quantity">Quantity</th>
+          <th class="accent-text total last">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for line_item in order.line_items %}
+        <tr class="{% include 'for-looper' %}">
+          <td class="image first"><a href="{{ line_item.product.url }}">{{ line_item.product.featured_image |  product_img_url: 'medium' | img_tag }}</a></td>
+          <td class="item">{{ line_item.title | link_to: line_item.product.url }}</td> 
+          <td class="price accent-text">{{ line_item.price | money }}</td>
+          <td class="quantity accent-text">{{ line_item.quantity }}</td>
+          <td class="total accent-text last">{{ line_item.quantity | times: line_item.price | money }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div id="order-subtotals" class="clearfix">
+
+      <ul class="order-totals">
+        <li class="order-subtotal accent-text"><h2>subtotal</h2>{{ order.subtotal_price | money }}</li>
+        {% for shipping_method in order.shipping_methods %}
+          <li class="order-shipping accent-text"><h2>Shipping ({{ shipping_method.title }})</h2>{{ shipping_method.price | money }}</li>
+        {% endfor %}
+        {% for tax_line in order.tax_lines %}
+          <li class="order-tax accent-text {% include 'for-looper' %}"><h2>Tax ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</h2>{{ tax_line.price | money }}</li>
+        {% endfor %}
+      </ul>
+
+    </div>
+
+    <div id="order-totals" class="clearfix">
+      
+      <ul class="order-totals">
+        <li class="order-total accent-text"><h2>total</h2>{{ order.total_price | money }}</li>
+      </ul>
+    
+    </div>
+
+    <a href="/account" class="nav-btn accent-text">← Return to account page</a>
+
+  </section>
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>

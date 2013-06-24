@@ -1,0 +1,161 @@
+<div id="content" class="customer addresses">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div class="page-title"><h1>Addresses</h1></div>
+
+
+  <!-- Add new address -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div id="add-new-address-wrap">
+    <a href="#" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">Add new address</a>
+  </div><!-- #add-new-address-wrap -->
+
+  <section id="add_address" class="add-address" style="display:none;">
+    {% form 'customer_address', customer.new_address %}
+    
+      <ul>
+        <li>
+          <label class="styled-label accent-text" for="address-first-name">First Name</label>
+          <input type="text" id="address-first-name" class="styled-text-field" name="address[first_name]" value="{{form.first_name}}" size="40" />
+        </li>
+        <li>
+          <label class="styled-label accent-text" for="address-last-name">Last Name</label>
+          <input type="text" id="address-last-name" class="styled-text-field" name="address[last_name]" value="{{form.last_name}}" size="40" />
+        </li>
+        <li>
+          <label class="styled-label accent-text" for="address-company">Company</label>
+          <input type="text" for="address-company" class="styled-text-field" name="address[company]" value="{{form.company}}" size="40" />
+        </li>
+        <li>
+          <label class="styled-label accent-text" for="address-address1">Address 1</label>
+          <input type="text" id="address-address1" class="styled-text-field" name="address[address1]" value="{{form.address1}}" size="40" />
+        </li>
+        <li>
+          <label class="styled-label accent-text" for="address-address2">Address 2</label>
+          <input type="text" id="address-address2" class="styled-text-field" name="address[address2]" value="{{form.address2}}" size="40" />
+        </li>
+        <li>
+          <label class="styled-label accent-text" for="address-city">City</label>
+          <input type="text" id="address-city" class="styled-text-field" name="address[city]" value="{{form.city}}" size="40" />
+        </li>
+        <li>
+          <label class="styled-label accent-text" for="address-country">Country</label>
+          <select class="styled-select" id="address-country" name="address[country]" data-default="{{form.country}}">{{ country_option_tags }}</select>
+        </li>
+        <li id="address-province-container" style="display:none">
+          <label class="styled-label accent-text" for="address-province">Province</label>
+          <select id="address-province" class="styled-select" name="address[province]" data-default="{{form.province}}"></select>
+        </li>
+        <li>
+          <label class="styled-label accent-text" for="address-zip">Zip</label>
+          <input type="text" id="address-zip" class="styled-text-field" name="address[zip]" value="{{form.zip}}" size="40" />
+        </li>
+        <li>
+          <label class="styled-label accent-text" for="address-phone">Phone</label>
+          <input type="text" id="address-phone" class="styled-text-field" name="address[phone]" value="{{form.phone}}" size="40" />
+        </li>
+        <li class="set-default">
+          {{ form.set_as_default_checkbox }} Set as Default Address?
+        </li>
+        <li class="form-action">
+          <input class="action-btn accent-text" type="submit" value="Submit">
+          <p>or <a href="#" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">cancel</a></p>
+        </li>
+      </ul>
+
+    {% endform %}
+  </section>
+
+  <!-- List addresses -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <ul id="address-list">
+    {% for address in customer.addresses %}
+      <li class="{% include 'for-looper' %}">
+        <h1 class="street">{{ address.street }} {% if address == customer.default_address %}<span class="default_address note">(Default Address)</span>{% endif %}</h1>
+        <p class="city-state">{{ address.city }} {% if address.province_code %}, {{ address.province_code }}{% endif %}</p>
+        <p class="country-zip">{{ address.country }} {{ address.zip }}</p>
+        <p class="address-action">
+          {{ "Edit" | edit_customer_address_link: address.id }}
+          {{ "Delete" | delete_customer_address_link: address.id }}
+        </p>
+
+      <section id="edit_address_{{address.id}}" class="edit-address" style="display:none;">
+      {% form 'customer_address', address %}
+        <ul>
+          <li>
+            <label class="styled-label accent-text" for="address-first-name">First Name</label>
+            <input type="text" id="address-first-name-{{form.id}}" class="styled-text-field" name="address[first_name]" value="{{form.first_name}}" size="40" />
+          </li>
+          <li>
+            <label class="styled-label accent-text" for="address-last-name">Last Name</label>
+            <input type="text" id="address-last-name-{{form.id}}" class="styled-text-field" name="address[last_name]" value="{{form.last_name}}" size="40" />
+          </li>
+          <li>
+            <label class="styled-label accent-text" for="address-company">Company</label>
+            <input type="text" for="address-company-{{form.id}}" class="styled-text-field" name="address[company]" value="{{form.company}}" size="40" />
+          </li>
+          <li>
+            <label class="styled-label accent-text" for="address-address1">Address 1</label>
+            <input type="text" id="address-address1-{{form.id}}" class="styled-text-field" name="address[address1]" value="{{form.address1}}" size="40" />
+          </li>
+          <li>
+            <label class="styled-label accent-text" for="address-address2">Address 2</label>
+            <input type="text" id="address-address2-{{form.id}}" class="styled-text-field" name="address[address2]" value="{{form.address2}}" size="40" />
+          </li>
+          <li>
+            <label class="styled-label accent-text" for="address-city">City</label>
+            <input type="text" id="address-city-{{form.id}}" class="styled-text-field" name="address[city]" value="{{form.city}}" size="40" />
+          </li>
+          <li>
+            <label class="styled-label accent-text" for="address-country">Country</label>
+            <select class="styled-select" id="address-country-{{form.id}}" name="address[country]" data-default="{{form.country}}">{{ country_option_tags }}</select>
+          </li>
+          <li id="address-province-container-{{form.id}}" style="display:none">
+            <label class="styled-label accent-text" for="address-province">Province</label>
+            <select id="address-province-{{form.id}}" class="styled-select" name="address[province]" data-default="{{form.province}}"></select>
+          </li>
+          <li>
+            <label class="styled-label accent-text" for="address-zip">Zip</label>
+            <input type="text" id="address-zip-{{form.id}}" class="styled-text-field" name="address[zip]" value="{{form.zip}}" size="40" />
+          </li>
+          <li>
+            <label class="styled-label accent-text" for="address-phone">Phone</label>
+            <input type="text" id="address-phone-{{form.id}}" class="styled-text-field" name="address[phone]" value="{{form.phone}}" size="40" />
+          </li>
+          <li class="set-default">
+            {{ form.set_as_default_checkbox }} Set as Default Address?
+          </li>
+          <li class="form-action">
+            <input class="action-btn accent-text" type="submit" id="submit-{{form.id}}" value="Submit">
+            <p>or <a href="#" onclick="Shopify.CustomerAddress.toggleForm({{form.id}}); return false;">cancel</a></p>
+          </li>
+        </ul>
+      {% endform %}
+      </section>
+
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="/account" class="nav-btn accent-text">← Return to account page</a>
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+  // initialize observers on address selectors
+    new Shopify.CountryProvinceSelector('address-country', 'address-province', {hideElement: 'address-province-container'});  
+  {% for address in customer.addresses %}
+    new Shopify.CountryProvinceSelector('address-country-{{address.id}}', 'address-province-{{address.id}}', {hideElement: 'address-province-container-{{address.id}}'});
+  {% endfor %}
+  
+</script>

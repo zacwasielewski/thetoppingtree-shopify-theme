@@ -1,0 +1,40 @@
+{% layout settings.customer_layout %}
+
+<div id="template">
+        <div id="customer">
+                <!-- Create Customer -->
+                <div id="create-customer">
+                        <div class="page-title">
+                                <h1 class="title">Create Account</h1>
+                        </div>
+
+                        {% form 'create_customer' %}
+                        {{ form.errors | default_errors }}
+
+                        <div id="first_name" class="clearfix large_form">
+                                <label for="first_name" class="login accent-text">First Name</label>
+                                <input type="text" value="" name="customer[first_name]" id="first_name" class="styled-text-field" />
+                        </div>
+
+                        <div id="last_name" class="clearfix large_form">
+                                <label for="last_name" class="login accent-text">Last Name</label>
+                                <input type="text" value="" name="customer[last_name]" id="last_name" class="styled-text-field" />
+                        </div>
+
+                        <div id="email" class="clearfix large_form">
+                                <label for="email" class="login accent-text">Email Address</label>
+                                <input type="email" value="" name="customer[email]" id="email" class="styled-text-field" />
+                        </div>
+
+                        <div id="password" class="clearfix large_form">
+                                <label for="password" class="login accent-text">Password</label>
+                                <input type="password" value="" name="customer[password]" id="password" class="styled-text-field" />
+                        </div>
+
+                        <div class="action_bottom">
+                                <input class="action-btn accent-text" type="submit" value="Create" />
+                        </div>
+                        {% endform %}
+                </div><!-- /#create-customer -->
+        </div>
+</div>

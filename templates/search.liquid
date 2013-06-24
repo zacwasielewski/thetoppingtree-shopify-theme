@@ -1,0 +1,92 @@
+{% paginate search.results by settings.search-results-per-page %}
+<div id="content" class="search-page">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  
+  <div class="page-title">
+      <h1>{{ search.results.size }} results for <em>&lsquo;{{ search.terms }}&rsquo;</em></h1>
+  </div>
+
+  <section id="page-content">
+
+    {% if search.results.size > 0 %} <!-- Display search results -->
+
+      <ul id="search-results">
+        {% for item in search.results %}
+          <li class="result blog {% if item.featured_image %}product{% else %}article{% endif %} {% include 'for-looper' %}">
+
+            <!-- If the result is a product -->
+            {% if item.featured_image %}
+              <div class="search-result-product-wrap">
+                {% include 'small-product-item' %}
+              </div>
+
+            <!-- If the result is an article -->
+            {% else %}
+
+              <!-- article: date -- > <a href="{{ item.url }}" class="article-date accent-text">{{ item.published_at | date: "%B %d, %Y" }}</a>
+              <!-- article: title -- > <h1 class="article-title"><a href="{{ item.url }}">{{ item.title }} {{ item.type }}</a></h1>              
+              <!-- article: content -- >
+                <div class="article-content rte">    
+                  {% if item.excerpt.size > 0 %}
+                    {{ item.excerpt }}
+                  {% else %}
+                    <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+                  {% endif %}
+                </div>
+
+              <div class="article-meta-wrap">
+              
+                <ul class="article-meta accent-text">
+                  {% if item.comments_enabled? %}
+                    <li><a href="{{ item.url }}#comments">{{ item.comments_count }} {{ article.comments_count | pluralize:'comment','comments' }}</a></li>
+                  {% endif %}
+                  <li class="share-widget-toggle"><a href="#">share this</a></li>
+                  <li><a href="{{ item.url }}">continue reading →</a></li>
+                </ul>
+
+                {% include 'share-widget' %}
+              
+              </div>
+
+            {% endif %}
+
+          </li>
+        {% endfor %}
+      </ul>
+
+    {% else %} <!-- Display notification if there aren't any results -->
+
+      <a href="/" class="return-to-home nav-btn accent-text">Return to home →</a>
+
+    {% endif %}
+
+    <!-- Pagination -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  
+    {% if paginate.previous or paginate.next %}
+      {% include 'pagination' %}
+    {% endif %}
+
+  </section>
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  
+  {% include 'breadcrumbs' %}
+
+</div>
+{% endpaginate %}
+
+<script type="text/javascript" charset="utf-8">
+
+  // Determine variant for add-to-cart
+  var allProducts = [];
+  {% for item in search.results %}
+    {% if item.featured_image %}
+      allProducts.push({{ item | json }});
+    {% endif %}
+  {% endfor %}
+
+</script>

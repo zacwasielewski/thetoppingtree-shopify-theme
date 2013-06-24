@@ -1,0 +1,25 @@
+<ul id="pagination" class="accent-text">
+    
+    <li id="pag-prev" class="nav-btn {% if paginate.previous %}active{% endif %}">
+        {% if paginate.previous %}<a href="{{ paginate.previous.url }}">{% endif %}<span>← Previous</span>{% if paginate.previous %}</a>{% endif %}
+    </li>
+    
+    {% for part in paginate.parts %}
+    
+        {% if part.is_link %}
+            <li><a href="{{ part.url }}"><span>{{ part.title }}</span></a></li>
+        {% else %}
+            {% if part.title == '&hellip;' %}
+                <li class="ellipsis">{{ part.title }}</li>
+            {% else %}
+                <li class="current"><span>{{ part.title }}</span></li>
+            {% endif %}
+        {% endif %}
+        
+    {% endfor %}
+
+    <li id="pag-next" class="nav-btn {% if paginate.next %}active{% endif %}">
+        {% if paginate.next %}<a href="{{ paginate.next.url }}">{% endif %}<span>Next →</span>{% if paginate.next %}</a>{% endif %}
+    </li>
+    
+</ul><!-- .pagination -->

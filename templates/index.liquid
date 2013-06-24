@@ -1,0 +1,113 @@
+<div id="content" class="home">
+
+  <!-- Slideshow -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  
+  {% if settings.show-slideshow %}
+    <section id="slideshow-outer-wrap"> 
+      <div id="slideshow-wrap">
+
+        <div class="slideshow-prev inactive"></div>
+        <div class="slideshow-next"></div>
+
+        <div class="slideshow">
+          {% if settings.show-slide-1 %}<div class="slide">{% if settings.slide-link-1.size > 0 %}<a href="{{ settings.slide-link-1 }}">{% endif %}<img src="{{ 'slide-image-1.jpg' | asset_url }}">{% if settings.slide-link-1.size > 0 %}</a>{% endif %}</div>{% endif %}
+          {% if settings.show-slide-2 %}<div class="slide">{% if settings.slide-link-2.size > 0 %}<a href="{{ settings.slide-link-2 }}">{% endif %}<img src="{{ 'slide-image-2.jpg' | asset_url }}">{% if settings.slide-link-2.size > 0 %}</a>{% endif %}</div>{% endif %}
+          {% if settings.show-slide-3 %}<div class="slide">{% if settings.slide-link-3.size > 0 %}<a href="{{ settings.slide-link-3 }}">{% endif %}<img src="{{ 'slide-image-3.jpg' | asset_url }}">{% if settings.slide-link-3.size > 0 %}</a>{% endif %}</div>{% endif %}
+          {% if settings.show-slide-4 %}<div class="slide">{% if settings.slide-link-4.size > 0 %}<a href="{{ settings.slide-link-4 }}">{% endif %}<img src="{{ 'slide-image-4.jpg' | asset_url }}">{% if settings.slide-link-4.size > 0 %}</a>{% endif %}</div>{% endif %}
+          {% if settings.show-slide-5 %}<div class="slide">{% if settings.slide-link-5.size > 0 %}<a href="{{ settings.slide-link-5 }}">{% endif %}<img src="{{ 'slide-image-5.jpg' | asset_url }}">{% if settings.slide-link-5.size > 0 %}</a>{% endif %}</div>{% endif %}
+        </div>
+        
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Introduction Message -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  
+  {% if settings.display-introduction-message %}
+    <section id="introduction-message-wrap" class="single-borders">
+      <div id="introduction-message">
+        <h1>{{ settings.introduction-title }}</h1>
+        <h2>{{ settings.introduction-tagline }}</h2>
+      </div><!-- #introduction-message-wrap -->
+    </section>
+  {% endif %}
+
+  <!-- Featured products -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  
+  {% if settings.display-featured-products %}
+    <section id="featured-products" class="section">
+      <div class="section-title single-borders">
+        <h1 class="accent-text">
+          {% if settings.featured-products-title.size > 0 %} <!-- Use a custom title if one is provided -->
+            {{ settings.featured-products-title }}
+          {% else %} <!-- Use collection title if a custom title is no provided  -->
+            {{ collections[settings.featured-products-collection].title }}
+          {% endif %}
+      </h1>
+    </div>
+    
+    <!-- Always renders... UNLESS the store has products but the specified collection does NOT have any products  -->
+    {% unless shop.products_count > 0 and collections.[settings.featured-products-collection].products.size == 0 %}
+      <ul class="product-list no-pagination clearfix">
+        
+        {% for product in collections.[settings.featured-products-collection].products limit: settings.featured-products-limit %}{% include 'small-product-item' %}{% endfor %}
+        
+        <!-- Display default content if the store has no products -->
+        {% if shop.products_count == 0 %}
+          {% for i in (1..4) %}{% include 'small-product-item-default' %}{% endfor %}
+        {% endif %}
+
+      </ul>
+    {% endunless %}
+    
+    <!-- ONLY renders when the store has products but the specified collection does NOT have any products -->
+    {% if shop.products_count > 0 and collections.[settings.featured-products-collection].products.size == 0 %}
+      <p id="empty-collection">No products in this collection</p>
+    {% endif %}
+
+    </section>
+  {% endif %}
+
+
+  <!-- From the blog -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% if settings.home-layout == 'double-column' %}<div id="double-column-wrap" class="clearfix">{% endif %} <!-- Inserts container div for double column layout -->
+
+  {% if settings.display-home-blog %}
+    <section id="from-the-blog" class="section">
+    
+      <div class="section-title single-borders">
+        <h1 class="accent-text">{{ settings.home-blog-title }}</h1>
+      </div>
+
+      <ul class="blog">
+        {% for article in blogs.[settings.home-blog].articles limit: 1 %}
+          <li class="article">
+            <a href="{{ article.url }}" class="article-date accent-text">{{ article.published_at | date: "%B %d, %Y" }}</a>
+            <h1 class="article-title"><a href="{{ article.url }}">{{ article.title }}</a></h1>
+            <div class="article-content rte">
+                {{ article.excerpt_or_content }}
+            </div>
+            {% if article.excerpt.size > 0 %}
+              <a href="{{ article.url }}" class="accent-text continue-reading">continue reading →</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+        
+    </section>
+  {% endif %}
+
+  <!-- Two column twitter feed -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  {% if settings.home-layout == 'double-column' %}
+    {% include 'twitter-feed' %}
+  {% endif %}
+
+  {% if settings.home-layout == 'double-column' %}</div>{% endif %} <!-- Closes container div for double column layout -->
+
+</div>

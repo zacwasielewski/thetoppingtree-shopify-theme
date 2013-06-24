@@ -1,0 +1,102 @@
+{% layout settings.customer_layout %}
+
+<div id="content" class="customer login">
+
+  <section id="customer-login">
+
+  <!-- Customer login page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <div class="page-title {% if shop.checkout.guest_login %}has-description{% endif %}">
+    
+    <h1>Customer Login</h1>
+
+    {% if shop.checkout.guest_login %}
+      {% form 'guest_login' %}
+        <h2>Or skip this step and <input class="btn guest" type="submit" value="continue as Guest" /></h2>
+      {% endform %}
+    {% endif %}
+
+  </div>
+
+  <!-- Customer login form -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% form 'customer_login' %}
+
+    {{ form.errors | default_errors }}
+
+    <div id="customer-email">
+      <label class="accent-text">Email</label>
+      <input type="email" value="your@email.com" name="customer[email]" class="styled-text-field">
+    </div> <!-- #customer-email -->
+
+    <div id="customer-password">
+      <label for="customer-password" class="accent-text">Password</label>
+      <input type="password" value="" name="customer[password]" class="styled-text-field">
+    </div><!-- #customer-password -->
+
+    <div id="customer-login-tools" class="form-action">
+      <input class="action-btn accent-text" type="submit" value="Submit">
+      <a id="forgot-password" href="#recover" onclick="showRecoverPasswordForm()">Forgot your password?</a>
+    </div><!-- #customer-login-tools -->
+
+  {% endform %}
+
+  </section>
+
+  <section id="recover-password">
+
+    <!-- Recover password page title -->
+    <div class="page-title has-description">
+      <h1>Reset Password</h1>
+      <h2>We’ll send you an email to reset your password.</h2>
+    </div>
+
+    <!-- Recover password form -->
+    {% form 'recover_customer_password' %}
+
+      {{ form.errors | default_errors }}
+
+      <div id="customer-recovery-email">
+        <label class="accent-text">Email</label>
+        <input type="email" value="your@email.com" name="email" class="styled-text-field {% if form.errors contains "email" %}errors{% endif %}">
+      </div> <!-- #customer-email -->
+
+      <div id="customer-recovery-tools" class="form-action">
+        <input class="action-btn accent-text" type="submit" value="Submit">
+        <p>or <a href="#" onclick="hideRecoverPasswordForm()">Cancel</a></p>
+      </div><!-- #customer-login-tools -->
+
+    {% endform %}
+
+  </section>
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% include 'breadcrumbs' %}
+
+</div>
+
+<!-- Login specific JS -->
+<!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  <script type="text/javascript">
+  
+    if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+
+    function showRecoverPasswordForm() {
+      document.getElementById('recover-password').style.display = 'block';
+      document.getElementById('customer-login').style.display='none';
+      window.location.hash = '#recover';
+      return false;
+    }
+
+    function hideRecoverPasswordForm() {
+      document.getElementById('recover-password').style.display = 'none';
+      document.getElementById('customer-login').style.display = 'block';
+      return false;
+    }
+    
+  </script>

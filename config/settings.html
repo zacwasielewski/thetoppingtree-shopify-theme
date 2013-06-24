@@ -1,0 +1,813 @@
+<h3>Editions theme by <a href="http://www.pixelunion.net">Pixel Union</a></h3>
+<h4>You are running version 1.0.6</h4><br />
+<p>If you require any support please contact us at <a href="mailto:support@pixelunion.net">support@pixelunion.net</a></p>
+<p>Find us on Twitter: <a href="http://twitter.com/pixelunion">@pixelunion</a> | Facebook: <a href="http://facebook.com/pixelunion">http://facebook.com/pixelunion</a></p>
+<br />
+<hr />
+<br />
+
+<fieldset>
+	<legend>General</legend>
+	
+	<h3>Navigation</h3>
+	<table>
+		<tr>
+			<td><label for="enable-mega-navigation">Enable multi-tiered menu?</label></td>
+			<td><input type="checkbox" name="enable-mega-navigation" /></td>
+		</tr>
+		<tr>
+			<td><label for="categories-label">Categories label</label></td>
+			<td><input name="categories-label" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="brands-label">Brands label</label></td>
+			<td><input name="brands-label" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="custom-brands-collection">Replace brands with custom collection</label></td>
+			<td><select class="collection" name="custom-brands-collection" /></td>
+		</tr>
+		<tr>
+			<td><label for="invert-dropdown-arrows">Invert dropdown arrow colour</label></td>
+			<td><input type="checkbox" name="invert-dropdown-arrows" /></td>
+		</tr>
+		<tr>
+			<td><label for="smaller-list-items">Compact list items</label></td>
+			<td><input type="checkbox" name="smaller-list-items" /></td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Background options</h3>
+	<table>
+		<tr>
+			<td><label for="use-background-image">Use a background image?</label></td>
+			<td><input type="checkbox" name="use-background-image" /></td>
+		</tr>
+		<tr>
+			<td><label for="background-image">Background image file?</label></td>
+			<td><input type="file" name="background-image.png" /></td>
+		</tr>
+		<tr>
+			<td><label for="repeat-background">Repeat your background image?</label></td>
+			<td>
+				<select name="repeat-background" id="repeat-background">
+					<option value="repeat">Repeat both</option>
+					<option value="repeat-x">Repeat only horizontally</option>
+					<option value="repeat-y">Repeat only vertically</option>
+					<option value="no-repeat">Do not repeat</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+      <td><label for="background-position">Background position</label></td>
+      <td>
+        <select name="bg_pos">
+          <option value="left top">Left Top</option>
+          <option value="left center">Left Center</option>
+          <option value="left bottom">Left Bottom</option>
+          <option value="center top" selected="selected">Center Top</option>              
+          <option value="center center">Center Center</option>
+          <option value="center bottom">Center Bottom</option>
+          <option value="right top">Right Top</option>
+          <option value="right center">Right Center</option>
+          <option value="right bottom">Right Bottom</option>
+        </select>
+      </td>
+    </tr>
+		<tr>
+			<td><label for="fixed-background">Fixed background position?</label></td>
+			<td><input type="checkbox" name="fixed-background" /></td>
+		</tr>
+		<tr>
+			<td><label for="background-colour">Background colour</label></td>
+			<td><input name="background-colour" class="color" type="text" value="" /></td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Logo options</h3>
+	<table>
+		<tr>
+			<td><label for="use-logo">Use a logo</label></td>
+			<td><input type="checkbox" name="use-logo" id="use-logo" /></td>
+		</tr>
+		<tr>
+			<td><label for="logo">Logo image file</label></td>
+			<td><input type="file" name="logo.png" id="logo" data-max-width="1000" data-max-height="1000" /></td>
+		</tr>
+		<tr>
+			<td><label for="include-retina-logo">Include retina logo</label></td>
+			<td><input type="checkbox" name="include-retina-logo" id="include-retina-logo" /></td>
+		</tr>
+		<tr>
+			<td><label for="logo">Retina logo image file</label></td>
+			<td><input type="file" name="retina-logo.png" id="logo" data-max-width="1000" data-max-height="1000" /></td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Global font options</h3>
+	<table>
+    <tr>
+      <td><label for="text-font">Text font</label></td>
+      <td>
+        <select name="text-font" id="text-font">
+					<optgroup label="Recommended">
+            <option value="'Neuton', sans-serif">Neuton</option>
+	          <option value="'PT Serif', serif">PT Serif</option>
+          </optgroup>          
+          <optgroup label="Sans-serif">
+            <option value="'Helvetica Neue', Helvetica, Arial, sans-serif" selected="selected">Helvetica/Arial</option>
+            <option value="Impact, Charcoal, Helvetica, Arial, sans-serif">Impact</option>
+            <option value="'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Lucida, Helvetica, Arial, sans-serif">Lucida Grande</option>
+            <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+            <option value="Verdana, Helvetica, Arial, sans-serif">Verdana</option>
+          </optgroup>
+          <optgroup label="Serif">
+            <option value="Garamond, Baskerville, Caslon, serif">Garamond</option>
+            <option value="Georgia, Utopia, 'Times New Roman', Times, serif">Georgia</option>
+            <option value="Palatino, 'Palatino Linotype', 'Book Antiqua', serif">Palatino</option>
+            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+            <option value="Google_Droid+Serif_400_serif">Droid Serif Normal 400</option>
+          </optgroup>
+          <optgroup label="Monospace">
+            <option value="'Courier New', Courier, monospace">Courier New</option>
+            <option value="Monaco, 'Lucida Console', 'DejaVu Sans Mono', monospace">Monaco/Lucida Console</option>
+          </optgroup>
+        </select>
+      </td>
+    </tr>
+		<tr>
+      <td><label for="accent-font">Accent font</label></td>
+      <td>
+        <select name="accent-font" id="accent-font">
+					<optgroup label="Recommended">
+            <option value="'News Cycle', sans-serif">News Cycle</option>
+	          <option value="'PT Sans', sans-serif">PT Sans</option>
+          </optgroup>          
+          <optgroup label="Sans-serif">
+            <option value="'Helvetica Neue', Helvetica, Arial, sans-serif" selected="selected">Helvetica/Arial</option>
+            <option value="Impact, Charcoal, Helvetica, Arial, sans-serif">Impact</option>
+            <option value="'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Lucida, Helvetica, Arial, sans-serif">Lucida Grande</option>
+            <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+            <option value="Verdana, Helvetica, Arial, sans-serif">Verdana</option>
+          </optgroup>
+          <optgroup label="Serif">
+            <option value="Garamond, Baskerville, Caslon, serif">Garamond</option>
+            <option value="Georgia, Utopia, 'Times New Roman', Times, serif">Georgia</option>
+            <option value="Palatino, 'Palatino Linotype', 'Book Antiqua', serif">Palatino</option>
+            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+            <option value="Google_Droid+Serif_400_serif">Droid Serif Normal 400</option>
+          </optgroup>
+          <optgroup label="Monospace">
+            <option value="'Courier New', Courier, monospace">Courier New</option>
+            <option value="Monaco, 'Lucida Console', 'DejaVu Sans Mono', monospace">Monaco/Lucida Console</option>
+          </optgroup>
+        </select>
+      </td>
+    </tr>
+  </table>
+  	
+	<br />
+	<hr />
+	
+	<h3>Global colour options</h3>
+	<table>
+		<tr>
+			<td><label for="text-colour">General text colour</label></td>
+			<td><input name="text-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="text-highlight-colour">Text highlight colour</label></td>
+			<td><input name="text-highlight-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="link-colour">Link colour</label></td>
+			<td><input name="link-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="link-hover-colour">Link hover colour</label></td>
+			<td><input name="link-hover-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="submit-button-colour">Submit button colour</label></td>
+			<td><input name="submit-button-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="submit-button-hover-colour">Submit button hover colour</label></td>
+			<td><input name="submit-button-hover-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="submit-button-text-colour">Submit button text colour</label></td>
+			<td><input name="submit-button-text-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="accent-colour">Primary accent colour</label></td>
+			<td><input name="accent-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="secondary-accent-colour">Secondary accent colour</label></td>
+			<td><input name="secondary-accent-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="primary-border-colour">Primary border colour</label></td>
+			<td><input name="primary-border-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="secondary-border-colour">Secondary border colour</label></td>
+			<td><input name="secondary-border-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="title-label-colour">Title and label colour</label></td>
+			<td><input name="title-label-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="dropdown-background-colour">Dropdown / popup background colour</label></td>
+			<td><input name="dropdown-background-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="sale-banner-background-colour">Sale banner background colour</label></td>
+			<td><input name="sale-banner-background-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="sale-banner-text-colour">Sale banner text colour</label></td>
+			<td><input name="sale-banner-text-colour" class="color" type="text" value="" /></td>
+		</tr>
+	</table>
+	
+	<h3>Bold specific colour options</h3>
+	<table>
+		<tr>
+			<td><label for="footer-text-colour">Footer text colour</label></td>
+			<td><input name="footer-text-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="footer-background-colour">Footer background colour</label></td>
+			<td><input name="footer-background-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="footer-link-colour">Footer link colour</label></td>
+			<td><input name="footer-link-colour" class="color" type="text" value="" /></td>
+		</tr>
+		<tr>
+			<td><label for="footer-link-hover-colour">Footer link hover colour</label></td>
+			<td><input name="footer-link-hover-colour" class="color" type="text" value="" /></td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Browse / search tool</h3>
+	<table>
+		<tr>
+			<td><label for="display-shop-by-category">Display shop by category?</label></td>
+			<td><input type="checkbox" name="display-shop-by-category" id="display-shop-by-category" /></td>
+		</tr>
+		<tr>
+			<td><label for="display-shop-by-vendor">Display shop by vendor?</label></td>
+			<td><input type="checkbox" name="display-shop-by-vendor" id="display-shop-by-vendor" /></td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Twitter feed</h3>
+	<p>To enable the built-in Twitter feed simply input your Twitter username below.</p>
+	<br />
+	<table>
+		<tr>
+			<td><label for="twitter-username">Twitter username</label></td>
+			<td><input type="text" name="twitter-username" id="twitter-username" /></td>
+		</tr>
+	</table>
+	<br />
+	<hr />
+	
+	<h3>Product overlays</h3>
+	<table>
+		<tr>
+			<td><label for="display-produt-overlay">Display product overlay?</label></td>
+			<td><input type="checkbox" name="display-produt-overlay" id="display-produt-overlay" /></td>
+		</tr>
+	</table>	
+
+	<br />
+	<hr />
+	
+	<h3>Sale items</h3>
+	<table>
+		<tr>
+			<td><label for="display-sale-banner">Display sale banner?</label></td>
+			<td><input type="checkbox" name="display-sale-banner" id="display-sale-banner" /></td>
+		</tr>
+		<tr>
+			<td><label for="sale-banner-text">Sale banner text</label></td>
+			<td><input type="text" name="sale-banner-text" id="sale-banner-text" /></td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Feature elements style</h3>
+	<p>You can choose between light and dark versions of the theme's feature elements. Feature elements are the <b><i>Browse by / variant dropdowns</i></b> and the <b><i>'Loading' animation</i></b>.</p>
+	<br />
+	<table>
+		<tr>
+			<td><label for="element-style">Choose a style</label></td>
+			<td>
+				<select name="element-style">
+					<option value="light-elements">Light</option>
+					<option value="dark-elements">Dark</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Layout style</h3>
+	<p>There are two layout style options: <b><i>Minimalist</i></b> and <b><i>Bold</i></b>. Changing this option will make subtle adjustments to the footer, header, and to borders. <b><i>Minimalist</i></b> has been optimized for the Light preset and <b><i>Bold</i></b> has been optimized for the Dark preset.</p>
+	<br />
+	<table>
+		<tr>
+			<td><label for="theme-style">Layout style</label></td>
+			<td>
+				<select name="theme-style">
+					<option value="minimalist">Minimalist</option>
+					<option value="bold">Bold</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+	
+</fieldset>
+
+<fieldset>
+	<legend>Home page</legend>
+	
+	<h3>Slideshow</h3>
+	<table>
+	    <tr>
+			<td><label for="show-slideshow">Display slideshow?</label></td>
+            <td><input type="checkbox" id="show-slideshow" name="show-slideshow" /></td>
+		</tr>
+		<tr>
+			<td><label for="slideshow-control-style">Invert slideshow control colours</label></td>
+            <td><input type="checkbox" id="slideshow-control-style" name="slideshow-control-style" /></td>
+		</tr>
+		<tr>
+			<td><label for="slideshow-frequency">Slide rotation frequency</label></td>
+			<td>
+				<select name="slideshow-frequency">
+					<option value="5000">5 seconds</option>
+					<option value="10000">10 seconds</option>
+					<option value="15000">15 seconds</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+	<p><b>Note:</b> The recommended dimensions for slideshow images is 940px wide by 444px tall</p>
+    <br />
+    
+	<table class="standard-table">
+
+		<tr>
+			<td> </td>
+			<td>Display?</td>
+			<td>Slide image</td>
+			<td>Link to</td>
+		</tr>
+
+		<tr class="odd">
+			<td><label for="show-slide-1">Slide #1</label></td>
+			<td><input type="checkbox" id="show-slide-1" name="show-slide-1" value="1" checked="checked" /></td>
+			<td><input type="file" id="slide-image-1" name="slide-image-1.jpg" data-max-width="5000" /></td>
+			<td><input type="text" id="slide-link-1" name="slide-link-1" /></td>
+		</tr>
+		
+		<tr class="even">
+			<td><label for="show-slide-2">Slide #2</label></td>
+			<td><input type="checkbox" id="show-slide-2" name="show-slide-2" value="1" /></td>
+			<td><input type="file" id="slide-image-2" name="slide-image-2.jpg" data-max-width="5000" /></td>
+			<td><input type="text" id="slide-link-2" name="slide-link-2" /></td>
+		</tr>
+		
+		<tr class="odd">
+			<td><label for="show-slide-3">Slide #3</label></td>
+			<td><input type="checkbox" id="show-slide-3" name="show-slide-3" value="1" /></td>
+			<td><input type="file" id="slide-image-3" name="slide-image-3.jpg" data-max-width="5000" /></td>
+			<td><input type="text" id="slide-link-3" name="slide-link-3" /></td>
+		</tr>
+		
+		<tr class="even">
+			<td><label for="show-slide-4">Slide #4</label></td>
+			<td><input type="checkbox" id="show-slide-4" name="show-slide-4" value="1" /></td>
+			<td><input type="file" id="slide-image-4" name="slide-image-4.jpg" data-max-width="5000" /></td>
+			<td><input type="text" id="slide-link-4" name="slide-link-4" /></td>
+		</tr>
+		
+		<tr class="odd">
+			<td><label for="show-slide-5">Slide #5</label></td>
+			<td><input type="checkbox" id="show-slide-5" name="show-slide-5" value="1" /></td>
+			<td><input type="file" id="slide-image-5" name="slide-image-5.jpg" data-max-width="5000" /></td>
+			<td><input type="text" id="slide-link-5" name="slide-link-5" /></td>
+		</tr>
+		
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Introduction message</h3>
+	<table>
+		<tr>
+			<td><label for="display-introduction-message">Display introduction message?</label></td>
+			<td><input type="checkbox" id="display-introduction-message" name="display-introduction-message" /></td>
+		</tr>
+		<tr>
+			<td><label for="introduction-title">Introduction title</label></td>
+			<td><input type="text" id="introduction-title" name="introduction-title" /></td>
+		</tr>
+		<tr>
+			<td><label for="introduction-tagline">Introduction tagline</label></td>
+			<td>
+				<textarea name="introduction-tagline" id="introduction-tagline"></textarea>
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Layout</h3>
+	<table>
+		<tr>
+			<td><label for="home-layout">Select a layout</label></td>
+			<td>
+				<select name="home-layout">
+					<option value="single-column">Single column</option>
+					<option value="double-column">Double column</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Featured products</h3>
+	<table>
+		<tr>
+			<td><label for="display-featured-products">Display featured products?</label></td>
+			<td><input type="checkbox" id="display-featured-products" name="display-featured-products" /></td>
+		</tr>
+		<tr>
+			<td><label for="display-featured-products">Choose a collection to display</label></td>
+			<td><select class="collection" name="featured-products-collection" /></td>
+		</tr>
+		<tr>
+			<td><label for="featured-products-title">Featured products title</label></td>
+			<td><input type="text" id="featured-products-title" name="featured-products-title" /></td>
+		</tr>
+		<tr>
+			<td><label for="featured-products-limit">Number of products to display</label></td>
+			<td>
+				<select name="featured-products-limit" id="featured-products-limit">
+					<option value="4">4</option>
+					<option value="8">8</option>
+					<option value="12">12</option>
+					<option value="16">16</option>
+					<option value="20">20</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>From the blog</h3>
+	<table>
+		<tr>
+			<td><label for="display-home-blog">Display blog?</label></td>
+			<td><input type="checkbox" id="display-home-blog" name="display-home-blog" /></td>
+		</tr>
+		<tr>
+			<td><label for="home-blog">Choose a blog to display</label></td>
+			<td><select class="blog" name="home-blog" /></td>
+		</tr>
+		<tr>
+			<td><label for="home-blog-title">Blog title</label></td>
+			<td><input type="text" id="home-blog-title" name="home-blog-title" /></td>
+		</tr>
+	</table>
+	
+</fieldset>
+
+<fieldset>
+	<legend>Collection page</legend>
+	
+	<table>
+		<tr>
+			<td><label for="products-pagination-method">Pagination method</label></td>
+			<td>
+				<select name="products-pagination-method" id="products-pagination-method">
+					<option value="click-to-load">Click to load more</option>
+					<option value="traditional-pagination">Traditional pagination</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label for="products-per-page">Products per page</label></td>
+			<td>
+				<select name="products-per-page" id="products-per-page">
+					<option value="4">4</option>
+					<option value="8">8</option>
+					<option value="12">12</option>
+					<option value="16">16</option>
+					<option value="20">20</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+</fieldset>
+
+<fieldset>
+	<legend>Product page</legend>
+	
+	<table>
+		<tr>
+			<td><label for="display-related-products">Display related products?</label></td>
+			<td><input type="checkbox" id="display-related-products" name="display-related-products" /></td>
+		</tr>
+		<tr>
+			<td><label for="related-products-title">Related products title</label></td>
+			<td><input type="text" id="related-products-title" name="related-products-title" /></td>
+		</tr>
+	</table>
+	
+</fieldset>
+
+<fieldset>
+	<legend>Blog and article page</legend>
+	
+	<h3>Blog</h3>
+	<table>
+		<tr>
+			<td><label for="blog-articles-per-page">Articles per page</label></td>
+			<td>
+				<select name="blog-articles-per-page" id="blog-articles-per-page">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					<option value="25">25</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+	<hr />
+	
+	<h3>Article</h3>
+	<table>
+	<tr>
+		<td><label for="article-comments-per-page">Comments per page</label></td>
+		<td>
+			<select name="article-comments-per-page" id="article-comments-per-page">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+				<option value="25">25</option>
+			</select>
+		</td>
+	</tr>
+</table>
+	
+</fieldset>
+
+<fieldset>
+	<legend>Search results page</legend>
+	
+	<table>
+		<tr>
+			<td><label for="search-results-per-page">Results per page</label></td>
+			<td>
+				<select name="search-results-per-page" id="search-results-per-page">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					<option value="25">25</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+</fieldset>
+
+<fieldset>
+	<legend>404 page</legend>
+	
+	<table>
+		<tr>
+			<td><label for="404-title">Title</label></td>
+			<td><input type="text" id="404-title" name="404-title" /></td>
+		</tr>
+		<tr>
+			<td><label for="404-tagline">Tagline</label></td>
+			<td><input type="text" id="404-tagline" name="404-tagline" /></td>
+		</tr>
+		<tr>
+			<td><label for="404-redirect-url">Continue shopping URL</label></td>
+			<td><input type="text" id="404-redirect-url" name="404-redirect-url" /></td>
+		</tr>
+	</table>
+	
+</fieldset>
+
+<fieldset>
+	<legend>Cart page</legend>
+	
+	<table>
+		<tr>
+			<td><label for="show-cart-notes">Display special instructions area?</label></td>
+			<td><input type="checkbox" id="show-cart-notes" name="show-cart-notes" /></td>
+		</tr>
+		<tr>
+			<td><label for="cart-notes-title">Special instructions title</label></td>
+			<td><input type="text" id="cart-notes-title" name="cart-notes-title" /></td>
+		</tr>
+		<tr>
+			<td><label for="cart-continue-url">Continue shopping URL</label></td>
+			<td><input type="text" id="cart-continue-url" name="cart-continue-url" /></td>
+		</tr>
+	</table>
+	
+</fieldset>
+
+<fieldset>
+	<legend>Footer</legend>
+	
+	<h3>Attribution</h3>
+	<table>
+		<tr>
+			<td><label for="enable-theme-branding">Enable theme branding</label></td>
+			<td><input type="checkbox" id="enable-theme-branding" name="enable-theme-branding" /></td>
+		</tr>
+		<tr>
+			<td><label for="copyright-text">Copyright</label></td>
+			<td><input type="text" id="copyright-text" name="copyright-text" /></td>
+		</tr>
+	</table>
+	
+	<h3>Social links</h3>
+	<table>
+		<tr>
+			<td><label for="show-social-links">Display social links widget</label></td>
+			<td><input type="checkbox" id="show-social-links" name="show-social-links" /></td>
+		</tr>
+		<tr>
+			<td><label for="social-links-title">Social links title</label></td>
+			<td><input type="text" id="social-links-title" name="social-links-title" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-twitter-link">Twitter URL</label></td>
+			<td><input type="text" id="show-twitter-link" name="show-twitter-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-facebook-link">Facebook URL</label></td>
+			<td><input type="text" id="show-facebook-link" name="show-facebook-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-tumblr-link">Tumblr URL</label></td>
+			<td><input type="text" id="show-tumblr-link" name="show-tumblr-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-pinterest-link">Pinterest URL</label></td>
+			<td><input type="text" id="show-pinterest-link" name="show-pinterest-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-google-link">Google URL</label></td>
+			<td><input type="text" id="show-google-link" name="show-google-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-instagram-link">Instagram URL</label></td>
+			<td><input type="text" id="show-instagram-link" name="show-instagram-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-svpply-link">Svpply URL</label></td>
+			<td><input type="text" id="show-svpply-link" name="show-svpply-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-flickr-link">Flickr URL</label></td>
+			<td><input type="text" id="show-flickr-link" name="show-flickr-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-vimeo-link">Vimeo URL</label></td>
+			<td><input type="text" id="show-vimeo-link" name="show-vimeo-link" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-youtube-link">Youtube URL</label></td>
+			<td><input type="text" id="show-youtube-link" name="show-youtube-link" /></td>
+		</tr>
+	</table>
+	
+	<h3>Mailing list</h3>
+	<table>
+		<tr>
+			<td><label for="show-mailing-list">Display mailing list module?</label></td>
+			<td><input type="checkbox" id="show-mailing-list" name="show-mailing-list" /></td>
+		</tr>
+		<tr>
+			<td><label for="mailing-list-type">Mailing list type</label></td>
+			<td>
+				<select name="mailing-list-type" id="mailing-list-type">
+					<option value="shopify">Shopify</option>
+					<option value="mailchimp">Mailchimp</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label for="mailchimp-action-url">Mailchimp action URL</label></td>
+			<td><input type="text" id="mailchimp-action-url" name="mailchimp-action-url" /></td>
+		</tr>
+		<tr>
+		  <td>&nbsp;</td>
+		  <td>
+		    <label>What is the <a href="http://support.shopify.com/customer/portal/articles/640278">Mailchimp action URL</a>?</label>
+		  </td>
+		</tr>
+	</table>
+	
+	<h3>Payment Options</h3>
+	<table>
+		<tr>
+			<td><label for="payment-style">Payment icons style</label></td>
+			<td>
+				<select name="payment-style">
+					<option value="light">Light</option>
+					<option value="dark">Dark</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-visa">Visa</label></td>
+			<td><input type="checkbox" name="show-payment-visa" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-amex">Amex</label></td>
+			<td><input type="checkbox" name="show-payment-amex" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-mastercard">Mastercard</label></td>
+			<td><input type="checkbox" name="show-payment-mastercard" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-cirrus">Cirrus</label></td>
+			<td><input type="checkbox" name="show-payment-cirrus" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-maestro">Maestro</label></td>
+			<td><input type="checkbox" name="show-payment-maestro" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-discover">Discover</label></td>
+			<td><input type="checkbox" name="show-payment-discover" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-paypal">PayPal</label></td>
+			<td><input type="checkbox" name="show-payment-paypal" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-interac">Interac</label></td>
+			<td><input type="checkbox" name="show-payment-interac" /></td>
+		</tr>
+		<tr>
+			<td><label for="show-payment-dankort">Dankort</label></td>
+			<td><input type="checkbox" name="show-payment-dankort" /></td>
+		</tr>
+			<tr>
+			<td><label for="show-payment-google">Google Wallet</label></td>
+			<td><input type="checkbox" name="show-payment-google" /></td>
+		</tr>
+	</table>
+	
+</fieldset>

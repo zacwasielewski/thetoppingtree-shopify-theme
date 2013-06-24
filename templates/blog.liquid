@@ -1,0 +1,60 @@
+{% paginate blog.articles by settings.blog-articles-per-page %}
+<div id="content" class="blog-page">
+
+  <!-- Page title -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+  {% if current_tags %}
+    <div class="page-title"><h1>{{ blog.title | link_to: blog.url }} / {{ current_tags.first }}</h1></div>
+  {% else %}
+    <div class="page-title"><h1>{{ blog.title }}</h1></div>
+  {% endif %}
+
+
+  <section id="blog-content">
+
+    <!-- Article loop -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+
+    <ul class="blog">
+      {% for article in blog.articles %}
+        <li class="article {% include 'for-looper' %}">
+          
+        <a href="{{ article.url }}" class="article-date accent-text">{{ article.published_at | date: "%B %d, %Y" }}</a>
+        <h1 class="article-title"><a href="{{ article.url }}">{{ article.title }}</a></h1>
+        <div class="article-content rte">
+            {{ article.excerpt_or_content }}
+        </div>
+
+        <div class="article-meta-wrap">
+          
+          <ul class="article-meta accent-text">
+            {% if article.comments_enabled? %}
+              <li><a href="{{ article.url }}#comments">{{ article.comments_count }} {{ article.comments_count | pluralize:'comment','comments' }}</a></li>
+            {% endif %}
+            <li class="share-widget-toggle">
+              <a href="#">share this</a>
+            </li>
+            <li><a href="{{ article.url }}">continue reading →</a></li>
+          </ul>
+
+          {% include 'share-widget' %}
+          
+        </div>
+
+        </li>
+      {% endfor %}
+    </ul>
+
+  </section>
+
+  <!-- Pagination -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  {% include 'pagination' %}
+
+  <!-- Breadcrumbs -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  {% include 'breadcrumbs' %}
+
+</div>
+{% endpaginate %}
