@@ -29,6 +29,9 @@ var BowBuilder = {
 		this.initFilterBowList('large-bows');
 		this.initFilterBowList('small-bows');
 		this.initFilterBowList('toppings');
+		this.initBowDetail('large-bows');
+		this.initBowDetail('small-bows');
+		this.initBowDetail('toppings');
 		this.initWizard();
 	},
 	
@@ -69,8 +72,65 @@ var BowBuilder = {
 		
 	},
 	
+	initBowDetail: function (size) {
+		
+		var $section = $('#bowbuilder-'+size),
+			$list = $section.find('ul.bowbuilder-product-list'),
+			$products = $list.find('li');
+		
+		$products.find('.product-image-wrap a').fancybox({
+			title: 'Title',
+			content: 'Content',
+			autoSize: false,
+			width: 910,
+			height: 370,
+			beforeLoad: function () {
+				
+				var $li = $(this.element).closest('li'),
+					$img_link = $li.find('.product-image-wrap a'),
+					$img = $img_link.find('img'),
+					$info = $li.find('.product-info');
+				
+				var source   = $("#product-detail-template").html(),
+					template = Handlebars.compile(source),
+					data = {
+						image: $img.attr('src'),
+						title: $info.find('h1').text(),
+						price: $info.find('.price').text(),
+						description: $info.find('.description').html()
+					},
+					html = template(data)
+				;
+				
+				console.log(data);
+				
+				this.title = $info.find('h1').text();
+				this.content = html;
+				
+			}
+			//afterLoad: showBowDetail
+		});
+
+		function showBowDetail (current) {
+	
+			var $a = $(current),
+				$product = $a.closest('li')
+				$image_wrap = $product.find('.product-image-wrap'),
+				$info = $product.find('.product-info'),
+				title = $info.find('h1').text()
+			;
+		
+			$('<div>Balls!</div>').appendTo(current.content);
+	
+			console.log(current);
+		
+		}
+	
+	},
+	
 	initBowSelect: function (size) {
 		
+		/*
 		var self = this,
 		    $section = $('#bowbuilder-'+size),
 			$list = $section.find('ul.bowbuilder-product-list'),
@@ -112,6 +172,7 @@ var BowBuilder = {
 			//self.container.trigger('validate_psteps');
 			
 		});
+		*/
 		
 	},
 	

@@ -29,6 +29,21 @@
 
             <input type="hidden" id="bow-group" name="properties[bow-group]" value="{{ current_time }}" />
 
+			<script id="product-detail-template" type="text/x-handlebars-template">
+				{% raw %}
+				<div class="product-detail">
+					<img class="product-detail-image" src="{{image}}">
+					<h1 class="product-detail-title">{{title}}</h1>
+					<p class="product-detail-price">{{price}}</p>
+					<div class="product-detail-description">{{{description}}}</div>
+					<div>
+						<!--<button class="product-detail-cancel-btn flat-btn accent-text">Cancel</button>-->
+						<button class="product-detail-select-btn action-btn accent-text">Select This Bow</button>
+					</div>
+				</div>
+				{% endraw %}
+			</script>
+
             <section id="bowbuilder-large-bows" class="step-content bowbuilder-step">
             
                 {% assign collection = collections.large-bows %}
@@ -154,4 +169,6 @@
 
 {{ 'jquery.isotope.min.js' | asset_url | script_tag }}
 {{ 'jquery.psteps.min.js' | asset_url | script_tag }}
+{{ 'handlebars.js' | asset_url | script_tag }}
+{{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
 {{ 'bow-builder.js' | asset_url | script_tag }}

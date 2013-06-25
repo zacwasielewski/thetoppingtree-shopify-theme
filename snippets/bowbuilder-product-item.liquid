@@ -20,25 +20,27 @@
         
             <!-- Product image -->
                 
-                    {% unless settings.display-produt-overlay %}<a href="{{ product.url }}">{% endunless %}
-                    <a title="Product details" href="{{ product.url }}"><img src="{{ itemType.featured_image | product_img_url: 'large' }}" alt="{{ itemType.featured_image.alt }}"></a>
-                    {% unless settings.display-produt-overlay %}</a>{% endunless %}
+            {% unless settings.display-product-overlay %}<a href="{{ product.url }}">{% endunless %}
+            <img src="{{ itemType.featured_image | product_img_url: 'large' }}" alt="{{ itemType.featured_image.alt }}">
+            {% unless settings.display-product-overlay %}</a>{% endunless %}
         
             <!-- Include sale banner if item is on sale -->
             {% if itemType.compare_at_price_min > itemType.price_min and settings.display-sale-banner %}
                 <h2 class="accent-text">
-                    {% unless settings.display-produt-overlay %}<a href="{{ product.url }}">{% endunless %}
+                    {% unless settings.display-product-overlay %}<a href="{{ product.url }}">{% endunless %}
                     {{ settings.sale-banner-text }}
-                    {% unless settings.display-produt-overlay %}</a>{% endunless %}
+                    {% unless settings.display-product-overlay %}</a>{% endunless %}
                 </h2>
             {% endif %}
-                
+            
         </div>
         
         <div class="product-info" id="product-info-{{ itemType.id }}">
         
             <!-- Product title -->
             <h1><a href="{{ itemType.url }}">{{ itemType.title }}</a></h1>
+
+            <div class="description">{{ itemType.description }}</div>
         
             <!-- Product price (switches depending on the sale condition) -->
             {% if itemType.compare_at_price_min > itemType.price_min %}
