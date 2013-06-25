@@ -1,4 +1,4 @@
-{% unless template contains 'search' %}<li class="{{ product.tags | join(' ') }}" data-product_id="{{ itemType.id }}">{% endunless %}
+{% unless template contains 'search' %}<li class="{{ product.tags | join(' ') }}" data-product_id="{{ product.id }}" data-collection="{{ collection.handle }}">{% endunless %}
     
     <div class="wrapper">
     

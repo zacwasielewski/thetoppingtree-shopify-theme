@@ -84,48 +84,33 @@ var BowBuilder = {
 			autoSize: false,
 			width: 910,
 			height: 370,
-			beforeLoad: function () {
-				
-				var $li = $(this.element).closest('li'),
-					$img_link = $li.find('.product-image-wrap a'),
-					$img = $img_link.find('img'),
-					$info = $li.find('.product-info');
-				
-				var source   = $("#product-detail-template").html(),
-					template = Handlebars.compile(source),
-					data = {
-						image: $img.attr('src'),
-						title: $info.find('h1').text(),
-						price: $info.find('.price').text(),
-						description: $info.find('.description').html()
-					},
-					html = template(data)
-				;
-				
-				console.log(data);
-				
-				this.title = $info.find('h1').text();
-				this.content = html;
-				
-			}
-			//afterLoad: showBowDetail
+			beforeLoad: this.showBowDetail
 		});
-
-		function showBowDetail (current) {
-	
-			var $a = $(current),
-				$product = $a.closest('li')
-				$image_wrap = $product.find('.product-image-wrap'),
-				$info = $product.find('.product-info'),
-				title = $info.find('h1').text()
-			;
 		
-			$('<div>Balls!</div>').appendTo(current.content);
+	},
 	
-			console.log(current);
+	showBowDetail: function () {
 		
-		}
-	
+		var $li = $(this.element).closest('li'),
+			$img_link = $li.find('.product-image-wrap a'),
+			$img = $img_link.find('img'),
+			$info = $li.find('.product-info');
+		
+		var source = $("#product-detail-template").html(),
+			template = Handlebars.compile(source),
+			data = {
+				id:    $li.attr('data-product_id'),
+				size:  $li.attr('data-collection'),
+				image: $img.attr('src'),
+				title: $info.find('h1').text(),
+				price: $info.find('.price').text(),
+				description: $info.find('.description').html(),
+			},
+			html = template(data);
+		
+		this.title = $info.find('h1').text();
+		this.content = html;
+		
 	},
 	
 	initBowSelect: function (size) {
@@ -176,10 +161,16 @@ var BowBuilder = {
 		
 	},
 	
-	selectBow: function (size,value) {
+	selectBow: function (e,size,value) {
 		
-		var $select = $('#bowbuilder-select-'+size);		
+		var $select = $('#bowbuilder-select-'+size),
+			$button = $(e);
+		
 		$select.val(String(value));
+		
+		$.fancybox.close();
+		
+		// BUG: here we need to move to the next step!
 		
 	},
 	
