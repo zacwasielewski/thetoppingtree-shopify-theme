@@ -111,7 +111,7 @@ var BowBuilder = {
 		var source = $("#product-detail-template").html(),
 			template = Handlebars.compile(source),
 			data = {
-				id:    $li.attr('data-product_id'),
+				id:    $li.attr('data-variant_id'),
 				size:  $li.attr('data-collection'),
 				image: $img.attr('src'),
 				title: $info.find('h1').text(),

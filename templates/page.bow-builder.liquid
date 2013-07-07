@@ -74,7 +74,7 @@
 						<option value=""></option>
 						{% for product in collection.products %}
 							{% for variant in product.variants %}
-								<option value="{{ product.id }}">
+								<option value="{{ variant.id }}">
 									{{ product.title }}
 									({{ variant.price | money }})
 								</option>
@@ -116,7 +116,7 @@
 						<option value=""></option>
 						{% for product in collection.products %}
 							{% for variant in product.variants %}
-								<option value="{{ product.id }}">
+								<option value="{{ variant.id }}">
 									{{ product.title }}
 									({{ variant.price | money }})
 								</option>
@@ -159,7 +159,7 @@
 						<option value=""></option>
 						{% for product in collection.products %}
 							{% for variant in product.variants %}
-								<option value="{{ product.id }}">
+								<option value="{{ variant.id }}">
 									{{ product.title }}
 									({{ variant.price | money }})
 								</option>
