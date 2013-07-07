@@ -14,7 +14,7 @@
 
     <div id="bowbuilder">
     
-        <div id="bowbuilder-progress" class="step-progress">
+        <div class="step-progress">
             <p>Progress:</p>
             <div class="step-title accent-text"><span class="step-order">1</span> <span class="step-name">Base Bow</span></div>
             <div class="step-title accent-text"><span class="step-order">2</span> <span class="step-name">Small Bow</span></div>
@@ -31,6 +31,8 @@
 
 			<script id="product-detail-template" type="text/x-handlebars-template">
 				{% raw %}
+				<meta name="step" value="{{size}}">
+				<meta name="id" value="{{id}}">
 				<div class="product-detail">
 					<img class="product-detail-image" src="{{image}}">
 					<h1 class="product-detail-title">{{title}}</h1>
@@ -38,113 +40,148 @@
 					<div class="product-detail-description">{{{description}}}</div>
 					<div>
 						<!--<button class="product-detail-cancel-btn flat-btn accent-text">Cancel</button>-->
-						<button class="product-detail-select-btn action-btn accent-text" onclick="window.BowBuilder.selectBow(this,'{{size}}','{{id}}');">Select This Bow</button>
+						<button class="product-detail-select-btn action-btn accent-text" zonclick="window.BowBuilder.selectBow(this,'{{size}}','{{id}}');">Select This Bow</button>
 					</div>
 				</div>
 				{% endraw %}
 			</script>
 
-            <section id="bowbuilder-large-bows" class="step-content bowbuilder-step">
-            
-                {% assign collection = collections.large-bows %}
+			{% assign collection = collections.large-bows %}
 
+            <section class="step step-content" data-section="{{ collection.handle }}">
+            
                 <h2>Step 1: Pick your base bow</h2>
                 
-                <div class="filter-by-tag bowbuilder-filter">
-                    <p>Choose a style:</p>
-                    <button class="flat-btn accent-text" data-filter=".standard">Standard</button>
-                    <button class="flat-btn accent-text" data-filter=".funky">Funky</button>
-                    <button class="flat-btn accent-text" data-filter=".fancy">Fancy</button>
-                    <button class="flat-btn accent-text" data-filter="*">All</button>
-                </div>
+                <div class="step-overlay">
+				
+					<div class="filter-by-tag filter">
+						<p>Choose a style:</p>
+						<button class="flat-btn accent-text" data-filter=".standard">Standard</button>
+						<button class="flat-btn accent-text" data-filter=".funky">Funky</button>
+						<button class="flat-btn accent-text" data-filter=".fancy">Fancy</button>
+						<button class="flat-btn accent-text" data-filter="*">All</button>
+					</div>
 
-                <ul class="product-list clearfix bowbuilder-product-list">
-                    {% for product in collection.products %}{% include 'bowbuilder-product-item' %}{% endfor %}
-                </ul>
+					<ul class="product-list clearfix">
+						{% for product in collection.products %}
+							{% for variant in product.variants %}
+								{% include 'bowbuilder-product-variant-item' %}
+							{% endfor %}
+						{% endfor %}
+					</ul>
 
-                <select name="id[]" id="bowbuilder-select-{{ collection.handle }}" class="bowbuilder-select">
-                    <option value=""></option>
-                    {% for product in collection.products %}
-                        {% for variant in product.variants %}
-                            <option value="{{ variant.id }}">
-                                {{ product.title }}
-                                ({{ variant.price | money }})
-                            </option>
-                        {% endfor %}
-                    {% endfor %}
-                </select>
+					<select name="id[]" class="product-select" data-section="{{ collection.handle }}">
+						<option value=""></option>
+						{% for product in collection.products %}
+							{% for variant in product.variants %}
+								<option value="{{ product.id }}">
+									{{ product.title }}
+									({{ variant.price | money }})
+								</option>
+							{% endfor %}
+						{% endfor %}
+					</select>
+				
+					<button class="action-btn accent-text next-button btn hide">Next &rarr;</button>
 
+				</div>
+				
             </section>
 
-            <section id="bowbuilder-small-bows" class="step-content bowbuilder-step hide">
-        
-                {% assign collection = collections.small-bows %}
+			{% assign collection = collections.small-bows %}
 
+            <section class="step step-content hide" data-section="{{ collection.handle }}">
+        
                 <h2>Step 2: Pick your small bow</h2>
 
-                <div class="filter-by-tag bowbuilder-filter">
-                    <p>Choose a style:</p>
-                    <button class="action-btn accent-text" data-filter=".ugly">Ugly</button>
-                    <button class="action-btn accent-text" data-filter=".stupid">Stupid</button>
-                    <button class="action-btn accent-text" data-filter=".dirty">Dirty</button>
-                    <button class="action-btn accent-text" data-filter="*">All</button>
-                </div>
-            
-                <ul class="product-list clearfix bowbuilder-product-list">
-                    {% for product in collection.products %}{% include 'bowbuilder-product-item' %}{% endfor %}
-                </ul>
+                <div class="step-overlay">
 
-                <select name="id[]" id="bowbuilder-select-{{ collection.handle }}" class="bowbuilder-select">
-                    <option value=""></option>
-                    {% for product in collection.products %}
-                        {% for variant in product.variants %}
-                            <option value="{{ variant.id }}">
-                                {{ product.title }}
-                                ({{ variant.price | money }})
-                            </option>
-                        {% endfor %}
-                    {% endfor %}
-                </select>
-        
+					<div class="filter-by-tag filter">
+						<p>Choose a style:</p>
+						<button class="flat-btn accent-text" data-filter=".ugly">Ugly</button>
+						<button class="flat-btn accent-text" data-filter=".stupid">Stupid</button>
+						<button class="flat-btn accent-text" data-filter=".dirty">Dirty</button>
+						<button class="flat-btn accent-text" data-filter="*">All</button>
+					</div>
+			
+					<ul class="product-list clearfix">
+						{% for product in collection.products %}
+							{% for variant in product.variants %}
+								{% include 'bowbuilder-product-variant-item' %}
+							{% endfor %}
+						{% endfor %}
+					</ul>
+
+					<select name="id[]" class="product-select" data-section="{{ collection.handle }}">
+						<option value=""></option>
+						{% for product in collection.products %}
+							{% for variant in product.variants %}
+								<option value="{{ product.id }}">
+									{{ product.title }}
+									({{ variant.price | money }})
+								</option>
+							{% endfor %}
+						{% endfor %}
+					</select>
+
+					<button class="action-btn accent-text back-button btn hide">&larr; Back</button>
+					<button class="action-btn accent-text next-button btn hide">Next &rarr;</button>
+
+        		</div>
+
             </section>
 
-            <section id="bowbuilder-toppings" class="step-content bowbuilder-step hide">
-        
-                {% assign collection = collections.toppings %}
+			{% assign collection = collections.toppings %}
 
+            <section class="step step-content hide" data-section="{{ collection.handle }}">
+        
                 <h2>Step 3: The final touch!</h2>
             
-                <div class="filter-by-tag bowbuilder-filter">
-                    <p>Choose a style:</p>
-                    <button class="action-btn accent-text" data-filter=".shiny">Shiny</button>
-                    <button class="action-btn accent-text" data-filter=".fluffy">Fluffy</button>
-                    <button class="action-btn accent-text" data-filter=".orangey">Orangey</button>
-                    <button class="action-btn accent-text" data-filter="*">All</button>
-                </div>
-            
-                <ul class="product-list clearfix bowbuilder-product-list">
-                    {% for product in collection.products %}{% include 'bowbuilder-product-item' %}{% endfor %}
-                </ul>
+                <div class="step-overlay">
 
-                <select name="id[]" id="bowbuilder-select-{{ collection.handle }}" class="bowbuilder-select">
-                    <option value=""></option>
-                    {% for product in collection.products %}
-                        {% for variant in product.variants %}
-                            <option value="{{ variant.id }}">
-                                {{ product.title }}
-                                ({{ variant.price | money }})
-                            </option>
-                        {% endfor %}
-                    {% endfor %}
-                </select>
-        
+					<div class="filter-by-tag filter">
+						<p>Choose a style:</p>
+						<button class="flat-btn accent-text" data-filter=".shiny">Shiny</button>
+						<button class="flat-btn accent-text" data-filter=".fluffy">Fluffy</button>
+						<button class="flat-btn accent-text" data-filter=".orangey">Orangey</button>
+						<button class="flat-btn accent-text" data-filter="*">All</button>
+					</div>
+			
+					<ul class="product-list clearfix">
+						{% for product in collection.products %}
+							{% for variant in product.variants %}
+								{% include 'bowbuilder-product-variant-item' %}
+							{% endfor %}
+						{% endfor %}
+					</ul>
+
+					<select name="id[]" class="product-select" data-section="{{ collection.handle }}">
+						<option value=""></option>
+						{% for product in collection.products %}
+							{% for variant in product.variants %}
+								<option value="{{ product.id }}">
+									{{ product.title }}
+									({{ variant.price | money }})
+								</option>
+							{% endfor %}
+						{% endfor %}
+					</select>
+
+					<button class="action-btn accent-text back-button btn hide">&larr; Back</button>
+					<button class="action-btn accent-text next-button btn hide">Next &rarr;</button>
+        		
+        		</div>
+        		
             </section>
 
-            <section id="small-bows" class="step-content hide">
+            <section class="step step-content hide" data-section="finalize">
         
                 <h2>Step 4: Finalize</h2>
             
                 <p>Preview and add to cart</p>
+
+				<button class="action-btn accent-text back-button btn hide">&larr; Back</button>
+				<button class="action-btn accent-text submit-button btn hide">Done</button>
                 
             </section>
             
@@ -168,7 +205,7 @@
 </div>
 
 {{ 'jquery.isotope.min.js' | asset_url | script_tag }}
-{{ 'jquery.psteps.min.js' | asset_url | script_tag }}
+{{ 'jquery.psteps.js' | asset_url | script_tag }}
 {{ 'handlebars.js' | asset_url | script_tag }}
 {{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
 {{ 'bow-builder.js' | asset_url | script_tag }}

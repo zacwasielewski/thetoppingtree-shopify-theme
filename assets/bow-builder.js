@@ -37,12 +37,10 @@ var BowBuilder = {
 	
 	initFilterBowList: function (size) {
 		
-		this.initBowSelect(size);
-		
-		var $section = $('#bowbuilder-'+size),
-		    $filter = $section.find('.bowbuilder-filter'),
+		var $section = this.container.find('[data-section='+size+']'),
+		    $filter = $section.find('.filter'),
 			$filterButtons = $filter.find('button'),
-			$list = $section.find('ul.bowbuilder-product-list');	
+			$list = $section.find('ul.product-list');	
 		
 		$list.isotope({
 			itemSelector : 'li',
@@ -51,32 +49,42 @@ var BowBuilder = {
 
 		$list.isotope({ filter: '.none' });
 	
-		$filterButtons.click(function(e){
+		$filterButtons.click($.proxy(function(e){
 			
-			var $this = $(this),
+			var $this = $(e.currentTarget),
 				selector;
 			
 			e.preventDefault();
 
-			if ( $this.hasClass('selected') ) {
+			if ( $this.hasClass('visible') ) {
 				return false;
 			}
+
+			this.hideBowDetail($list.find('li'));
 			
-			$filterButtons.removeClass('selected')
-			$this.addClass('selected');
+			$filterButtons.removeClass('visible')
+			$this.addClass('visible');
 
 			selector = $this.attr('data-filter');
 			$list.isotope({ filter: selector });
 
-		});
+		},this));
 		
 	},
 	
 	initBowDetail: function (size) {
 		
-		var $section = $('#bowbuilder-'+size),
-			$list = $section.find('ul.bowbuilder-product-list'),
+		var $section = this.container.find('[data-section='+size+']'),
+			$list = $section.find('ul.product-list'),
 			$products = $list.find('li');
+		
+		/*
+		$products.find('.product-image-wrap a').click($.proxy(function(e){
+			e.preventDefault();
+			var $li = $(e.currentTarget).closest('li');
+			this.showBowDetail($li);
+		},this));
+		*/
 		
 		$products.find('.product-image-wrap a').fancybox({
 			title: 'Title',
@@ -84,18 +92,22 @@ var BowBuilder = {
 			autoSize: false,
 			width: 910,
 			height: 370,
-			beforeLoad: this.showBowDetail
+			beforeLoad: this.showBowDetail,
+			afterShow: $.proxy(function () { this.activateBowDetail() }, this)
 		});
 		
 	},
 	
 	showBowDetail: function () {
 		
-		var $li = $(this.element).closest('li'),
+		var $a = $(this.element),
+			$li = $a.closest('li.product-list-item'),
+			$list = $li.closest('ul.product-list'),
 			$img_link = $li.find('.product-image-wrap a'),
 			$img = $img_link.find('img'),
-			$info = $li.find('.product-info');
-		
+			$info = $li.find('.product-info'),
+			detailClass;
+				
 		var source = $("#product-detail-template").html(),
 			template = Handlebars.compile(source),
 			data = {
@@ -107,85 +119,63 @@ var BowBuilder = {
 				description: $info.find('.description').html(),
 			},
 			html = template(data);
-		
 		this.title = $info.find('h1').text();
 		this.content = html;
 		
 	},
 	
-	initBowSelect: function (size) {
+	activateBowDetail: function () {
 		
-		/*
-		var self = this,
-		    $section = $('#bowbuilder-'+size),
-			$list = $section.find('ul.bowbuilder-product-list'),
-			$listItems = $list.find('li'),
-			$listLinks = $list.find('a');
-				
-		$listLinks.click(function(e){
-			
-			var $this = $(this),
-				$thisListItem = $this.closest('li');
+		var $overlay = $('.fancybox-inner');
 		
-			e.preventDefault();
-
-			if ( $thisListItem.hasClass('selected') ) {
-				
-				$listItems.removeClass('selected');
-				self.selectBow(size,'');
-
-			} else {
-				
-				$listItems.removeClass('selected')
-				$thisListItem.addClass('selected');				
-				self.selectBow(size,$thisListItem.attr('data-product_id'));
-
-    			$list.isotope({ filter: '.selected' });
-
-                $thisListItem.css({ width: 960 });
-                $thisListItem.find('.wrapper').animate({ width: 960 },{
-                    complete: function () {
-                        $thisListItem.css({ height: 360 });
-                        $thisListItem.find('.wrapper').animate({ height: 360 });
-                    }
-                });
-
-                $list.isotope( 'reLayout' );
-				
-			}
+		$overlay.find('button.product-detail-select-btn').click($.proxy(function(e){
 			
-			//self.container.trigger('validate_psteps');
+			var step = $overlay.find('meta[name=step]').attr('value'),
+				id = $overlay.find('meta[name=id]').attr('value');
 			
-		});
-		*/
-		
+			this.selectBow(e.currentTarget,step,id);
+			
+		},this));
+
 	},
 	
-	selectBow: function (e,size,value) {
+	hideBowDetail: function ($li) {
 		
-		var $select = $('#bowbuilder-select-'+size),
-			$button = $(e);
+		$li.removeClass('detail');
+	},
+	
+	selectBow: function (el,step,id) {
 		
-		$select.val(String(value));
+		var $select = this.container.find('select[data-section="'+step+'"]'),
+			$button = $(el),
+			$step = $('section.step[data-section="'+step+'"]');//$select.closest('.step');
+		
+		$select.val(String(id));
 		
 		$.fancybox.close();
 		
-		// BUG: here we need to move to the next step!
+		console.log($step.find('.next-button'));
+		
+		$step.find('.next-button').click(); // DIRTY DIRTY HACK!
 		
 	},
 	
 	initWizard: function () {
 		
+		this.container.find('.next-button,.back-button').click(function(e){
+			e.preventDefault();
+		});
+		
 		this.container.psteps({
 			traverse_titles: 'visited',
-			shrink_step_names: false,
-			check_marks: false,
+			//shrink_step_names: false,
+			//check_marks: false,
 			validation_rule: function() {
 				var current_step = $(this);
-				var select = current_step.find('select.bowbuilder-select');
+				var select = current_step.find('select');
 				return (select.val() != '');
 			},
-			before_next: 'Please choose the correct box before moving on to the next step.',
+			before_next: 'Please choose a bow before moving on to the next step.',
 			before_submit: 'Please complete all steps before submitting.'
 		});
 		
