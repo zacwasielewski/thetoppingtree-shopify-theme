@@ -19,6 +19,18 @@
     <!-- Display the cart -->
     <!-- +++++++++++++++++++++++++++++++++++++++ -->
 
+	{% assign delimiter = "," %}
+	{% assign groups_str = "" %}
+	{% assign groups = cart.items | map: 'properties' | map: 'bowbuilder-group' %}
+	
+	{% for group in groups %}
+		{% assign groups_arr = groups_str | split: delimiter %}
+		{% unless groups_arr contains group %}
+			{% assign groups_str = groups_str | append: delimiter | append: group %}
+		{% endunless %}
+	{% endfor %}
+	{% assign groups_uniq = groups_str | remove_first: delimiter | split: delimiter %}
+
     <form action="/cart" method="post" id="cart-form">
 
       <!-- Cart table header -->
@@ -34,21 +46,73 @@
           <th class="last">Total</th>
         </tr>
 
-        <!-- Cart table line-items -->
-        {% for item in cart.items %}
-          <tr class="cart-row {% include 'for-looper' %}">
-            <td class="cart-item first">
-              <a href="{{ item.product.url | within: collections.all }}"><img src="{{ item.product.images[0] | product_img_url: "large" }}" alt="{{ item.title | escape }}" /></a>
-            </td>
-            <td class="cart-detail">
-              <a href="{{ item.product.url }}">{{ item.title | escape }}</a>
-            </td>
-            <td class="cart-price accent-text">{{ item.price | money }}</td>
-            <td class="cart-quantity"><input type="number" class="styled-text-field" name="updates[]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" /></td>
-            <td class="cart-remove"><a href="/cart/change/?line={{ forloop.index }}&quantity=0" title="remove">Remove</a></td>
-            <td class="cart-total accent-text last">{{ item.line_price | money }}</td>
-          </tr>
+        {% for group in groups_uniq %}
+			<fieldset class="bowbuilder-group">
+				{% for item in cart.items %}
+					{% if item.properties['bowbuilder-group'] == group %}
+						<tr class="cart-row {% include 'for-looper' %}">
+							<td class="cart-item first">
+							<a href="{{ item.product.url | within: collections.all }}"><img src="{{ item.product.images[0] | product_img_url: "large" }}" alt="{{ item.title | escape }}" /></a>
+							</td>
+							<td class="cart-detail">
+							<a href="{{ item.product.url }}">{{ item.title | escape }}</a>
+							<!--
+							{% for p in item.properties %}
+							{% unless p.last == blank %}
+							{{ p.first }}:
+							{% if p.last contains '/uploads/' %}
+							<a class="lightbox" href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+							{% else %}
+							{{ p.last }}
+							{% endif %}
+							<br />
+							{% endunless %}
+							{% endfor %}
+							-->
+							</td>
+							<td class="cart-price accent-text">{{ item.price | money }}</td>
+							<td class="cart-quantity"><input type="number" class="styled-text-field" name="updates[]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" /></td>
+							<td class="cart-remove"><a href="/cart/change/?line={{ forloop.index }}&quantity=0" title="remove">Remove</a></td>
+							<td class="cart-total accent-text last">{{ item.line_price | money }}</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</fieldset>
+
         {% endfor %}
+
+		<!-- Cart table line-items -->
+		{% for item in cart.items %}
+			{% if item.properties['bowbuilder-group'] == "" %}
+				<tr class="cart-row {% include 'for-looper' %}">
+					<td class="cart-item first">
+					<a href="{{ item.product.url | within: collections.all }}"><img src="{{ item.product.images[0] | product_img_url: "large" }}" alt="{{ item.title | escape }}" /></a>
+					</td>
+					<td class="cart-detail">
+					<a href="{{ item.product.url }}">{{ item.title | escape }}</a>
+					
+					<!--
+					{% for p in item.properties %}
+					{% unless p.last == blank %}
+					{{ p.first }}:
+					{% if p.last contains '/uploads/' %}
+					<a class="lightbox" href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+					{% else %}
+					{{ p.last }}
+					{% endif %}
+					<br />
+					{% endunless %}
+					{% endfor %}
+					-->
+					
+					</td>
+					<td class="cart-price accent-text">{{ item.price | money }}</td>
+					<td class="cart-quantity"><input type="number" class="styled-text-field" name="updates[]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" /></td>
+					<td class="cart-remove"><a href="/cart/change/?line={{ forloop.index }}&quantity=0" title="remove">Remove</a></td>
+					<td class="cart-total accent-text last">{{ item.line_price | money }}</td>
+				</tr>
+			{% endif %}
+		{% endfor %}
 
       </table>
 

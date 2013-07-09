@@ -27,7 +27,7 @@
             {% assign linklist = linklists['bowbuilder'] %}
             {% assign current_time = 'now' | date: "%Y%m%d%H%M%S" %}
 
-            <input type="hidden" id="bow-group" name="properties[bow-group]" value="{{ current_time }}" />
+            <input type="hidden" id="bow-group" name="properties[bowbuilder-group]" value="{{ current_time }}" />
 
 			<script id="product-detail-template" type="text/x-handlebars-template">
 				{% raw %}
@@ -182,7 +182,7 @@
 
 				<button class="action-btn accent-text back-button btn hide">&larr; Back</button>
 				<button class="action-btn accent-text submit-button btn hide">Done</button>
-                
+				                
             </section>
             
         </form>
