@@ -45,7 +45,7 @@
             </td>
             <td class="cart-price accent-text">{{ item.price | money }}</td>
             <td class="cart-quantity"><input type="number" class="styled-text-field" name="updates[]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" /></td>
-            <td class="cart-remove"><a href="/cart/change/{{ item.variant.id }}?quantity=0" title="remove">Remove</a></td>
+            <td class="cart-remove"><a href="/cart/change/?line={{ forloop.index }}&quantity=0" title="remove">Remove</a></td>
             <td class="cart-total accent-text last">{{ item.line_price | money }}</td>
           </tr>
         {% endfor %}
