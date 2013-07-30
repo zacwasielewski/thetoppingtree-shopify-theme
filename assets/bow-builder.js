@@ -46,9 +46,7 @@ var BowBuilder = {
 			itemSelector : 'li',
 			layoutMode : 'fitRows'
 		});
-
-		$list.isotope({ filter: '.none' });
-	
+	  
 		$filterButtons.click($.proxy(function(e){
 			
 			var $this = $(e.currentTarget),
@@ -70,6 +68,8 @@ var BowBuilder = {
 
 		},this));
 		
+		$filterButtons.filter('[data-filter="*"]').click();
+		
 	},
 	
 	initBowDetail: function (size) {
@@ -78,20 +78,12 @@ var BowBuilder = {
 			$list = $section.find('ul.product-list'),
 			$products = $list.find('li');
 		
-		/*
-		$products.find('.product-image-wrap a').click($.proxy(function(e){
-			e.preventDefault();
-			var $li = $(e.currentTarget).closest('li');
-			this.showBowDetail($li);
-		},this));
-		*/
-		
 		$products.find('.product-image-wrap a').fancybox({
 			title: 'Title',
 			content: 'Content',
 			autoSize: false,
 			width: 910,
-			height: 370,
+			height: 455,
 			beforeLoad: this.showBowDetail,
 			afterShow: $.proxy(function () { this.activateBowDetail() }, this)
 		});
@@ -140,7 +132,6 @@ var BowBuilder = {
 	},
 	
 	hideBowDetail: function ($li) {
-		
 		$li.removeClass('detail');
 	},
 	
@@ -148,13 +139,15 @@ var BowBuilder = {
 		
 		var $select = this.container.find('select[data-section="'+step+'"]'),
 			$button = $(el),
-			$step = $('section.step[data-section="'+step+'"]');//$select.closest('.step');
+			$item = $('li[data-variant_id='+id+']'),
+			$step = $('section.step[data-section="'+step+'"]');
 		
 		$select.val(String(id));
+    
+		$step.find('li').removeClass('selected');
+		$item.addClass('selected');
 		
 		$.fancybox.close();
-		
-		console.log($step.find('.next-button'));
 		
 		$step.find('.next-button').click(); // DIRTY DIRTY HACK!
 		
@@ -168,8 +161,6 @@ var BowBuilder = {
 		
 		this.container.psteps({
 			traverse_titles: 'visited',
-			//shrink_step_names: false,
-			//check_marks: false,
 			validation_rule: function() {
 				var current_step = $(this);
 				var select = current_step.find('select');

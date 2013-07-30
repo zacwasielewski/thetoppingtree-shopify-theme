@@ -10,6 +10,12 @@
   <!-- Standard page content -->
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
 
+  {% if page.content.size > 0 %}
+    <section id="page-content" class="rte">
+      {{ page.content }}
+    </section>
+  {% endif %}
+
   <section id="collection-content">
 
     <div id="bowbuilder">
@@ -39,8 +45,7 @@
 					<p class="product-detail-price">{{price}}</p>
 					<div class="product-detail-description">{{{description}}}</div>
 					<div>
-						<!--<button class="product-detail-cancel-btn flat-btn accent-text">Cancel</button>-->
-						<button class="product-detail-select-btn action-btn accent-text" zonclick="window.BowBuilder.selectBow(this,'{{size}}','{{id}}');">Select This Bow</button>
+						<button class="product-detail-select-btn action-btn accent-text">Select This Bow</button>
 					</div>
 				</div>
 				{% endraw %}
@@ -55,11 +60,11 @@
                 <div class="step-overlay">
 				
 					<div class="filter-by-tag filter">
-						<p>Choose a style:</p>
+						<p>Show style:</p>
+						<button class="flat-btn accent-text visible" data-filter="*">All</button>
 						<button class="flat-btn accent-text" data-filter=".standard">Standard</button>
 						<button class="flat-btn accent-text" data-filter=".funky">Funky</button>
 						<button class="flat-btn accent-text" data-filter=".fancy">Fancy</button>
-						<button class="flat-btn accent-text" data-filter="*">All</button>
 					</div>
 
 					<ul class="product-list clearfix">
@@ -97,11 +102,11 @@
                 <div class="step-overlay">
 
 					<div class="filter-by-tag filter">
-						<p>Choose a style:</p>
+						<p>Show style:</p>
+						<button class="flat-btn accent-text visible" data-filter="*">All</button>
 						<button class="flat-btn accent-text" data-filter=".ugly">Ugly</button>
 						<button class="flat-btn accent-text" data-filter=".stupid">Stupid</button>
 						<button class="flat-btn accent-text" data-filter=".dirty">Dirty</button>
-						<button class="flat-btn accent-text" data-filter="*">All</button>
 					</div>
 			
 					<ul class="product-list clearfix">
@@ -140,11 +145,11 @@
                 <div class="step-overlay">
 
 					<div class="filter-by-tag filter">
-						<p>Choose a style:</p>
+						<p>Show style:</p>
+						<button class="flat-btn accent-text visible" data-filter="*">All</button>
 						<button class="flat-btn accent-text" data-filter=".shiny">Shiny</button>
 						<button class="flat-btn accent-text" data-filter=".fluffy">Fluffy</button>
 						<button class="flat-btn accent-text" data-filter=".orangey">Orangey</button>
-						<button class="flat-btn accent-text" data-filter="*">All</button>
 					</div>
 			
 					<ul class="product-list clearfix">
