@@ -548,7 +548,7 @@ function initSlideshow() {
         prev: 'slideshow-prev',
         generatePagination: false,
         preload: true,
-        preloadImage: '../img/loading.gif',
+        preloadImage: '{{ 'light-loading.gif' | asset_url }}',
         play: {{ settings.slideshow-frequency }},
         hoverPause: true,
         slideEasing: "easeInOutQuint",
