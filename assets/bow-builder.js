@@ -229,11 +229,33 @@ var BowBuilder = {
     var $section = this._get_$section(section)
         $step_title = $section.find('.step-title'),
         info = this.get_product_info(product);
-
+    
+    this.unset_section_product(section);
+    
+    // change the value of the master <select>
     $section.find('select').val(value);
     
-    $step_title.find('step-selected-product').remove();
-    $step_title.append('<span class="step-selected-product">&mdash; ' + info.title + '<button class="btn action-btn small remove">x</button></span>'); 
+    // insert selected product title into HTML view
+    $product_title = $('<span class="step-selected-product">&mdash; ' + info.title + '</span>');
+    $remove_btn = $('<button class="accent-text btn action-btn small remove">x</button></span>');
+    $remove_btn.click($.proxy(function(e){
+      e.preventDefault();
+      this.unset_section_product(section);
+    },this));
+    $product_title.append($remove_btn);
+    
+    $step_title.append($product_title);
+    
+  },
+  
+  unset_section_product: function (section) {
+
+    var $section = this._get_$section(section)
+        $step_title = $section.find('.step-title');
+
+    $section.find('select').val('');
+    
+    $step_title.find('.step-selected-product').remove();
     
   },
   
