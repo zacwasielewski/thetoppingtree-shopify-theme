@@ -130,8 +130,8 @@ var BowBuilder = {
   init_product_info: function (section) {
 
 		var $section = this._get_$section(section),
-			$list = $section.find('ul.product-list'),
-			$products = $list.find('li');
+        $list = $section.find('ul.product-list'),
+        $products = $list.find('li');
 		
 		$products.find('.product-image-wrap a').fancybox({
 			title: 'Title',
@@ -154,7 +154,9 @@ var BowBuilder = {
   },
   
   _get_$section: function (section) {
-    return this.global.$container.find('[data-section='+section+']');
+    return (section)
+      ? this.global.$sections.filter('[data-section='+section+']')
+      : this.global.$sections;
   }
 
 };
