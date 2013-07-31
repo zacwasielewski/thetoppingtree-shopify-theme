@@ -106,7 +106,7 @@ var BowBuilder = {
         $toggle = $section.find('.step-name a');
 
     $section.find('ul:visible').slideUp({
-      duration: 200,
+      duration: 400,
       done: callback
     });
     
@@ -116,14 +116,14 @@ var BowBuilder = {
   
   show_preview: function (callback) {
     this.global.$preview.fadeIn({
-      duration: 200,
+      duration: 400,
       done: callback
     });
   },
   
   hide_preview: function (callback) {
     this.global.$preview.fadeOut({
-      duration: 200,
+      duration: 400,
       done: callback
     });
   },
@@ -140,15 +140,13 @@ var BowBuilder = {
 		  
 		  e.preventDefault();
 		  product = $(e.currentTarget).closest('li.product-list-item').get(0);
-		  //value = $(product).data('variant_id');
-		  //this.set_section_select(section,value);
-		  this.show_product_info(product);
+		  this.show_product_info(section,product);
 		  
 		},this));
 
   },
   
-  show_product_info: function (product) {
+  show_product_info: function (section,product) {
     
     var title, content;
     
@@ -170,14 +168,15 @@ var BowBuilder = {
         html = template(data);
     
 		title = $info.find('h1').text();
-		content = html;
-
+		$content = this.activate_product_info_html(section,product,html);
+		
     $.fancybox.open({
       title: title,
-      content: content,
+      content: $content,
       autoSize: false,
       width: 910,
       height: 455,
+      beforeShow: function () {}
     });
     
   },
@@ -185,8 +184,24 @@ var BowBuilder = {
   hide_product_info: function () {
   },
   
-  activate_product_info: function () {
-    alert('activated!');
+  activate_product_info_html: function (section,product,html) {
+
+    var $html = $(html);
+    
+    $html.find('button').click($.proxy(function(e){
+      
+      e.preventDefault();
+      
+		  var value = $(product).data('variant_id');
+		  this.set_section_select(section,value);
+		  this.hide_section(section);
+
+      $.fancybox.close(true);
+      
+    },this));
+    
+    return $html;
+    
   },
   
   set_section_select: function (section,value) {
