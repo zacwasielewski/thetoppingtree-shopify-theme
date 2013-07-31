@@ -42,7 +42,7 @@ var BowBuilder = {
   
   init_section: function (section) {
     
-    var $section = this.global.$sections.filter("[data-section='"+ section +"']"),
+    var $section = this._get_$section(section),
         $toggle = $section.find('.step-name a');
     
     $section.find('ul').hide();
@@ -85,7 +85,7 @@ var BowBuilder = {
   
   show_section: function (section,callback) {
     
-    var $section = this.global.$sections.filter("[data-section='"+ section +"']"),
+    var $section = this._get_$section(section),
         $toggle = $section.find('.step-name a'),
         $sections = this.global.$sections,
         $toggles = this.global.$sections.find('.step-name a');
@@ -101,7 +101,7 @@ var BowBuilder = {
   
   hide_section: function (section,callback) {
 
-    var $section = this.global.$sections.filter("[data-section='"+ section +"']"),
+    var $section = this._get_$section(section),
         $toggle = $section.find('.step-name a');
 
     $section.find('ul:visible').slideUp({
@@ -127,17 +127,39 @@ var BowBuilder = {
     });
   },
   
+  init_product_info: function (section) {
+
+		var $section = this._get_$section(section),
+			$list = $section.find('ul.product-list'),
+			$products = $list.find('li');
+		
+		$products.find('.product-image-wrap a').fancybox({
+			title: 'Title',
+			content: 'Content',
+			autoSize: false,
+			width: 910,
+			height: 455,
+			beforeLoad: this.showBowDetail,
+			afterShow: $.proxy(function () { this.activate_product_info() }, this)
+		});
+
+  },
+  
   show_product_info: function () {
-    
     
     
   },
   
   hide_product_info: function () {
   },
+  
+  _get_$section: function (section) {
+    return this.global.$container.find('[data-section='+section+']');
+  }
 
 };
 
+/*
 var BowBuilder2 = {
 	
 	container:null,
@@ -303,5 +325,6 @@ var BowBuilder2 = {
 	}
 	
 };
+*/
 
 BowBuilder.init();
