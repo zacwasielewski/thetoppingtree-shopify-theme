@@ -9,6 +9,101 @@ if (typeof jQuery.ui === 'undefined') {
 */
 
 var BowBuilder = {
+
+  config: {
+    sections: ['large-bows','small-bows','toppings']
+  },
+  
+  global: {
+    $container: null,
+    $preview: null
+  },
+  
+  init: function () {
+    
+		$(document).ready($.proxy(function(){
+			this.load();
+		},this));
+
+  },
+  
+  load: function () {
+    
+    this.global.$container = $('#bow-builder');
+    this.global.$preview   = $('.bow-builder-preview');
+    
+    $.each(this.config.sections,$.proxy(function(n,section){
+      this.init_section(section);
+    },this));
+    
+  },
+  
+  init_section: function (section) {
+    
+    var $section = this.global.$container.find("li[data-section='"+ section +"']"),
+        $toggle = $section.find('.step-name a');
+    
+    $section.find('ul').hide();
+
+    $toggle.click($.proxy(function(e){
+      
+      var $toggle = $(e.currentTarget),
+          toggle_state = $toggle.data('toggle-state');
+      
+      e.preventDefault();
+      
+      if (toggle_state=='open') {
+        this.hide_section(section);
+      } else {
+        this.show_section(section);
+      }
+      
+    },this));
+    
+  },
+  
+  show_section: function (section) {
+    
+    var $section = this.global.$container.find("li[data-section='"+ section +"']"),
+        $toggle = $section.find('.step-name a');
+
+    this.hide_preview(function(){
+      $section.find('ul').slideDown();
+    });
+    $toggle.data('toggle-state','open');
+
+  },
+  
+  hide_section: function (section) {
+
+    var $section = this.global.$container.find("li[data-section='"+ section +"']"),
+        $toggle = $section.find('.step-name a');
+
+    $section.find('ul').slideUp({
+      duration: 400,
+      complete: $.proxy(function() { this.show_preview() }, this)
+    });
+    $toggle.data('toggle-state',null);
+    
+  },
+  
+  show_preview: function (callback) {
+    this.global.$preview.fadeIn({
+      duration: 200,
+      complete: callback
+    });
+  },
+  
+  hide_preview: function (callback) {
+    this.global.$preview.fadeOut({
+      duration: 200,
+      complete: callback
+    });
+  }
+
+};
+
+var BowBuilder2 = {
 	
 	container:null,
 	

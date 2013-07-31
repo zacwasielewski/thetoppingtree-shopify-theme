@@ -16,17 +16,127 @@
     </section>
   {% endif %}
 
+
+  <div id="bow-builder">
+    
+    <div class="bow-builder-steps">
+      <ol>
+
+        {% assign collection = collections.large-bows %}
+      
+        <li class="step-title" data-section="{{ collection.handle }}"><span class="step-order accent-text">Step 1:</span>
+          <span class="step-name accent-text"><a href="#">Base Bow</a></span>
+
+          <div class="bow-builder-products">
+            
+            <ul class="product-list clearfix">
+              {% for product in collection.products %}
+                {% for variant in product.variants %}
+                  {% include 'bowbuilder-product-variant-item' %}
+                {% endfor %}
+              {% endfor %}
+            </ul>
+
+            <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
+              <option value=""></option>
+              {% for product in collection.products %}
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}">
+                    {{ product.title }} ({{ variant.price | money }})
+                  </option>
+                {% endfor %}
+              {% endfor %}
+            </select>
+            
+          </div>
+        </li>
+
+        {% assign collection = collections.small-bows %}
+          
+        <li class="step-title" data-section="{{ collection.handle }}"><span class="step-order accent-text">Step 2:</span>
+          <span class="step-name accent-text"><a href="#">Small Bow</a></span>
+
+          <div class="bow-builder-products">
+            
+            <ul class="product-list clearfix">
+              {% for product in collection.products %}
+                {% for variant in product.variants %}
+                  {% include 'bowbuilder-product-variant-item' %}
+                {% endfor %}
+              {% endfor %}
+            </ul>
+
+            <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
+              <option value=""></option>
+              {% for product in collection.products %}
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}">
+                    {{ product.title }} ({{ variant.price | money }})
+                  </option>
+                {% endfor %}
+              {% endfor %}
+            </select>
+            
+          </div>
+        </li>
+
+        {% assign collection = collections.toppings %}
+          
+        <li class="step-title" data-section="{{ collection.handle }}"><span class="step-order accent-text">Step 3:</span>
+          <span class="step-name accent-text"><a href="#">Topping</a></span>
+
+          <div class="bow-builder-products">
+            
+            <ul class="product-list clearfix">
+              {% for product in collection.products %}
+                {% for variant in product.variants %}
+                  {% include 'bowbuilder-product-variant-item' %}
+                {% endfor %}
+              {% endfor %}
+            </ul>
+
+            <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
+              <option value=""></option>
+              {% for product in collection.products %}
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}">
+                    {{ product.title }} ({{ variant.price | money }})
+                  </option>
+                {% endfor %}
+              {% endfor %}
+            </select>
+            
+          </div>
+        </li>
+          
+      </ol>
+    </div>
+    
+    <div class="bow-builder-preview">
+      This is the preview image
+    </div>
+    
+  </div>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
   <section id="collection-content">
 
-    <div id="bowbuilder">
-    
-        <div class="step-progress">
-            <p>Progress:</p>
-            <div class="step-title accent-text"><span class="step-order">1</span> <span class="step-name">Base Bow</span></div>
-            <div class="step-title accent-text"><span class="step-order">2</span> <span class="step-name">Small Bow</span></div>
-            <div class="step-title accent-text"><span class="step-order">3</span> <span class="step-name">Topping</span></div>
-            <div class="step-title accent-text"><span class="step-order">4</span> <span class="step-name">Finish!</span></div>
-        </div>
+    <div id="xbowbuilder">
     
         <form action="/cart/add" method="post" enctype="multipart/form-data">
 
@@ -210,7 +320,6 @@
 </div>
 
 {{ 'jquery.isotope.min.js' | asset_url | script_tag }}
-{{ 'jquery.psteps.js' | asset_url | script_tag }}
 {{ 'handlebars.js' | asset_url | script_tag }}
 {{ 'jquery.fancybox.pack.js' | asset_url | script_tag }}
 {{ 'bow-builder.js' | asset_url | script_tag }}

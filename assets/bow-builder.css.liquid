@@ -1,3 +1,4 @@
+/*
 #bowbuilder select,
 #bowbuilder button.back-button,
 #bowbuilder button.next-button {
@@ -5,34 +6,20 @@
 }
 
 #bowbuilder ul.product-list li.product-list-item {
-    /*background-color: #eee;*/
 }
 
 #bowbuilder ul.product-list li.product-list-item.selected {
-    /*background-color: #eee;*/
     border: 1px solid red;
 }
 
 
 #bowbuilder ul.product-list li.product-list-item .product-wrap {
-    /*
-    xwidth: 220px;
-    xheight: 240px;
-    xbackground-color: #ddd;
-    */
 }
 
 #bowbuilder ul.product-list li.product-list-item .product-image-wrap {
-  /*
-	xbackground-color: #ccc;
-	*/
 }
 
 #bowbuilder ul.product-list li.product-list-item .product-image-wrap img {
-    /*
-    xwidth: 200px !important;
-    xheight: 150px !important;
-    */
 }
 
 #bowbuilder ul.product-list li.product-list-item .product-info {
@@ -65,7 +52,78 @@
 .fancybox-skin {
 	background-color: #fff;
 }
+*/
 
+#bow-builder {
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  overflow: auto;
+  padding: 20px 0;
+}
+
+.bow-builder-steps {
+  display: block;
+  float: left;
+  margin-left: 19px;
+  text-align: left;
+}
+
+.bow-builder-steps ol {
+  margin: 0;
+  padding: 0;
+}
+
+.bow-builder-steps ol li {
+  margin: 0;
+  padding: 10px;
+}
+
+.bow-builder-steps button {
+  margin-left: 10px;
+}
+
+.step-order{
+  /*
+  display: inline-block;
+  text-align: center;
+  line-height: 36px;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+  */
+}
+
+.bow-builder-preview {
+  display: block;
+  float: right;
+  width: 420px;
+  height: 300px;
+  margin-left: 20px;
+  margin-right: 19px;
+  text-align: left;
+  text-align: center;
+  background-color: #eee;
+}
+
+.bow-builder-preview img {
+  background-color: #eee;
+  width: 440px;
+}
+
+.product-list {
+  margin: 1em 0;
+}
+
+.product-info {
+  display: none;
+}
+
+.bow-builder-product-select {
+  display: none;
+}
 
 
 /* Flat button
@@ -129,11 +187,11 @@
 /* Wizard steps
 ------------------------------------------------*/
 
+/*
 .step-progress {
     padding: 20px 0 10px 0;
     line-height: 40px;
     margin: 0 0 40px 0;
-    /*background-color: rgb(241,241,241);*/
     border: 1px solid #d2d2d2;
     border-radius: 5px;
 }
@@ -141,9 +199,7 @@
 .step-progress p {
   display: inline-block;
   zoom: 1;
-  /* ie7 fix */
   *display: inline;
-  /* ie7 fix */
 }
 
 .step-progress p {
@@ -182,6 +238,7 @@
 .step-title.step-visited {
     color: #666;
 }
+*/
 
 
 /**** Isotope filtering ****/
