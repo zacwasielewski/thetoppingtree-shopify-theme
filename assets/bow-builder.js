@@ -211,7 +211,10 @@ var BowBuilder = {
       e.preventDefault();
       
 		  var value = $(product).data('variant_id');
+
 		  this.set_section_product(section,product,value);
+      this.update_preview_image();
+
       this.hide_section(section,$.proxy(function(){
         this.show_preview();
       },this));
@@ -241,6 +244,7 @@ var BowBuilder = {
     $remove_btn.click($.proxy(function(e){
       e.preventDefault();
       this.unset_section_product(section);
+      this.update_preview_image();
     },this));
     $product_title.append($remove_btn);
     
@@ -265,6 +269,22 @@ var BowBuilder = {
 
     // remove 'selected' mark from all product elements
     $section.find('li.product-list-item').removeClass('selected');
+    
+  },
+  
+  update_preview_image: function () {
+    
+    this.global.$preview.empty();
+    
+    this.global.$sections.each($.proxy(function(n,section){
+      
+      var src = $(section).find('li.product-list-item.selected .product-image-wrap img').data('bow-builder-img-src');
+      if (src) {
+        var img = '<img src="'+src+'">';
+        this.global.$preview.append(img);
+      }
+    
+    },this));
     
   },
   
