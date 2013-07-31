@@ -136,22 +136,15 @@ var BowBuilder = {
 		
 		$products.find('.product-image-wrap a').click($.proxy(function(e){
 		
-		  var product = $(e.currentTarget).closest('li.product-list-item').get(0);
+		  var product, value;
+		  
 		  e.preventDefault();
+		  product = $(e.currentTarget).closest('li.product-list-item').get(0);
+		  //value = $(product).data('variant_id');
+		  //this.set_section_select(section,value);
 		  this.show_product_info(product);
 		  
 		},this));
-		
-		/*{
-			title: 'Title',
-			content: 'Content',
-			autoSize: false,
-			width: 910,
-			height: 455,
-			beforeLoad: this.show_product_info,
-			afterShow: this.activate_product_info
-		});
-		*/
 
   },
   
@@ -194,6 +187,13 @@ var BowBuilder = {
   
   activate_product_info: function () {
     alert('activated!');
+  },
+  
+  set_section_select: function (section,value) {
+    
+    var $section = this._get_$section(section);
+    $section.find('select').val(value);
+    
   },
   
   _get_$section: function (section) {
