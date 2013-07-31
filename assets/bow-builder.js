@@ -181,6 +181,24 @@ var BowBuilder = {
     
   },
   
+  get_product_info: function (product) {
+
+		var $product = $(product),
+        $img_link = $product.find('.product-image-wrap a'),
+        $img = $img_link.find('img'),
+        $info = $product.find('.product-info');
+				
+    return {
+      id:    $product.attr('data-variant_id'),
+      size:  $product.attr('data-collection'),
+      image: $img.attr('src'),
+      title: $info.find('h1').text(),
+      price: $info.find('.price').text(),
+      description: $info.find('.description').html(),
+    };
+
+  },
+  
   hide_product_info: function () {
   },
   
@@ -193,8 +211,10 @@ var BowBuilder = {
       e.preventDefault();
       
 		  var value = $(product).data('variant_id');
-		  this.set_section_select(section,value);
-		  this.hide_section(section);
+		  this.set_section_product(section,product,value);
+      this.hide_section(section,$.proxy(function(){
+        this.show_preview();
+      },this));
 
       $.fancybox.close(true);
       
@@ -204,10 +224,16 @@ var BowBuilder = {
     
   },
   
-  set_section_select: function (section,value) {
+  set_section_product: function (section,product,value) {
     
-    var $section = this._get_$section(section);
+    var $section = this._get_$section(section)
+        $step_title = $section.find('.step-title'),
+        info = this.get_product_info(product);
+
     $section.find('select').val(value);
+    
+    $step_title.find('step-selected-product').remove();
+    $step_title.append('<span class="step-selected-product">&mdash; ' + info.title + '<button class="btn action-btn small remove">x</button></span>'); 
     
   },
   
