@@ -15,15 +15,24 @@
             {% assign itemType = prod %}
         {% endif %}
     
+        {% assign bow_builder_image = nil %}
+        {% for image in product.images %}
+            {% if image.alt == 'bow-builder' %}
+                {% assign bow_builder_image = image %}
+            {% endif %}
+        {% endfor %}
     
         <div class="product-image-wrap is-loading">
         
             <!-- Product image -->
-                
             {% unless settings.display-product-overlay %}<a href="{{ product.url }}">{% endunless %}
-            <img src="{{ itemType.featured_image | product_img_url: 'large' }}" alt="{{ itemType.featured_image.alt }}">
+            <img
+              src="{{ itemType.featured_image | product_img_url: 'large' }}"
+              alt="{{ itemType.featured_image.alt }}"
+              data-bow-builder-img-src="{% if bow_builder_image %}{{ bow_builder_image | product_img_url: 'large' }}{% endif %}"
+            >
             {% unless settings.display-product-overlay %}</a>{% endunless %}
-        
+            
             <!-- Include sale banner if item is on sale -->
             {% if itemType.compare_at_price_min > itemType.price_min and settings.display-sale-banner %}
                 <h2 class="accent-text">
