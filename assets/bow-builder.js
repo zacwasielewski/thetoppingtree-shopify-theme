@@ -246,6 +246,12 @@ var BowBuilder = {
     
     $step_title.append($product_title);
     
+    // remove 'selected' mark from all product elements
+    $section.find('li.product-list-item').removeClass('selected');
+    
+    // mark product element as 'selected'
+    $(product).addClass('selected');
+    
   },
   
   unset_section_product: function (section) {
@@ -256,6 +262,9 @@ var BowBuilder = {
     $section.find('select').val('');
     
     $step_title.find('.step-selected-product').remove();
+
+    // remove 'selected' mark from all product elements
+    $section.find('li.product-list-item').removeClass('selected');
     
   },
   
