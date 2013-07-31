@@ -16,6 +16,7 @@ var BowBuilder = {
   
   global: {
     $container: null,
+    $sections: null,
     $preview: null
   },
   
@@ -30,6 +31,7 @@ var BowBuilder = {
   load: function () {
     
     this.global.$container = $('#bow-builder');
+    this.global.$sections  = this.global.$container.find('li[data-section]');
     this.global.$preview   = $('.bow-builder-preview');
     
     $.each(this.config.sections,$.proxy(function(n,section){
@@ -40,7 +42,7 @@ var BowBuilder = {
   
   init_section: function (section) {
     
-    var $section = this.global.$container.find("li[data-section='"+ section +"']"),
+    var $section = this.global.$sections.filter("[data-section='"+ section +"']"),
         $toggle = $section.find('.step-name a');
     
     $section.find('ul').hide();
@@ -53,36 +55,60 @@ var BowBuilder = {
       e.preventDefault();
       
       if (toggle_state=='open') {
-        this.hide_section(section);
+      
+        this.hide_section(section,$.proxy(function(){
+          this.show_preview();
+        },this));
+        
       } else {
-        this.show_section(section);
+      
+        this.hide_preview($.proxy(function(){
+                    
+          this.global.$sections.each($.proxy(function(n,el){
+            
+            var tmp_section = $(el).data('section');
+            if (tmp_section != section) {
+              this.hide_section(tmp_section);
+            }
+            
+          },this));
+          
+          this.show_section(section);
+
+        },this));
+        
       }
       
     },this));
     
   },
   
-  show_section: function (section) {
+  show_section: function (section,callback) {
     
-    var $section = this.global.$container.find("li[data-section='"+ section +"']"),
-        $toggle = $section.find('.step-name a');
-
-    this.hide_preview(function(){
-      $section.find('ul').slideDown();
+    var $section = this.global.$sections.filter("[data-section='"+ section +"']"),
+        $toggle = $section.find('.step-name a'),
+        $sections = this.global.$sections,
+        $toggles = this.global.$sections.find('.step-name a');
+        
+    $section.find('ul').slideDown({
+      duration: 400,
+      done: callback
     });
+    
     $toggle.data('toggle-state','open');
 
   },
   
-  hide_section: function (section) {
+  hide_section: function (section,callback) {
 
-    var $section = this.global.$container.find("li[data-section='"+ section +"']"),
+    var $section = this.global.$sections.filter("[data-section='"+ section +"']"),
         $toggle = $section.find('.step-name a');
 
-    $section.find('ul').slideUp({
-      duration: 400,
-      complete: $.proxy(function() { this.show_preview() }, this)
+    $section.find('ul:visible').slideUp({
+      duration: 200,
+      done: callback
     });
+    
     $toggle.data('toggle-state',null);
     
   },
@@ -90,16 +116,25 @@ var BowBuilder = {
   show_preview: function (callback) {
     this.global.$preview.fadeIn({
       duration: 200,
-      complete: callback
+      done: callback
     });
   },
   
   hide_preview: function (callback) {
     this.global.$preview.fadeOut({
       duration: 200,
-      complete: callback
+      done: callback
     });
-  }
+  },
+  
+  show_product_info: function () {
+    
+    
+    
+  },
+  
+  hide_product_info: function () {
+  },
 
 };
 
