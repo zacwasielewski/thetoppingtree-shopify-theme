@@ -16,117 +16,142 @@
     </section>
   {% endif %}
 
-
   <div id="bow-builder">
-    
-    <div class="bow-builder-steps">
-      <ol>
 
-        {% assign collection = collections.large-bows %}
+    <form action="/cart/add" method="post" enctype="multipart/form-data">
+
+      {% assign linklist = linklists['bowbuilder'] %}
+      {% assign current_time = 'now' | date: "%Y%m%d%H%M%S" %}
+
+      <input type="hidden" id="bow-group" name="properties[bowbuilder-group]" value="{{ current_time }}" />
       
-        <li class="step" data-section="{{ collection.handle }}">
-          <span class="step-title">
-            <span class="step-order accent-text">Step 1:</span>
-            <span class="step-name accent-text"><a href="#">Base Bow</a></span>
-          </span>
+      <div class="bow-builder-steps">
+        <ol>
 
-          <div class="bow-builder-products">
+          {% assign collection = collections.large-bows %}
+      
+          <li class="step" data-section="{{ collection.handle }}">
+            <span class="step-title">
+              <span class="step-order accent-text">Step 1:</span>
+              <span class="step-name accent-text"><a href="#">Base Bow</a></span>
+            </span>
+
+            <div class="bow-builder-products">
             
-            <ul class="product-list clearfix">
-              {% for product in collection.products %}
-                {% for variant in product.variants %}
-                  {% include 'bowbuilder-product-variant-item' %}
+              <ul class="product-list clearfix">
+                {% for product in collection.products %}
+                  {% for variant in product.variants %}
+                    {% include 'bowbuilder-product-variant-item' %}
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            </ul>
+              </ul>
 
-            <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
-              <option value=""></option>
-              {% for product in collection.products %}
-                {% for variant in product.variants %}
-                  <option value="{{ variant.id }}">
-                    {{ product.title }} ({{ variant.price | money }})
-                  </option>
+              <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
+                <option value=""></option>
+                {% for product in collection.products %}
+                  {% for variant in product.variants %}
+                    <option value="{{ variant.id }}">
+                      {{ product.title }} ({{ variant.price | money }})
+                    </option>
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            </select>
+              </select>
             
-          </div>
-        </li>
+            </div>
+          </li>
 
-        {% assign collection = collections.small-bows %}
+          {% assign collection = collections.small-bows %}
           
-        <li class="step" data-section="{{ collection.handle }}">
-          <span class="step-title">
-            <span class="step-order accent-text">Step 2:</span>
-            <span class="step-name accent-text"><a href="#">Small Bow</a></span>
-          </span>
+          <li class="step" data-section="{{ collection.handle }}">
+            <span class="step-title">
+              <span class="step-order accent-text">Step 2:</span>
+              <span class="step-name accent-text"><a href="#">Small Bow</a></span>
+            </span>
 
-          <div class="bow-builder-products">
+            <div class="bow-builder-products">
             
-            <ul class="product-list clearfix">
-              {% for product in collection.products %}
-                {% for variant in product.variants %}
-                  {% include 'bowbuilder-product-variant-item' %}
+              <ul class="product-list clearfix">
+                {% for product in collection.products %}
+                  {% for variant in product.variants %}
+                    {% include 'bowbuilder-product-variant-item' %}
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            </ul>
+              </ul>
 
-            <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
-              <option value=""></option>
-              {% for product in collection.products %}
-                {% for variant in product.variants %}
-                  <option value="{{ variant.id }}">
-                    {{ product.title }} ({{ variant.price | money }})
-                  </option>
+              <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
+                <option value=""></option>
+                {% for product in collection.products %}
+                  {% for variant in product.variants %}
+                    <option value="{{ variant.id }}">
+                      {{ product.title }} ({{ variant.price | money }})
+                    </option>
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            </select>
+              </select>
             
-          </div>
-        </li>
+            </div>
+          </li>
 
-        {% assign collection = collections.toppings %}
+          {% assign collection = collections.toppings %}
           
-        <li class="step" data-section="{{ collection.handle }}">
-          <span class="step-title">
-            <span class="step-order accent-text">Step 3:</span>
-            <span class="step-name accent-text"><a href="#">Topping</a></span>
-          </span>
+          <li class="step" data-section="{{ collection.handle }}">
+            <span class="step-title">
+              <span class="step-order accent-text">Step 3:</span>
+              <span class="step-name accent-text"><a href="#">Topping</a></span>
+            </span>
 
-          <div class="bow-builder-products">
+            <div class="bow-builder-products">
             
-            <ul class="product-list clearfix">
-              {% for product in collection.products %}
-                {% for variant in product.variants %}
-                  {% include 'bowbuilder-product-variant-item' %}
+              <ul class="product-list clearfix">
+                {% for product in collection.products %}
+                  {% for variant in product.variants %}
+                    {% include 'bowbuilder-product-variant-item' %}
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            </ul>
+              </ul>
 
-            <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
-              <option value=""></option>
-              {% for product in collection.products %}
-                {% for variant in product.variants %}
-                  <option value="{{ variant.id }}">
-                    {{ product.title }} ({{ variant.price | money }})
-                  </option>
+              <select name="id[]" class="bow-builder-product-select" data-section="{{ collection.handle }}">
+                <option value=""></option>
+                {% for product in collection.products %}
+                  {% for variant in product.variants %}
+                    <option value="{{ variant.id }}">
+                      {{ product.title }} ({{ variant.price | money }})
+                    </option>
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
-            </select>
+              </select>
             
-          </div>
-        </li>
+            </div>
+          </li>
           
-      </ol>
-    </div>
+        </ol>
+      </div>
     
-    <div class="bow-builder-preview">
-      This is the preview image
-    </div>
+      <div class="bow-builder-preview">
+        This is the preview image
+      </div>
     
+    </form>
+
   </div>
 
+  <script id="product-detail-template" type="text/x-handlebars-template">
+    {% raw %}
+      <div class="fancybox">
+        <meta name="step" value="{{size}}">
+        <meta name="id" value="{{id}}">
+        <div class="product-detail">
+          <img class="product-detail-image" src="{{image}}">
+          <h1 class="product-detail-title">{{title}}</h1>
+          <p class="product-detail-price">{{price}}</p>
+          <div class="product-detail-description">{{{description}}}</div>
+          <div>
+            <button class="product-detail-select-btn action-btn accent-text">Select This Bow</button>
+          </div>
+        </div>
+      </div>
+    {% endraw %}
+  </script>
 
 
 <br>
@@ -154,21 +179,6 @@
 
             <input type="hidden" id="bow-group" name="properties[bowbuilder-group]" value="{{ current_time }}" />
 
-			<script id="product-detail-template" type="text/x-handlebars-template">
-				{% raw %}
-				<meta name="step" value="{{size}}">
-				<meta name="id" value="{{id}}">
-				<div class="product-detail">
-					<img class="product-detail-image" src="{{image}}">
-					<h1 class="product-detail-title">{{title}}</h1>
-					<p class="product-detail-price">{{price}}</p>
-					<div class="product-detail-description">{{{description}}}</div>
-					<div>
-						<button class="product-detail-select-btn action-btn accent-text">Select This Bow</button>
-					</div>
-				</div>
-				{% endraw %}
-			</script>
 
 			{% assign collection = collections.large-bows %}
 

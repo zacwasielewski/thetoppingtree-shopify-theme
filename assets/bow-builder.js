@@ -36,6 +36,7 @@ var BowBuilder = {
     
     $.each(this.config.sections,$.proxy(function(n,section){
       this.init_section(section);
+      this.init_product_info(section);
     },this));
     
   },
@@ -131,26 +132,68 @@ var BowBuilder = {
 
 		var $section = this._get_$section(section),
         $list = $section.find('ul.product-list'),
-        $products = $list.find('li');
+        $products = $list.find('li.product-list-item');
 		
-		$products.find('.product-image-wrap a').fancybox({
+		$products.find('.product-image-wrap a').click($.proxy(function(e){
+		
+		  var product = $(e.currentTarget).closest('li.product-list-item').get(0);
+		  e.preventDefault();
+		  this.show_product_info(product);
+		  
+		},this));
+		
+		/*{
 			title: 'Title',
 			content: 'Content',
 			autoSize: false,
 			width: 910,
 			height: 455,
-			beforeLoad: this.showBowDetail,
-			afterShow: $.proxy(function () { this.activate_product_info() }, this)
+			beforeLoad: this.show_product_info,
+			afterShow: this.activate_product_info
 		});
+		*/
 
   },
   
-  show_product_info: function () {
+  show_product_info: function (product) {
     
+    var title, content;
+    
+		var $product = $(product),
+        $img_link = $product.find('.product-image-wrap a'),
+        $img = $img_link.find('img'),
+        $info = $product.find('.product-info');
+				
+		var source = $("#product-detail-template").html(),
+        template = Handlebars.compile(source),
+        data = {
+          id:    $product.attr('data-variant_id'),
+          size:  $product.attr('data-collection'),
+          image: $img.attr('src'),
+          title: $info.find('h1').text(),
+          price: $info.find('.price').text(),
+          description: $info.find('.description').html(),
+        },
+        html = template(data);
+    
+		title = $info.find('h1').text();
+		content = html;
+
+    $.fancybox.open({
+      title: title,
+      content: content,
+      autoSize: false,
+      width: 910,
+      height: 455,
+    });
     
   },
   
   hide_product_info: function () {
+  },
+  
+  activate_product_info: function () {
+    alert('activated!');
   },
   
   _get_$section: function (section) {
