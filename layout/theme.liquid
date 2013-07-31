@@ -43,7 +43,7 @@
     {% if template == "index" %} {{ shop.name | escape }} {% elsif template == "404" %} {{ settings.404-title }} &ndash; {{ shop.name | escape }} {% else %} {{ page_title | escape }} &ndash; {{ shop.name | escape }} {% endif %}
   </title>
 
-  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   
   <link href="{{ 'favicon.ico' | asset_url }}" rel="shortcut icon" />
 
