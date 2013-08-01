@@ -170,6 +170,8 @@ var BowBuilder = {
 		title = $info.find('h1').text();
 		$content = this.activate_product_info_html(section,product,html);
 		
+		this.preload_preview_image(product);
+		
     $.fancybox.open({
       title: title,
       content: $content,
@@ -269,6 +271,15 @@ var BowBuilder = {
 
     // remove 'selected' mark from all product elements
     $section.find('li.product-list-item').removeClass('selected');
+    
+  },
+  
+  preload_preview_image: function (product) {
+    
+    var src = $(product).find('.product-image-wrap img').data('bow-builder-img-src');
+    if (src) {
+      $('<img/>')[0].src = src;
+    }
     
   },
   
