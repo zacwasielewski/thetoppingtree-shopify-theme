@@ -38,6 +38,8 @@ var BowBuilder = {
       this.init_section(section);
       this.init_product_info(section);
     },this));
+
+    this.humanize_group_input();
     
   },
   
@@ -298,7 +300,15 @@ var BowBuilder = {
     },this));
     
   },
-  
+
+  humanize_group_input: function () {
+    
+    var $input = this.global.$container.find('input[name="properties[bowbuilder-group]"]'),
+        id = Math.random().toString(36).substr(2,5);
+    $input.val(id);
+    
+  },
+    
   _get_$section: function (section) {
     return (section)
       ? this.global.$sections.filter('[data-section='+section+']')

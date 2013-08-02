@@ -23,7 +23,7 @@
       {% assign linklist = linklists['bowbuilder'] %}
       {% assign current_time = 'now' | date: "%Y%m%d%H%M%S" %}
 
-      <input type="hidden" id="bow-group" name="properties[bowbuilder-group]" value="{{ current_time }}" />
+      <input type="hidden" name="properties[bowbuilder-group]" value="{{ current_time }}" />
       
       <div class="bow-builder-steps">
         <ol>
@@ -56,6 +56,7 @@
                   {% endfor %}
                 {% endfor %}
               </select>
+              <input type="hidden" name="properties[bowbuilder-collection-product-map][{{ collection.handle }}]" value="1" />
             
             </div>
           </li>
@@ -88,6 +89,7 @@
                   {% endfor %}
                 {% endfor %}
               </select>
+              <input type="hidden" name="properties[bowbuilder-collection-product-map][{{ collection.handle }}]" value="2" />
             
             </div>
           </li>
@@ -120,6 +122,7 @@
                   {% endfor %}
                 {% endfor %}
               </select>
+              <input type="hidden" name="properties[bowbuilder-collection-product-map][{{ collection.handle }}]" value="3" />
             
             </div>
           </li>
