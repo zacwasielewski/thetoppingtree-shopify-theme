@@ -16,6 +16,7 @@ var BowBuilder = {
   
   global: {
     $container: null,
+    $form: null,
     $sections: null,
     $preview: null
   },
@@ -31,6 +32,7 @@ var BowBuilder = {
   load: function () {
     
     this.global.$container = $('#bow-builder');
+    this.global.$form      = this.global.$container.find('form');
     this.global.$sections  = this.global.$container.find('li[data-section]');
     this.global.$preview   = $('.bow-builder-preview');
     
@@ -39,7 +41,31 @@ var BowBuilder = {
       this.init_product_info(section);
     },this));
 
+    this.activate_form();
     this.humanize_group_input();
+    
+  },
+  
+  activate_form: function () {
+    
+    var that = this;
+    
+    this.global.$form.submit($.proxy(function(e){
+    
+      var form = e.currentTarget;
+      e.preventDefault();
+      
+      this.global.$sections.find('select').each(function(i,select){
+        
+        if ($(select).val()=='') {
+          $(select).attr('disabled',true);
+        }
+        
+      });
+      
+      form.submit();
+      
+    },this));
     
   },
   
