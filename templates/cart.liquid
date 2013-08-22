@@ -50,14 +50,14 @@
 
         {% for group in groups_uniq %}
           <tbody class="bowbuilder-group">
-            <tr><td colspan="6">
+            <tr class="cart-table-header"><th colspan="6" class="first accent-text">
               Build Your Bow:
-            </td></tr>
+            </th></tr>
             {% for item in cart.items %}
               {% if item.properties['bowbuilder-group'] == group %}
                 <tr class="cart-row {% include 'for-looper' %}">
                   <td class="cart-item first">
-                  <a href="{{ item.product.url | within: collections.all }}"><img src="{{ item.product.images[0] | product_img_url: "large" }}" alt="{{ item.title | escape }}" /></a>
+                  <a href="{{ item.product.url | within: collections.all }}"><img src="{{ item.product.images[0] | product_img_url: "small" }}" alt="{{ item.title | escape }}" /></a>
                   </td>
                   <td class="cart-detail">
                   <a href="{{ item.product.url }}">{{ item.title | escape }}</a>
@@ -91,7 +91,7 @@
           {% if item.properties['bowbuilder-group'] == "" %}
             <tr class="cart-row {% include 'for-looper' %}">
               <td class="cart-item first">
-              <a href="{{ item.product.url | within: collections.all }}"><img src="{{ item.product.images[0] | product_img_url: "large" }}" alt="{{ item.title | escape }}" /></a>
+              <a href="{{ item.product.url | within: collections.all }}"><img src="{{ item.product.images[0] | product_img_url: "small" }}" alt="{{ item.title | escape }}" /></a>
               </td>
               <td class="cart-detail">
               <a href="{{ item.product.url }}">{{ item.title | escape }}</a>
