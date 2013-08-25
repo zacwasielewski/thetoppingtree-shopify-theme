@@ -1,5 +1,5 @@
 {
-  "current": "Dark",
+  "current": "Light",
   "presets": {
     "Light": {
       "enable-mega-navigation": true,
@@ -15,6 +15,7 @@
       "background-colour": "#ffffff",
       "use-logo": false,
       "include-retina-logo": false,
+      "header-font": "'Neuton', sans-serif",
       "text-font": "'Neuton', sans-serif",
       "accent-font": "'News Cycle', sans-serif",
       "text-colour": "#666666",
@@ -125,6 +126,7 @@
       "background-colour": "#161716",
       "use-logo": false,
       "include-retina-logo": false,
+      "header-font": "'Neuton', sans-serif",
       "text-font": "'PT Serif', serif",
       "accent-font": "'PT Sans', sans-serif",
       "text-colour": "#777777",

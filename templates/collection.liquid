@@ -5,7 +5,7 @@
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
 
   <div class="page-title {% if collection.description.size > 0 %}has-description{% endif %}">
-    <h1>{{ collection.title }}{% if current_tags.size > 0 %} / {{ current_tags.first }}{% endif %}</h1>
+    <h1 class="heading-text">{{ collection.title }}{% if current_tags.size > 0 %} / {{ current_tags.first }}{% endif %}</h1>
     
     <!-- Collection description -->
     {% if collection.description.size > 0 %}

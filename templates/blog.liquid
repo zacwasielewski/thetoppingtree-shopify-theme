@@ -5,9 +5,9 @@
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
 
   {% if current_tags %}
-    <div class="page-title"><h1>{{ blog.title | link_to: blog.url }} / {{ current_tags.first }}</h1></div>
+    <div class="page-title"><h1 class="heading-text">{{ blog.title | link_to: blog.url }} / {{ current_tags.first }}</h1></div>
   {% else %}
-    <div class="page-title"><h1>{{ blog.title }}</h1></div>
+    <div class="page-title"><h1 class="heading-text">{{ blog.title }}</h1></div>
   {% endif %}
 
 

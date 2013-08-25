@@ -85,6 +85,8 @@
         {% if settings.accent-font == "'PT Sans', sans-serif" %} <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'> {% endif %}
         {% if settings.text-font == "'PT Serif', serif" %} <link href='//fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'> {% endif %}
     
+        <script type="text/javascript" src="//use.typekit.net/lgm0xkq.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     
     <!-- Theme CSS -->
   	<!-- ——————————————————————————————————————— -->
@@ -261,7 +263,7 @@
             
             <!-- Main navigation -->
             <!-- +++++++++++++++++++++++++++++++++++++++ -->
-            <ul id="header-nav" class="{% if settings.theme-style == 'minimalist' %}double-borders{% endif %} {% if settings.invert-dropdown-arrows %}invert-arrows{% endif %} {% if settings.smaller-list-items %}smaller{% endif %} accent-text">
+            <ul id="header-nav" class="{% if settings.theme-style == 'minimalist' %}drawn-borders{% endif %} {% if settings.invert-dropdown-arrows %}invert-arrows{% endif %} {% if settings.smaller-list-items %}smaller{% endif %} accent-text">
                 
                 <li class="mobile-nav-item browse"><a><span>M</span>Browse</a></li>
                 <li class="mobile-nav-item cart"><a href="/cart"><span>c</span>Cart</a></li>
@@ -474,7 +476,7 @@
             <section id="footer-tools" class="section">
                 
                 <ul class="clearfix">
-                    <li id="attribution" class="module {% if settings.theme-style == 'minimalist' %}double-borders{% endif %}">
+                    <li id="attribution" class="module {% if settings.theme-style == 'minimalist' %}drawn-borders{% endif %}">
                             {% if settings.copyright-text.size > 0 %}
                               <h2 class="module-title accent-text">{{ settings.copyright-text }}</h2>
                             {% endif %}
@@ -483,7 +485,7 @@
                     
                     
                     {% if settings.show-social-links %}
-                    <li id="social-links" class="module {% if settings.theme-style == 'minimalist' %}double-borders{% endif %}">
+                    <li id="social-links" class="module {% if settings.theme-style == 'minimalist' %}drawn-borders{% endif %}">
                         <h2 class="module-title accent-text">{{ settings.social-links-title }}</h2>
                         <ul>
                             {% if settings.show-twitter-link.size > 0 %}
@@ -522,7 +524,7 @@
                     {% endif %}
                     
                     {% if settings.show-mailing-list %}
-                    <li id="mailing-list" class="module {% if settings.theme-style == 'minimalist' %}double-borders{% endif %}">
+                    <li id="mailing-list" class="module {% if settings.theme-style == 'minimalist' %}drawn-borders{% endif %}">
                         <h2 class="module-title accent-text">Join our mailing list</h2>
                         
                         {% if settings.mailing-list-type == 'mailchimp' %}
