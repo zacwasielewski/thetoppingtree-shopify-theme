@@ -233,7 +233,7 @@
 
     </ul>
 
-    {% if template == "index" %}
+    {% if template == "false" %}
 
 
     {% else %}
@@ -241,92 +241,92 @@
     <!-- Logo wrap -->
     <!-- +++++++++++++++++++++++++++++++++++++++ -->
     <div {% if settings.use-logo == false %}class="text"{% endif %} id="logo-wrap" onclick = "void(0)"> <!-- void click event necessary for mobile meganav hover off event -->
-    {% if settings.use-logo %}
-    <a href="/" id="logo">
-    <img class="standard" src="{{ 'logo.png' | asset_url }}">
-    {% if settings.include-retina-logo %}
-    <img class="retina" src="{{ 'retina-logo.png' | asset_url }}">
-    {% endif %}
-    </a><!-- #logo -->
-    {% else %}
-    <h1 id="store-title" class="accent-text"><a href="/">{{ shop.name }}</a></h1>
-    {% endif %}
+			{% if settings.use-logo %}
+				<a href="/" id="logo">
+				<img class="standard" src="{{ 'logo.png' | asset_url }}">
+				{% if settings.include-retina-logo %}
+					<img class="retina" src="{{ 'retina-logo.png' | asset_url }}">
+				{% endif %}
+					</a><!-- #logo -->
+				{% else %}
+				<h1 id="store-title" class="accent-text"><a href="/">{{ shop.name }}</a></h1>
+			{% endif %}
     </div><!-- #logo-wrap -->
 
     <!-- Main navigation -->
     <!-- +++++++++++++++++++++++++++++++++++++++ -->
     <ul id="header-nav" class="{% if settings.theme-style == 'minimalist' %}drawn-borders{% endif %} {% if settings.invert-dropdown-arrows %}invert-arrows{% endif %} {% if settings.smaller-list-items %}smaller{% endif %} accent-text">
 
-    <li class="mobile-nav-item browse"><a><span>M</span>Browse</a></li>
-    <li class="mobile-nav-item cart"><a href="/cart"><span>c</span>Cart</a></li>
-    <li class="mobile-nav-item navigate"><a><span>n</span>Navigate</a></li>
+			<li class="mobile-nav-item browse"><a><span>M</span>Browse</a></li>
+			<li class="mobile-nav-item cart"><a href="/cart"><span>c</span>Cart</a></li>
+			<li class="mobile-nav-item navigate"><a><span>n</span>Navigate</a></li>
 
-    {% for link in linklists.main-menu.links %}
+			{% for link in linklists.main-menu.links %}
 
-    {% capture child_linklist_handle %}{{ link.title | handle }}{% endcapture %}
+			{% capture child_linklist_handle %}{{ link.title | handle }}{% endcapture %}
 
-    {% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 or (child_linklist_handle == 'catalog' and settings.enable-mega-navigation) %}
-    {% capture has_dropdown %}true{% endcapture %}
-    {% else %}
-    {% capture has_dropdown %}false{% endcapture %}
-    {% endif %}
+			{% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 or (child_linklist_handle == 'catalog' and settings.enable-mega-navigation) %}
+				{% capture has_dropdown %}true{% endcapture %}
+			{% else %}
+				{% capture has_dropdown %}false{% endcapture %}
+			{% endif %}
 
-    <li class="nav-item {% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %} {% if link.active %}active{% endif %} {% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 or child_linklist_handle == 'catalog' %}dropdown{% endif %} {% if child_linklist_handle == 'catalog' %}mega{% endif %}">
-    <a href="{{ link.url }}">{{ link.title }} {% if has_dropdown == 'true' %}<span class="arrow down"></span>{% endif %}</a>
+			<li class="nav-item {% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %} {% if link.active %}active{% endif %} {% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 or child_linklist_handle == 'catalog' %}dropdown{% endif %} {% if child_linklist_handle == 'catalog' %}mega{% endif %}">
+			<a href="{{ link.url }}">{{ link.title }} {% if has_dropdown == 'true' %}<span class="arrow down"></span>{% endif %}</a>
 
-    <!-- Simple dropdown -->
-    {% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 and child_linklist_handle != 'catalog' %}
-    <div class="dropdown-parent-outline"></div><!-- .dropdown-parent-outline -->
-    <div class="dropdown-nav">
+			<!-- Simple dropdown -->
+			{% if linklists[child_linklist_handle] and linklists[child_linklist_handle].links.size > 0 and child_linklist_handle != 'catalog' %}
+				<div class="dropdown-parent-outline"></div><!-- .dropdown-parent-outline -->
+				<div class="dropdown-nav">
 
-    <ul>
-    {% for simple_nav_link in linklists[child_linklist_handle].links %}
-    <li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
-    <a href="{{ simple_nav_link.url }}">{{ simple_nav_link.title }}</a>
-    </li>
-    {% endfor %}
-    </ul>
+					<ul>
+						{% for simple_nav_link in linklists[child_linklist_handle].links %}
+							<li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+							<a href="{{ simple_nav_link.url }}">{{ simple_nav_link.title }}</a>
+							</li>
+						{% endfor %}
+					</ul>
 
-    </div><!-- .nav-dropdown -->
-    {% endif %}
+				</div><!-- .nav-dropdown -->
+			{% endif %}
 
 
-    <!-- Mega dropdown -->
-    {% if child_linklist_handle == 'catalog' and settings.enable-mega-navigation %}
-    <div class="dropdown-parent-outline"></div><!-- .dropdown-parent-outline -->
-    <div class="dropdown-nav">
+			<!-- Mega dropdown -->
+			{% if child_linklist_handle == 'catalog' and settings.enable-mega-navigation %}
+			<div class="dropdown-parent-outline"></div><!-- .dropdown-parent-outline -->
+			<div class="dropdown-nav">
 
-    <header>
+			<header>
 
-    <ul id="dropdown-titles">
-    <li class="categories"><span>{{ settings.categories-label }}</span></li>
-    <li class="brands"><span>{{ settings.brands-label }}</span></li>
-    </ul>
+				<ul id="dropdown-titles">
+					<li class="categories"><span>{{ settings.categories-label }}</span></li>
+					<li class="brands"><span>{{ settings.brands-label }}</span></li>
+				</ul>
 
-    <ul id="dropdown-breadcrumbs">
-    <li class="primary"><span href="">Categories</span></li>
-    <li class="secondary"><span class="separator">></span><span class="label"></span></li>
-    <li class="tertiary"><span class="separator">></span><span class="label"></span></li>
-    </ul>
+				<ul id="dropdown-breadcrumbs">
+					<li class="primary"><span href="">Categories</span></li>
+					<li class="secondary"><span class="separator">></span><span class="label"></span></li>
+					<li class="tertiary"><span class="separator">></span><span class="label"></span></li>
+				</ul>
 
-    </header>
+			</header>
 
-    <div id="brands-nav-level">
+			<div id="brands-nav-level">
 
-    <ul>
-    {% if settings.custom-brands-collection.size > 0 %}
-    {% for p in collections.[settings.custom-brands-collection].products %}
-    <li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
-    <a href="{{ p.url }}">{{ p.title }}</a>
-    </li>
-    {% endfor %}
-    {% else %}
-    {% for vendor in shop.vendors %}
-    <li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
-    {{ vendor | link_to_vendor  }}
-    </li>
-    {% endfor %}
-    {% endif %}
+			<ul>
+			{% if settings.custom-brands-collection.size > 0 %}
+			{% for p in collections.[settings.custom-brands-collection].products %}
+			<li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+			<a href="{{ p.url }}">{{ p.title }}</a>
+			</li>
+			{% endfor %}
+			{% else %}
+			{% for vendor in shop.vendors %}
+			<li class="{% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %}">
+			{{ vendor | link_to_vendor  }}
+			</li>
+			{% endfor %}
+			{% endif %}
 
     </ul>
 
