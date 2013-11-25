@@ -210,22 +210,21 @@
     </span>
     </li>
 
-    <!-- Account details -->
-    <li class="account-details">
-    {% if shop.customer_accounts_enabled %}
-    {% if customer %}
-    <p>Logged in as <a href="/account">{{ customer.first_name }}</a>. {{ "Logout" | customer_logout_link }}.</p>
-    {% else %}
-    <p>
-    {{ "Login" | customer_login_link }}
-    {% if shop.customer_accounts_optional %}
-    {{ 'Sign up' | customer_register_link }}
-    {% endif %}
-    </p>
-    {% endif %}
-    {% else %}
-    &nbsp;
-    {% endif %}
+    <li class="header-logo">
+      <!-- Logo wrap -->
+      <!-- +++++++++++++++++++++++++++++++++++++++ -->
+        <div {% if settings.use-logo == false %}class="text"{% endif %} id="header-logo-wrap" onclick = "void(0)"> <!-- void click event necessary for mobile meganav hover off event -->
+          {% if settings.use-logo %}
+            <a href="/" id="logo">
+            <img class="standard" src="{{ 'small-logo.png' | asset_url }}">
+            {% if settings.include-retina-logo %}
+              <img class="retina" src="{{ 'retina-logo.png' | asset_url }}">
+            {% endif %}
+            </a><!-- #logo -->
+          {% else %}
+            <h1 id="store-title" class="accent-text"><a href="/">{{ shop.name }}</a></h1>
+          {% endif %}
+        </div><!-- #logo-wrap -->
     </li>
 
     <!-- Cart Details -->
@@ -237,27 +236,11 @@
 
     {% if template == "false" %}
 
-
     {% else %}
-
-    <!-- Logo wrap -->
-    <!-- +++++++++++++++++++++++++++++++++++++++ -->
-    <div {% if settings.use-logo == false %}class="text"{% endif %} id="logo-wrap" onclick = "void(0)"> <!-- void click event necessary for mobile meganav hover off event -->
-			{% if settings.use-logo %}
-				<a href="/" id="logo">
-				<img class="standard" src="{{ 'logo.png' | asset_url }}">
-				{% if settings.include-retina-logo %}
-					<img class="retina" src="{{ 'retina-logo.png' | asset_url }}">
-				{% endif %}
-					</a><!-- #logo -->
-				{% else %}
-				<h1 id="store-title" class="accent-text"><a href="/">{{ shop.name }}</a></h1>
-			{% endif %}
-    </div><!-- #logo-wrap -->
 
     <!-- Main navigation -->
     <!-- +++++++++++++++++++++++++++++++++++++++ -->
-    <ul id="header-nav" class="{% if settings.theme-style == 'minimalist' %}drawn-borders{% endif %} {% if settings.invert-dropdown-arrows %}invert-arrows{% endif %} {% if settings.smaller-list-items %}smaller{% endif %} accent-text">
+    <ul id="header-nav" class="{% if settings.theme-style == 'minimalist' %}drawn-border-bottom{% endif %} {% if settings.invert-dropdown-arrows %}invert-arrows{% endif %} {% if settings.smaller-list-items %}smaller{% endif %} accent-text">
 
 			<li class="mobile-nav-item browse"><a><span>M</span>Browse</a></li>
 			<li class="mobile-nav-item cart"><a href="/cart"><span>c</span>Cart</a></li>
@@ -291,7 +274,6 @@
 
 				</div><!-- .nav-dropdown -->
 			{% endif %}
-
 
 			<!-- Mega dropdown -->
 			{% if child_linklist_handle == 'catalog' and settings.enable-mega-navigation %}
@@ -478,7 +460,27 @@
     {% if settings.copyright-text.size > 0 %}
     <h2 class="module-title accent-text">{{ settings.copyright-text }}</h2>
     {% endif %}
-    <p {% if settings.copyright-text.size == 0 %}class="no-title"{% endif %}>{{ powered_by_link }}. {% if settings.enable-theme-branding %}Editions Theme by <a href="/">Pixel Union</a>.{% endif %}</p>
+    
+    <!-- Account details -->
+
+    {% if shop.customer_accounts_enabled %}
+      {% if customer %}
+        <p>Logged in as <a href="/account">{{ customer.first_name }}</a>. {{ "Logout" | customer_logout_link }}.</p>
+      {% else %}
+        <p>
+          {{ "Login" | customer_login_link }}
+          {% if shop.customer_accounts_optional %}
+          / {{ 'Sign up' | customer_register_link }}
+          {% endif %}
+        </p>
+      {% endif %}
+      {% else %}
+    {% endif %}    
+    
+    <!--
+    <p {% if settings.copyright-text.size == 0 %}class="no-title"{% endif %}>{{ powered_by_link }}.
+      {% if settings.enable-theme-branding %}Editions Theme by <a href="/">Pixel Union</a>.{% endif %}</p>
+      -->
     </li>
 
 
