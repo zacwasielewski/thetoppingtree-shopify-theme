@@ -101,28 +101,9 @@
   <!-- ——————————————————————————————————————— -->
   <!-- ——————————————————————————————————————— -->
 
-  <!--
-  {{ 'jquery.min.1.7.1.js' | asset_url | script_tag }}
-  {{ 'modernizr-2.5.3.min.js' | asset_url | script_tag }}
-  -->
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" data-main="{{ 'main.js' | asset_url }}" src="{{ 'require.js' | asset_url }}"></script>
 
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' | script_tag }}
-  {{ '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js' | script_tag }}
-  {{ '//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js' | script_tag }}
-  {{ '//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js' | script_tag }}
-
-  <!-- Shopify Assets -->
-  <!-- ——————————————————————————————————————— -->
-  <!-- ——————————————————————————————————————— -->
-
-  {{ 'pixelOptionSelect.js' | asset_url | script_tag }}
-  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
-  {{ "/services/javascripts/currencies.js" | script_tag }}
-
-  {% if template contains 'customers' %}
-    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
-    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
-  {% endif %}
 
   <!-- Content for Header -->
   <!-- ——————————————————————————————————————— -->
@@ -589,35 +570,28 @@
 
   {% include 'quickShop' %}
   <script type="text/javascript" charset="utf-8">
-  {% include 'quickShopScript' %}
+    {% include 'quickShopScript' %}
   </script>
-
 
   <script type="text/javascript" charset="utf-8">
-
-  var shopCurrency = '{{ shop.currency }}';
-
+    var shopCurrency = '{{ shop.currency }}';
   </script>
 
-  {{ 'plugins.js' | asset_url | script_tag }}
-  {{ 'customSelect.js' | asset_url | script_tag }}
-  {{ 'script.js' | asset_url | script_tag }}
-
   <script>
-  var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
   </script>
 
   <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
 
   <script type="text/javascript">
-  (function() {
-  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-  po.src = 'https://apis.google.com/js/plusone.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
   </script>
 
 </body>

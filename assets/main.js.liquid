@@ -1,0 +1,51 @@
+require.config({
+  shim: {
+    'jquery_migrate': [ 'jquery' ],
+    'jquery_api': [ 'jquery' ],
+  },
+  paths: {
+    jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min',
+    jquery_ui: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min',
+    modernizr: '//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min',
+    jquery_migrate: '//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min',
+
+    pixelOptionSelect: '{{ 'pixelOptionSelect.js' | asset_url }}',
+    jquery_api: '{{ 'api.jquery.js' | shopify_asset_url }}',
+    currencies: '/services/javascripts/currencies',
+
+    shopify_common: '{{ "shopify_common.js" | shopify_asset_url }}',
+    customer_area:  '{{ "customer_area.js" | shopify_asset_url }}',
+
+    plugins: '{{ 'plugins.js' | asset_url }}',
+    customSelect: '{{ 'customSelect.js' | asset_url }}',
+    script: '{{ 'script.js' | asset_url }}',
+    
+    bow_builder: '{{ 'bow-builder.js' | asset_url }}',
+
+  },
+});
+
+var scripts = [
+  'jquery',
+  'jquery_ui',
+  'modernizr',
+  'jquery_migrate',
+
+  'pixelOptionSelect',
+  'jquery_api',
+  'currencies',
+
+  'shopify_common',
+  'customer_area',
+
+  'plugins',
+  'customSelect',
+  'script',
+  
+  'bow_builder',
+];
+
+define(function(require) {
+  require(scripts,function(){
+  });
+});

@@ -1,6 +1,4 @@
 {% unless template contains 'search' %}<li class="product-list-item {{ product.tags | join(' ') }}" data-product_id="{{ product.id }}" data-variant_id="{{ variant.id }}" data-collection="{{ collection.handle }}">{% endunless %}
-    
-<div class="product-wrap">
 
   <!-- 
   We have to re-assign this variable depending on the 
@@ -43,7 +41,6 @@
     {% endif %}
       
   </div>
-  
   <div class="product-info" id="product-info-{{ itemType.id }}">
   
     <!-- Product title -->
@@ -65,6 +62,5 @@
   
   </div><!-- .product-info -->
 
-</div>
+{% unless template contains 'search' %}<!--</li> Omitting the closing tag removes pesky whitespace between inline-block elements -->{% endunless %}
 
-{% unless template contains 'search' %}</li>{% endunless %}

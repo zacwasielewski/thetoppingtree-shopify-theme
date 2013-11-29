@@ -1,17 +1,31 @@
-/*
-if (typeof jQuery === 'undefined') {
-    document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>');
-	document.write('<script type="text/javascript">jQuery.noConflict();<\/script>');
-}
-if (typeof jQuery.ui === 'undefined') {
-    document.write('<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>');
-}
-*/
+require.config({
+  paths: {
+    jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+    //isotope:    '{{ 'jquery.isotope.min.js' | asset_url }}',
+    //handlebars: '{{ 'handlebars.js' | asset_url }}',
+    fancybox:   '{{ 'jquery.fancybox.pack.js' | asset_url }}',
+    fuelux:     '{{ 'fuelux.min.js' | asset_url }}',
+  },
+});
+
+var scripts = [
+  'jquery','fuelux/wizard','fancybox'
+];
+
+define(function(require) {
+  require(scripts,function(){
+    BowBuilder.init();
+  });
+});
 
 var BowBuilder = {
 
   config: {
-    sections: ['large-bows','small-bows','toppings']
+    sections: [
+      'bowbuilder-base-bow',
+      'bowbuilder-small-bow',
+      'bowbuilder-topping',
+    ]
   },
   
   global: {
@@ -31,19 +45,50 @@ var BowBuilder = {
   
   load: function () {
     
-    this.global.$container = $('#bow-builder');
+    this.global.$container = $('.bow-builder');
+    if (this.global.$container.size()==0) return;
+    
     this.global.$form      = this.global.$container.find('form');
     this.global.$sections  = this.global.$container.find('li[data-section]');
-    this.global.$preview   = $('.bow-builder-preview');
+    //this.global.$preview   = $('.bow-builder-preview');
+    this.global.wizard     = this.global.$container.find('.bow-builder-wizard').wizard().data('wizard');
+    
+    //this.global.wizard.next();
     
     $.each(this.config.sections,$.proxy(function(n,section){
-      this.init_section(section);
-      this.init_product_info(section);
+      $section = $('#'+section);
+      //this.init_section(section);
+      //this.init_product_info(section);
+      console.log(section);
+      this.init_bow_details($section);
     },this));
 
-    this.activate_form();
+    //this.activate_form();
     this.humanize_group_input();
     
+  },
+  
+  init_bow_details: function ($section) {
+		
+		var $list = $section.find('ul.product-list'),
+			  $products = $list.find('li');
+		
+		console.log($list);
+		console.log($products);
+		console.log($products.find('.product-image-wrap a'));
+		
+		
+		
+		$products.find('.product-image-wrap a').fancybox({
+			title: 'Title',
+			content: 'Content',
+			autoSize: false,
+			width: 910,
+			height: 455,
+			//beforeLoad: this.showBowDetail,
+			//afterShow: $.proxy(function () { this.activateBowDetail() }, this)
+		});
+		
   },
   
   activate_form: function () {
@@ -510,5 +555,3 @@ var BowBuilder2 = {
 	
 };
 */
-
-BowBuilder.init();

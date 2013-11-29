@@ -1,74 +1,71 @@
-/*
-#bowbuilder select,
-#bowbuilder button.back-button,
-#bowbuilder button.next-button {
-	display: none !important;
+#page-content {
+  
 }
-
-#bowbuilder ul.product-list li.product-list-item {
-}
-
-#bowbuilder ul.product-list li.product-list-item.selected {
-    border: 1px solid red;
-}
-
-
-#bowbuilder ul.product-list li.product-list-item .product-wrap {
-}
-
-#bowbuilder ul.product-list li.product-list-item .product-image-wrap {
-}
-
-#bowbuilder ul.product-list li.product-list-item .product-image-wrap img {
-}
-
-#bowbuilder ul.product-list li.product-list-item .product-info {
-	display: none;
-	xbackground-color: #ccc;
-}
-
-#bowbuilder ul.product-list li.product-list-item.detail {
-	width: 920px;
-}
-
-#bowbuilder ul.product-list li.product-list-item.detail .product-wrap {
-    width: 940px;
-}
-
-#bowbuilder ul.product-list li.product-list-item.detail .product-image-wrap img {
-	float: left;
-	width: 445px;
-	margin-right: 20px;
-}
-
-#bowbuilder ul.product-list li.product-list-item.detail .product-info {
-	display: block;
-}
-
-.fancybox-overlay img.product-detail-image {
-	float: left;
-}
-
-.fancybox-skin {
-	background-color: #fff;
-}
-*/
-
-
 
 #bow-builder {
-  border: 1px solid {{ settings.primary-border-colour }};
-  overflow: auto;
-  padding: 20px 0;
-  margin: 1.875em 0 3.250em;
-  background-color: #fff;
 }
 
-.bow-builder-steps {
-  display: block;
-  float: left;
-  margin-left: 19px;
-  text-align: left;
+.bow-builder-progress {
+  margin: 50px 0;
+}
+.bow-builder-progress li {
+  display: inline-block;
+  font-weight: 300;
+  line-height: 48px;
+  color: #dedede;
+}
+
+.bow-builder-progress li:before {
+  font-family: 'Lunchbox Ornaments';
+  content: 'v';
+  margin: 0 .5em;
+  font-size: 36px;
+  height: 24px;
+  color: #dedede;
+  position: relative;
+  top: 6px;
+}
+.bow-builder-progress li:first-child:before {
+  content: none;
+}
+
+.bow-builder-progress li .step-order {
+  background-color: {{ settings.text-colour }};
+  color: #fff;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 20px;
+  margin-right: .25em;
+}
+
+.bow-builder-progress li,
+.bow-builder-progress li a {
+  color: {{ settings.text-colour }};
+}
+.bow-builder-progress li .step-order {
+  background-color: {{ settings.text-colour }};
+}
+
+.bow-builder-progress li.active,
+.bow-builder-progress li.active a {
+  color: {{ settings.link-hover-colour }};
+}
+.bow-builder-progress li.active .step-order {
+  background-color: {{ settings.link-hover-colour }};
+}
+
+.bow-builder-progress li.complete,
+.bow-builder-progress li.complete a {
+  color: {{ settings.link-colour }};
+}
+.bow-builder-progress li.complete .step-order {
+  background-color: {{ settings.link-colour }};
+}
+
+.bow-builder-steps .step h2 {
+  text-align: center;
 }
 
 .bow-builder-steps ol {
@@ -85,18 +82,16 @@
   margin-left: 10px;
 }
 
+.bow-builder .step-content .step-pane {
+  display: none;
+}
+.bow-builder .step-content .step-pane.active {
+  display: block;
+}
+
+
+
 .step-order{
-  /*
-  display: inline-block;
-  text-align: center;
-  line-height: 36px;
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
-  background-color: #fff;
-  border-radius: 20px;
-  border: 1px solid #e2e2e2;
-  */
 }
 
 .bow-builder-preview {
@@ -125,22 +120,32 @@
   margin: 1em 0;
 }
 
-#bow-builder .product-list-item {
-  
+.bow-builder-products .product-list .product-list-item.selected {
+  border-color: #666;
 }
 
-#bow-builder .product-list-item.selected {
-  background-color: #eee;
-}
-
-
-#bow-builder .product-info {
+.bow-builder-products .product-list .product-list-item .product-info {
   display: none;
 }
 
 .bow-builder-product-select {
   display: none;
 }
+
+.product-image-wrap {
+  border: none;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  display: table-cell;
+  vertical-align: middle;
+  overflow: hidden;
+  box-shadow: 1px 1px 3px 1px #eee;
+}
+.product-image-wrap img {
+  vertical-align: middle;
+}
+
 
 /* Fancybox detail overlay
 ------------------------------------------------*/
@@ -207,68 +212,6 @@
   color: {{ settings.secondary-accent-colour }};
   -webkit-font-smoothing: antialiased; }
 
-/* fsa */
-.neuton .filter-by-tag p {
-  font-size: 0.875em;
-  font-weight: 300; }
-
-
-/* Wizard steps
-------------------------------------------------*/
-
-/*
-.step-progress {
-    padding: 20px 0 10px 0;
-    line-height: 40px;
-    margin: 0 0 40px 0;
-    border: 1px solid #d2d2d2;
-    border-radius: 5px;
-}
-
-.step-progress p {
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-}
-
-.step-progress p {
-  font-style: italic;
-  font-size: 0.750em;
-  margin: 0 12px 0 0;
-  color: {{ settings.secondary-accent-colour }};
-  -webkit-font-smoothing: antialiased; }
-
-.step-title {
-    text-align: center;
-    display: inline-block;
-    padding: 0 1em;
-    font-size: 0.813em;
-    color: rgb(210,210,210);
-}
-
-.step-order{
-    margin: 0 auto;
-    display: block;
-    height: 40px;
-    width: 40px;
-    background-color: #fff;
-    border-radius: 20px;
-    border: 1px solid #e2e2e2;
-}
-
-.step-title.step-visited.step-active {
-    color: #333;
-    color: {{ settings.accent-colour }};
-}
-.step-title.step-visited.step-active .step-order{
-    color: {{ settings.accent-colour }};
-}
-
-.step-title.step-visited {
-    color: #666;
-}
-*/
-
 
 /**** Isotope filtering ****/
 
@@ -320,4 +263,5 @@
        -o-transition-duration: 0s;
           transition-duration: 0s;
 }
+
 
