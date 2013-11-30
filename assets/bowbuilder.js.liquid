@@ -136,7 +136,7 @@ var BowBuilder = {
 
 	selectBow: function (el,step,id) {
 		
-		var $select = this.global.$container.find('select[data-section="'+step+'"]'),
+		var $select = this.global.$container.find('select[data-bowbuilder-component="'+step+'"]'),
         $button = $(el),
         $item   = $('li[data-variant_id='+id+']'),
         $step   = $('#'+step);
