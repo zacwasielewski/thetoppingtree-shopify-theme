@@ -16,11 +16,11 @@
     </section>
   {% endif %}
   
-  <div class="bow-builder">
+  <div class="bowbuilder">
   
-    <div class="bow-builder-wizard">
+    <div class="bowbuilder-wizard">
   
-      <ol class="steps bow-builder-progress">
+      <ol class="steps bowbuilder-progress">
         <li data-target="#bowbuilder-base-bow" class="active">
           <span class="step-order">1</span>
           <span class="step-name accent-text">Base Bow</span></a>
@@ -51,9 +51,9 @@
         {% assign step_num  = '1' %}
         {% assign step_name = 'Base Bow' %}
         {% assign tag  = 'bowbuilder-base-bow' %}
-        <div class="step-pane active" id="{{ tag }}">
+        <div class="bowbuilder-step step-pane active" id="{{ tag }}">
           <h2>Step {{ step_num }}: Choose your {{ step_name }}</h2>
-          <div class="bow-builder-products">
+          <div class="bowbuilder-products">
             <ul class="product-list clearfix">
               {% for product in collections.all.products %}
                 {% if product.tags contains tag %}
@@ -63,7 +63,7 @@
                 {% endif %}
               {% endfor %}
             </ul>
-            <select name="id[]" class="bow-builder-product-select" data-section="{{ tag }}">
+            <select name="id[]" class="bowbuilder-product-select" data-bowbuilder-component="{{ tag }}">
               <option value=""></option>
               {% for product in collections.all.products %}
                 {% if product.tags contains tag %}
@@ -82,9 +82,9 @@
         {% assign step_num  = '2' %}
         {% assign step_name = 'Small Bow' %}
         {% assign tag  = 'bowbuilder-small-bow' %}
-        <div class="step-pane" id="{{ tag }}">
+        <div class="bowbuilder-step step-pane" id="{{ tag }}">
           <h2>Step {{ step_num }}: Choose your {{ step_name }}</h2>
-          <div class="bow-builder-products">
+          <div class="bowbuilder-products">
             <ul class="product-list clearfix">
               {% for product in collections.all.products %}
                 {% if product.tags contains tag %}
@@ -94,7 +94,7 @@
                 {% endif %}
               {% endfor %}
             </ul>
-            <select name="id[]" class="bow-builder-product-select" data-section="{{ tag }}">
+            <select name="id[]" class="bowbuilder-product-select" data-bowbuilder-component="{{ tag }}">
               <option value=""></option>
               {% for product in collections.all.products %}
                 {% if product.tags contains tag %}
@@ -113,9 +113,9 @@
         {% assign step_num  = '3' %}
         {% assign step_name = 'Topping' %}
         {% assign tag  = 'bowbuilder-topping' %}
-        <div class="step-pane" id="{{ tag }}">
+        <div class="bowbuilder-step step-pane" id="{{ tag }}">
           <h2>Step {{ step_num }}: Choose your {{ step_name }}</h2>
-          <div class="bow-builder-products">
+          <div class="bowbuilder-products">
             <ul class="product-list clearfix">
               {% for product in collections.all.products %}
                 {% if product.tags contains tag %}
@@ -125,7 +125,7 @@
                 {% endif %}
               {% endfor %}
             </ul>
-            <select name="id[]" class="bow-builder-product-select" data-section="{{ tag }}">
+            <select name="id[]" class="bowbuilder-product-select" data-bowbuilder-component="{{ tag }}">
               <option value=""></option>
               {% for product in collections.all.products %}
                 {% if product.tags contains tag %}
@@ -160,15 +160,15 @@
   <script id="product-detail-template" type="text/x-handlebars-template">
     {% raw %}
       <div class="fancybox">
-        <meta name="step" value="{{size}}">
+        <meta name="step" value="{{step}}">
         <meta name="id" value="{{id}}">
-        <div class="product-detail">
-          <img class="product-detail-image" src="{{image}}">
-          <h1 class="product-detail-title">{{title}}</h1>
-          <p class="product-detail-price">{{price}}</p>
-          <div class="product-detail-description">{{{description}}}</div>
+        <div class="bowbuilder-product-detail">
+          <img class="bowbuilder-product-detail-image" src="{{image}}">
+          <h2 class="bowbuilder-product-detail-title">{{title}}</h2>
+          <p class="bowbuilder-product-detail-price">{{price}}</p>
+          <div class="bowbuilder-product-detail-description">{{{description}}}</div>
           <div>
-            <button class="product-detail-select-btn action-btn accent-text">Select This Bow</button>
+            <button class="bowbuilder-product-detail-select-btn action-btn accent-text">Select This Bow</button>
           </div>
         </div>
       </div>

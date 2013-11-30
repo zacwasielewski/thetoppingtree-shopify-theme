@@ -1,15 +1,15 @@
 require.config({
   paths: {
-    jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+    jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
     //isotope:    '{{ 'jquery.isotope.min.js' | asset_url }}',
-    //handlebars: '{{ 'handlebars.js' | asset_url }}',
+    handlebars: '{{ 'handlebars.js' | asset_url }}',
     fancybox:   '{{ 'jquery.fancybox.pack.js' | asset_url }}',
     fuelux:     '{{ 'fuelux.min.js' | asset_url }}',
   },
 });
 
 var scripts = [
-  'jquery','fuelux/wizard','fancybox'
+  'jquery','fuelux/wizard','handlebars','fancybox'
 ];
 
 define(function(require) {
@@ -45,13 +45,13 @@ var BowBuilder = {
   
   load: function () {
     
-    this.global.$container = $('.bow-builder');
+    this.global.$container = $('.bowbuilder');
     if (this.global.$container.size()==0) return;
     
     this.global.$form      = this.global.$container.find('form');
-    this.global.$sections  = this.global.$container.find('li[data-section]');
-    //this.global.$preview   = $('.bow-builder-preview');
-    this.global.wizard     = this.global.$container.find('.bow-builder-wizard').wizard().data('wizard');
+    //this.global.$sections  = this.global.$container.find('.bowbuilder-step');
+    //this.global.$preview   = $('.bowbuilder-preview');
+    this.global.wizard     = this.global.$container.find('.bowbuilder-wizard').wizard().data('wizard');
     
     //this.global.wizard.next();
     
@@ -59,12 +59,11 @@ var BowBuilder = {
       $section = $('#'+section);
       //this.init_section(section);
       //this.init_product_info(section);
-      console.log(section);
       this.init_bow_details($section);
     },this));
 
     //this.activate_form();
-    this.humanize_group_input();
+    //this.humanize_group_input();
     
   },
   
@@ -73,24 +72,87 @@ var BowBuilder = {
 		var $list = $section.find('ul.product-list'),
 			  $products = $list.find('li');
 		
-		console.log($list);
-		console.log($products);
-		console.log($products.find('.product-image-wrap a'));
-		
-		
-		
 		$products.find('.product-image-wrap a').fancybox({
 			title: 'Title',
 			content: 'Content',
 			autoSize: false,
 			width: 910,
-			height: 455,
-			//beforeLoad: this.showBowDetail,
-			//afterShow: $.proxy(function () { this.activateBowDetail() }, this)
+			height: 425,
+			beforeLoad: this.showBowDetail,
+			afterShow: $.proxy(function () { this.activateBowDetail() }, this)
 		});
 		
   },
-  
+
+	showBowDetail: function () {
+				
+		var $a = $(this.element),
+			$li = $a.closest('li.product-list-item'),
+			$list = $li.closest('ul.product-list'),
+			$img_link = $li.find('.product-image-wrap a'),
+			$img = $img_link.find('img'),
+			$info = $li.find('.product-info'),
+			tags = $li.attr('data-tags'),
+			step,
+			detailClass;
+		
+		$.each(tags.split(" "),function(index,tag){
+		  if (tag.indexOf("bowbuilder-") !== -1) {
+		    step = tag;
+		  }
+		});
+		
+		var source = $("#product-detail-template").html(),
+			template = Handlebars.compile(source),
+			data = {
+				id:    $li.attr('data-variant_id'),
+				step:  step,
+				image: $img.attr('src'),
+				title: $info.find('h1').text(),
+				price: $info.find('.price').text(),
+				description: $info.find('.description').html(),
+			},
+			html = template(data);
+		
+		this.title = $info.find('h1').text();
+		this.content = html;
+		
+	},
+
+	activateBowDetail: function () {
+		
+		var $overlay = $('.fancybox-inner');
+		
+		$overlay.find('button').click($.proxy(function(e){
+			
+			var step = $overlay.find('meta[name=step]').attr('value'),
+				  id   = $overlay.find('meta[name=id]').attr('value');
+			
+			this.selectBow(e.currentTarget,step,id);
+			
+		},this));
+
+	},
+
+	selectBow: function (el,step,id) {
+		
+		var $select = this.global.$container.find('select[data-section="'+step+'"]'),
+        $button = $(el),
+        $item   = $('li[data-variant_id='+id+']'),
+        $step   = $('#'+step);
+		
+		$select.val(String(id));
+    
+		$step.find('li').removeClass('selected');
+		$item.addClass('selected');
+		
+		$.fancybox.close();
+		
+    this.global.wizard.next();
+		
+	},
+	
+  /*
   activate_form: function () {
     
     var that = this;
@@ -349,7 +411,7 @@ var BowBuilder = {
   
   preload_preview_image: function (product) {
     
-    var src = $(product).find('.product-image-wrap img').data('bow-builder-img-src');
+    var src = $(product).find('.product-image-wrap img').data('bowbuilder-img-src');
     if (src) {
       $('<img/>')[0].src = src;
     }
@@ -362,7 +424,7 @@ var BowBuilder = {
     
     this.global.$sections.each($.proxy(function(n,section){
       
-      var src = $(section).find('li.product-list-item.selected .product-image-wrap img').data('bow-builder-img-src');
+      var src = $(section).find('li.product-list-item.selected .product-image-wrap img').data('bowbuilder-img-src');
       if (src) {
         var img = '<img src="'+src+'">';
         this.global.$preview.append(img);
@@ -385,7 +447,8 @@ var BowBuilder = {
       ? this.global.$sections.filter('[data-section='+section+']')
       : this.global.$sections;
   }
-
+  */
+  
 };
 
 /*

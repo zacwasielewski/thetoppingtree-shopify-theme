@@ -1,21 +1,17 @@
-#page-content {
-  
-}
+/* Bow Builder progress meter
+------------------------------------------------*/
 
-#bow-builder {
-}
-
-.bow-builder-progress {
+.bowbuilder-progress {
   margin: 50px 0;
 }
-.bow-builder-progress li {
+.bowbuilder-progress li {
   display: inline-block;
   font-weight: 300;
   line-height: 48px;
   color: #dedede;
 }
 
-.bow-builder-progress li:before {
+.bowbuilder-progress li:before {
   font-family: 'Lunchbox Ornaments';
   content: 'v';
   margin: 0 .5em;
@@ -25,11 +21,11 @@
   position: relative;
   top: 6px;
 }
-.bow-builder-progress li:first-child:before {
+.bowbuilder-progress li:first-child:before {
   content: none;
 }
 
-.bow-builder-progress li .step-order {
+.bowbuilder-progress li .step-order {
   background-color: {{ settings.text-colour }};
   color: #fff;
   display: inline-block;
@@ -40,61 +36,113 @@
   margin-right: .25em;
 }
 
-.bow-builder-progress li,
-.bow-builder-progress li a {
+.bowbuilder-progress li,
+.bowbuilder-progress li a {
   color: {{ settings.text-colour }};
 }
-.bow-builder-progress li .step-order {
+.bowbuilder-progress li .step-order {
   background-color: {{ settings.text-colour }};
 }
 
-.bow-builder-progress li.active,
-.bow-builder-progress li.active a {
+.bowbuilder-progress li.active,
+.bowbuilder-progress li.active a {
   color: {{ settings.link-hover-colour }};
 }
-.bow-builder-progress li.active .step-order {
+.bowbuilder-progress li.active .step-order {
   background-color: {{ settings.link-hover-colour }};
 }
 
-.bow-builder-progress li.complete,
-.bow-builder-progress li.complete a {
+.bowbuilder-progress li.complete,
+.bowbuilder-progress li.complete a {
   color: {{ settings.link-colour }};
 }
-.bow-builder-progress li.complete .step-order {
+.bowbuilder-progress li.complete .step-order {
   background-color: {{ settings.link-colour }};
 }
 
-.bow-builder-steps .step h2 {
+
+/* Bow Builder content
+------------------------------------------------*/
+
+.bowbuilder-steps .step h2 {
   text-align: center;
 }
 
-.bow-builder-steps ol {
-  margin: 0;
-  padding: 0;
-}
-
-.bow-builder-steps ol li {
-  margin: 0;
-  padding: 10px;
-}
-
-.bow-builder-steps button {
-  margin-left: 10px;
-}
-
-.bow-builder .step-content .step-pane {
+.bowbuilder .step-content .step-pane {
   display: none;
 }
-.bow-builder .step-content .step-pane.active {
+.bowbuilder .step-content .step-pane.active {
   display: block;
 }
 
-
-
-.step-order{
+.bowbuilder-products .product-list .product-list-item {
+  margin: 0 0 20px 20px;
+  width: 198px;
+  border: 1px solid #eee;
+  background-color: #fff;
 }
 
-.bow-builder-preview {
+.bowbuilder-products .product-list .product-list-item:hover {
+  border-color: #ccc;
+}
+
+.bowbuilder-products .product-list .product-list-item.selected {
+  border-color: {{ settings.link-colour }};
+}
+
+.bowbuilder-products .product-list .product-list-item .product-info {
+  display: none;
+}
+
+.product-image-wrap {
+  border: none;
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: table-cell;
+  vertical-align: middle;
+  /*
+  border: none;
+  xborder-radius: 100px;
+  box-shadow: 1px 1px 2px 1px #ddd;
+  xbackground-color: transparent;
+  */
+}
+.product-image-wrap img {
+  vertical-align: middle;
+}
+
+
+/* Hidden elements
+------------------------------------------------*/
+
+.bowbuilder-product-select {
+  display: none;
+}
+
+
+
+/* Bow Builder product overlay
+------------------------------------------------*/
+
+.fancybox-skin {
+	background-color: #fff;
+}
+
+.bowbuilder-product-detail {
+  padding-left: 425px;
+  margin: 30px;
+}
+
+.bowbuilder-product-detail img {
+	float: left;
+	margin: 20px 0 20px -455px;
+	width: 455px;
+}
+
+/*
+.bowbuilder-preview {
   display: block;
   float: right;
   width: 440px;
@@ -107,7 +155,7 @@
   position: relative;
 }
 
-.bow-builder-preview img {
+.bowbuilder-preview img {
   background-color: transparent;
   width: 440px;
   height: 440px;
@@ -115,54 +163,11 @@
   top: 0;
   left: 0;
 }
-
-#bow-builder .product-list {
-  margin: 1em 0;
-}
-
-.bow-builder-products .product-list .product-list-item.selected {
-  border-color: #666;
-}
-
-.bow-builder-products .product-list .product-list-item .product-info {
-  display: none;
-}
-
-.bow-builder-product-select {
-  display: none;
-}
-
-.product-image-wrap {
-  border: none;
-  width: 200px;
-  height: 200px;
-  border-radius: 100px;
-  display: table-cell;
-  vertical-align: middle;
-  overflow: hidden;
-  box-shadow: 1px 1px 3px 1px #eee;
-}
-.product-image-wrap img {
-  vertical-align: middle;
-}
-
-
-/* Fancybox detail overlay
-------------------------------------------------*/
-
-.fancybox img.product-detail-image {
-	float: left;
-	width: 440px;
-}
-
-.fancybox-skin {
-	background-color: #fff;
-}
-
+*/
 
 /* Flat button
 ------------------------------------------------*/
-
+/*
 .flat-btn {
   display: inline-block;
   zoom: 1;
@@ -191,7 +196,7 @@
 
 .flat-btn.visible {
   background-color: #333333; }
-
+*/
 
 /* Filter by tag
 ------------------------------------------------*/

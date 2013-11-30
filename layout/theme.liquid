@@ -90,9 +90,9 @@
     {{ 'customer.css' | asset_url | stylesheet_tag }}
   {% endif %}
 
-  {% if template == 'page.bow-builder' %}
+  {% if template == 'page.bowbuilder' %}
     {{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
-    {{ 'bow-builder.css' | asset_url | stylesheet_tag }}
+    {{ 'bowbuilder.css' | asset_url | stylesheet_tag }}
   {% endif %}
 
   {{ 'ss-standard.css' | asset_url | stylesheet_tag }}
@@ -101,7 +101,7 @@
   <!-- ——————————————————————————————————————— -->
   <!-- ——————————————————————————————————————— -->
 
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" data-main="{{ 'main.js' | asset_url }}" src="{{ 'require.js' | asset_url }}"></script>
 
 

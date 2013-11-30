@@ -1,4 +1,4 @@
-{% unless template contains 'search' %}<li class="product-list-item {{ product.tags | join(' ') }}" data-product_id="{{ product.id }}" data-variant_id="{{ variant.id }}" data-collection="{{ collection.handle }}">{% endunless %}
+{% unless template contains 'search' %}<li class="product-list-item {{ product.tags | join(' ') }}" data-product_id="{{ product.id }}" data-variant_id="{{ variant.id }}" data-collection="{{ collection.handle }}" data-tags="{{ product.tags | join(' ') }}">{% endunless %}
 
   <!-- 
   We have to re-assign this variable depending on the 
