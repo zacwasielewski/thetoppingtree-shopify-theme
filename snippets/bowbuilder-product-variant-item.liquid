@@ -27,7 +27,7 @@
     <img
       src="{{ itemType.featured_image | product_img_url: 'large' }}"
       alt="{{ itemType.featured_image.alt }}"
-      data-bow-builder-img-src="{% if bow_builder_image %}{{ bow_builder_image | product_img_url: 'large' }}{% endif %}"
+      data-builder-img-src="{% if bow_builder_image %}{{ bow_builder_image | product_img_url: 'large' }}{% endif %}"
     >
     {% unless settings.display-product-overlay %}</a>{% endunless %}
     

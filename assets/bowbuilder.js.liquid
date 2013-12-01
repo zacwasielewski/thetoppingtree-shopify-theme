@@ -14,14 +14,14 @@ var scripts = [
 
 define(function(require) {
   require(scripts,function(){
-    BowBuilder.init();
+    ProductBuilder.init();
   });
 });
 
-var BowBuilder = {
+var ProductBuilder = {
 
   config: {
-    sections: [
+    components: [
       'bowbuilder-base-bow',
       'bowbuilder-small-bow',
       'bowbuilder-topping',
@@ -31,7 +31,7 @@ var BowBuilder = {
   global: {
     $container: null,
     $form: null,
-    $sections: null,
+    $components: null,
     $preview: null
   },
   
@@ -47,27 +47,21 @@ var BowBuilder = {
     
     this.global.$container = $('.bowbuilder');
     if (this.global.$container.size()==0) return;
-    
-    this.global.$form      = this.global.$container.find('form');
-    //this.global.$sections  = this.global.$container.find('.bowbuilder-step');
-    //this.global.$preview   = $('.bowbuilder-preview');
-    this.global.wizard     = this.global.$container.find('.bowbuilder-wizard').wizard().data('wizard');
+    this.global.$form  = this.global.$container.find('form');
+    this.global.wizard = this.global.$container.find('.bowbuilder-wizard').wizard().data('wizard');
     
     //this.global.wizard.next();
     
-    $.each(this.config.sections,$.proxy(function(n,section){
+    $.each(this.config.components,$.proxy(function(n,section){
       $section = $('#'+section);
-      //this.init_section(section);
-      //this.init_product_info(section);
-      this.init_bow_details($section);
+      this.initComponentDetails($section);
     },this));
 
-    //this.activate_form();
-    //this.humanize_group_input();
+    this.humanizeGroupInput();
     
   },
   
-  init_bow_details: function ($section) {
+  initComponentDetails: function ($section) {
 		
 		var $list = $section.find('ul.product-list'),
 			  $products = $list.find('li');
@@ -78,13 +72,13 @@ var BowBuilder = {
 			autoSize: false,
 			width: 910,
 			height: 425,
-			beforeLoad: this.showBowDetail,
-			afterShow: $.proxy(function () { this.activateBowDetail() }, this)
+			beforeLoad: this.showComponentDetail,
+			afterShow: $.proxy(function () { this.activateComponentDetail() }, this)
 		});
 		
   },
 
-	showBowDetail: function () {
+	showComponentDetail: function () {
 				
 		var $a = $(this.element),
 			$li = $a.closest('li.product-list-item'),
@@ -92,7 +86,7 @@ var BowBuilder = {
 			$img_link = $li.find('.product-image-wrap a'),
 			$img = $img_link.find('img'),
 			$info = $li.find('.product-info'),
-			tags = $li.attr('data-tags'),
+			tags = $li.data('tags'),
 			step,
 			detailClass;
 		
@@ -105,7 +99,7 @@ var BowBuilder = {
 		var source = $("#product-detail-template").html(),
 			template = Handlebars.compile(source),
 			data = {
-				id:    $li.attr('data-variant_id'),
+				id:    $li.data('variant_id'),
 				step:  step,
 				image: $img.attr('src'),
 				title: $info.find('h1').text(),
@@ -119,7 +113,7 @@ var BowBuilder = {
 		
 	},
 
-	activateBowDetail: function () {
+	activateComponentDetail: function () {
 		
 		var $overlay = $('.fancybox-inner');
 		
@@ -148,9 +142,81 @@ var BowBuilder = {
 		
 		$.fancybox.close();
 		
+		this.updatePreview();
+		
     this.global.wizard.next();
 		
 	},
+  
+  /*
+  preloadPreviewImage: function (product) {
+    
+    var src = $(product).find('.product-image-wrap img').data('bowbuilder-img-src');
+    if (src) {
+      $('<img/>')[0].src = src;
+    }
+    
+  },
+  
+  updatePreviewImage: function () {
+    
+    this.global.$preview.empty();
+    
+    this.global.$components.each($.proxy(function(n,section){
+      
+      var src = $(section).find('li.product-list-item.selected .product-image-wrap img').data('bowbuilder-img-src');
+      if (src) {
+        var img = '<img src="'+src+'">';
+        this.global.$preview.append(img);
+      }
+    
+    },this));
+    
+  },
+  */
+  
+  updatePreview: function () {
+    
+    var images = [],
+        variants = [],
+        source,
+        template,
+        data;
+    
+    $.each(this.config.components,$.proxy(function(n,section){
+      var $section = $('#'+section),
+          $selected = $section.find('li.product-list-item.selected');
+      images.push({
+        src: $selected.find('.product-image-wrap img').data('builder-img-src') || $selected.find('.product-image-wrap img').attr('src')
+      });
+      variants.push({
+        name: $selected.find('.product-info h1').text(),
+        price: $selected.find('.product-info .price').text()
+      });
+    },this));
+    
+    console.log(images);
+    console.log(variants);
+
+		source = $("#builder-preview-template").html(),
+		template = Handlebars.compile(source),
+		data = {
+      images: images,
+      variants: variants
+    };
+
+    console.log( $('#builder-preview') );
+    $('#builder-preview').html(template(data));
+    
+  },
+
+  humanizeGroupInput: function () {
+    
+    var $input = this.global.$container.find('input[name="properties[bowbuilder-group]"]'),
+        id = Math.random().toString(36).substr(2,5);
+    $input.val(id);
+    
+  },
 	
   /*
   activate_form: function () {
@@ -528,13 +594,13 @@ var BowBuilder2 = {
 			autoSize: false,
 			width: 910,
 			height: 455,
-			beforeLoad: this.showBowDetail,
-			afterShow: $.proxy(function () { this.activateBowDetail() }, this)
+			beforeLoad: this.showComponentDetail,
+			afterShow: $.proxy(function () { this.activateComponentDetail() }, this)
 		});
 		
 	},
 	
-	showBowDetail: function () {
+	showComponentDetail: function () {
 		
 		var $a = $(this.element),
 			$li = $a.closest('li.product-list-item'),
@@ -560,7 +626,7 @@ var BowBuilder2 = {
 		
 	},
 	
-	activateBowDetail: function () {
+	activateComponentDetail: function () {
 		
 		var $overlay = $('.fancybox-inner');
 		

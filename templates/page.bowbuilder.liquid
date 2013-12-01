@@ -51,7 +51,7 @@
         {% assign step_num  = '1' %}
         {% assign step_name = 'Base Bow' %}
         {% assign tag  = 'bowbuilder-base-bow' %}
-        <div class="bowbuilder-step step-pane active" id="{{ tag }}">
+        <div class="bowbuilder-component step-pane active" id="{{ tag }}">
           <h2>Step {{ step_num }}: Choose your {{ step_name }}</h2>
           <div class="bowbuilder-products">
             <ul class="product-list clearfix">
@@ -82,7 +82,7 @@
         {% assign step_num  = '2' %}
         {% assign step_name = 'Small Bow' %}
         {% assign tag  = 'bowbuilder-small-bow' %}
-        <div class="bowbuilder-step step-pane" id="{{ tag }}">
+        <div class="bowbuilder-component step-pane" id="{{ tag }}">
           <h2>Step {{ step_num }}: Choose your {{ step_name }}</h2>
           <div class="bowbuilder-products">
             <ul class="product-list clearfix">
@@ -113,7 +113,7 @@
         {% assign step_num  = '3' %}
         {% assign step_name = 'Topping' %}
         {% assign tag  = 'bowbuilder-topping' %}
-        <div class="bowbuilder-step step-pane" id="{{ tag }}">
+        <div class="bowbuilder-component step-pane" id="{{ tag }}">
           <h2>Step {{ step_num }}: Choose your {{ step_name }}</h2>
           <div class="bowbuilder-products">
             <ul class="product-list clearfix">
@@ -145,9 +145,27 @@
         {% assign step_name = 'Finish' %}
         {% assign tag  = 'bowbuilder-finish' %}
         <div class="step-pane" id="{{ tag }}">
-          <!--
-          <label>Quantity:</label> <input type="text" name="quantity" size="1" value="1">
-          -->
+        
+          <script id="builder-preview-template" type="text/x-handlebars-template">
+            {% raw %}
+              
+              <div id="builder-preview-image">
+                {{#each images}}
+                  <img src="{{src}}">
+                {{/each}}
+              </div>
+              
+              <ul id="builder-preview-details">
+                {{#each variants}}
+                  <li>{{name}} - {{price}}</li>
+                {{/each}}
+              </ul>
+              
+            {% endraw %}
+          </script>
+          <div id="builder-preview"></div>
+
+          <!--<label>Quantity:</label> <input type="text" name="quantity" size="1" value="1">-->
           <input type="hidden" name="quantity" value="1">
           <button class="action-btn accent-text submit-button btn">Add to Cart</button>
         </div>
