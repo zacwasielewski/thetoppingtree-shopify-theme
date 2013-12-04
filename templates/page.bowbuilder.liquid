@@ -149,25 +149,28 @@
           <script id="builder-preview-template" type="text/x-handlebars-template">
             {% raw %}
               
-              <div id="builder-preview-image">
+              <div class="builder-final-preview-image">
                 {{#each images}}
                   <img src="{{src}}">
                 {{/each}}
               </div>
               
-              <ul id="builder-preview-details">
+              <div id="builder-preview-details">
+                <ul>
                 {{#each variants}}
                   <li>{{name}} - {{price}}</li>
                 {{/each}}
-              </ul>
+                </ul>
+              </div>
+
+              <!--<label>Quantity:</label> <input type="text" name="quantity" size="1" value="1">-->
+              <input type="hidden" name="quantity" value="1">
+              <button class="action-btn accent-text submit-button btn">Add to Cart</button>
               
             {% endraw %}
           </script>
-          <div id="builder-preview"></div>
+          <div id="builder-preview" class="clearfix"></div>
 
-          <!--<label>Quantity:</label> <input type="text" name="quantity" size="1" value="1">-->
-          <input type="hidden" name="quantity" value="1">
-          <button class="action-btn accent-text submit-button btn">Add to Cart</button>
         </div>
       
       </form>
