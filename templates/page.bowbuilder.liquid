@@ -27,14 +27,16 @@
         </li>
         <li data-target="#bowbuilder-small-bow">
           <span class="step-order">2</span>
-          <span class="step-name accent-text">Small Bow</span></a>
+          <span class="step-name accent-text">Topping</span></a>
         </li>
+        <!--
         <li data-target="#bowbuilder-topping">
           <span class="step-order">3</span>
           <span class="step-name accent-text">Topping</span></a>
         </li>
+        -->
         <li data-target="#bowbuilder-finish">
-          <span class="step-order">4</span>
+          <span class="step-order">3</span>
           <span class="step-name accent-text">Finish</span></a>
         </li>
       </ol>
@@ -111,37 +113,6 @@
         </div>
       
         {% assign step_num  = '3' %}
-        {% assign step_name = 'Topping' %}
-        {% assign tag  = 'bowbuilder-topping' %}
-        <div class="bowbuilder-component step-pane" id="{{ tag }}">
-          <h2>Step {{ step_num }}: Choose your {{ step_name }}</h2>
-          <div class="bowbuilder-products">
-            <ul class="product-list clearfix">
-              {% for product in collections.all.products %}
-                {% if product.tags contains tag %}
-                  {% for variant in product.variants %}
-                    {% include 'bowbuilder-product-variant-item' %}
-                  {% endfor %}                    
-                {% endif %}
-              {% endfor %}
-            </ul>
-            <select name="id[]" class="bowbuilder-product-select" data-bowbuilder-component="{{ tag }}">
-              <option value=""></option>
-              {% for product in collections.all.products %}
-                {% if product.tags contains tag %}
-                  {% for variant in product.variants %}
-                    <option value="{{ variant.id }}">
-                      {{ product.title }} ({{ variant.price | money }})
-                    </option>
-                  {% endfor %}
-                {% endif %}
-              {% endfor %}
-            </select>
-            <input type="hidden" name="properties[bowbuilder-collection-product-map][{{ tag }}]" value="{{ step_num }}" />
-          </div>
-        </div>
-      
-        {% assign step_num  = '4' %}
         {% assign step_name = 'Finish' %}
         {% assign tag  = 'bowbuilder-finish' %}
         <div class="step-pane" id="{{ tag }}">
