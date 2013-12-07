@@ -1020,7 +1020,7 @@ p.rte-image-wrap {
 
 #header-nav > li > a {
   color: {{ settings.link-colour }};
-  margin: 1em 0;
+  margin: 1em .25em;
   padding: 1em 2em .875em;
   display: block;
   position: relative;
@@ -1030,14 +1030,16 @@ p.rte-image-wrap {
 
 #header-nav > li > a:hover {
   color:  {{ settings.link-hover-colour }};
-  background-color: #f8f8f7;
+  xbackground-color: #f8f8f7;
+  xborder: 1px solid #f1f1f0;
 }
 
 #header-nav > li.active > a {
   font-weight: 700;
-  color: #fff;
+  xcolor: #fff;
   border-radius: 5px;
-  background-color: {{ settings.link-colour }};
+  xbackground-color: #f8f8f7;
+  xborder: 1px solid #f1f1f0;
 }
 
 #header-nav > li > a > .arrow {
