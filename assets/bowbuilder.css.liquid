@@ -2,22 +2,29 @@
 ------------------------------------------------*/
 
 .bowbuilder-progress {
-  margin: 50px 0;
+  margin: 3em 0;
+  font-size: 1em;
 }
 .bowbuilder-progress li {
   display: inline-block;
   font-weight: 300;
-  line-height: 48px;
-  color: #dedede;
+  line-height: 2em;
+  xcolor: #dedede;
+  font-size: 0.822em;
+  font-weight: 700;
 }
 
 .bowbuilder-progress li:before {
   font-family: 'Lunchbox Ornaments';
   content: 'v';
+  display: inline;
   margin: 0 .5em;
-  font-size: 36px;
-  height: 24px;
+  font-size: 2em;
+  line-height: 1;
+  xheight: 10px;
   color: #dedede;
+  xborder: 1px solid red;
+  xoverflow: hidden;
   position: relative;
   top: 6px;
 }
@@ -26,22 +33,23 @@
 }
 
 .bowbuilder-progress li .step-order {
-  background-color: {{ settings.text-colour }};
-  color: #fff;
+  border: 2px solid #dedede;
+  border-style: solid;
+  xcolor: #fff;
   display: inline-block;
-  width: 36px;
-  height: 36px;
-  line-height: 36px;
-  border-radius: 20px;
+  width: 2em;
+  height: 2em;
+  border-radius: 1.5em;
   margin-right: .25em;
+  line-height: 2em;
 }
 
 .bowbuilder-progress li,
 .bowbuilder-progress li a {
+  font-weight: 900;
   color: {{ settings.text-colour }};
 }
 .bowbuilder-progress li .step-order {
-  background-color: {{ settings.text-colour }};
 }
 
 .bowbuilder-progress li.active,
@@ -49,15 +57,20 @@
   color: {{ settings.link-hover-colour }};
 }
 .bowbuilder-progress li.active .step-order {
+  border-style: solid;
+  border-color: {{ settings.link-hover-colour }};
   background-color: {{ settings.link-hover-colour }};
+  color: #fff;
 }
 
 .bowbuilder-progress li.complete,
 .bowbuilder-progress li.complete a {
   color: {{ settings.link-colour }};
+  cursor: pointer;
 }
 .bowbuilder-progress li.complete .step-order {
-  background-color: {{ settings.link-colour }};
+  border-style: solid;
+  border-color: {{ settings.link-colour }};
 }
 
 
